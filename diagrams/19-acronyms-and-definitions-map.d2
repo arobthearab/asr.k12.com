@@ -1,0 +1,187 @@
+title: |md
+  # Acronyms and Definitions Map
+  **SRA Appendix A** — Acronyms and Definitions
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+
+# ─── Row 1: Identity & Privileged ───
+row1: {
+  grid-columns: 2
+  label: ""
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  identity_terms: {
+    grid-rows: 4
+    label: "Identity Terms"
+    style: {
+      fill: "#E3F2FD"
+      stroke: "#1565C0"
+      stroke-width: 2
+    }
+    iam: "IAM — Identity and\nAccess Management" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    ciam: "CIAM — Customer\nIdentity and Access Mgmt" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    iga: "IGA — Identity Governance\nand Administration" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    ca: "CA — Conditional Access" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+  }
+  privileged_terms: {
+    grid-rows: 4
+    label: "Privileged Terms"
+    style: {
+      fill: "#F3E5F5"
+      stroke: "#6A1B9A"
+      stroke-width: 2
+    }
+    pam: "PAM — Privileged\nAccess Management" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    pim: "PIM — Privileged\nIdentity Management" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    jit: "JIT — Just-in-Time Access" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    jea: "JEA — Just-Enough Admin" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+  }
+}
+
+# ─── Row 2: Posture & Operations ───
+row2: {
+  grid-columns: 2
+  label: ""
+  style: {
+    fill: transparent
+    stroke: transparent
+  }
+  posture_terms: {
+    grid-rows: 4
+    label: "Posture/Exposure Terms"
+    style: {
+      fill: "#E8F5E9"
+      stroke: "#2E7D32"
+      stroke-width: 2
+    }
+    cspm: "CSPM — Cloud Security\nPosture Management" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    vm: "VM — Vulnerability Mgmt" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    edr: "EDR — Endpoint Detection\nand Response" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    mdm: "MDM — Mobile Device Mgmt" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+  }
+  operations_terms: {
+    grid-rows: 4
+    label: "Operational Terms"
+    style: {
+      fill: "#FFF3E0"
+      stroke: "#EF6C00"
+      stroke-width: 2
+    }
+    secops: "SecOps — Security Ops" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    cmdb: "CMDB — Config Mgmt DB" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    mttr: "MTTR — Mean Time\nto Remediate/Respond" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+    sla: "SLA — Service Level Agreement" {
+      width: 220
+      height: 60
+      style.border-radius: 6
+    }
+  }
+}
+
+# ─── Row 3: Frameworks ───
+framework_terms: {
+  grid-columns: 3
+  label: "Framework Terms"
+  style: {
+    fill: "#FFEBEE"
+    stroke: "#C62828"
+    stroke-width: 2
+  }
+  csf: "CSF — Cybersecurity Framework" {
+    width: 220
+    height: 60
+    style.border-radius: 6
+  }
+  zt: "ZT — Zero Trust" {
+    width: 220
+    height: 60
+    style.border-radius: 6
+  }
+  togaf: "TOGAF — Enterprise\nArchitecture Framework" {
+    width: 220
+    height: 60
+    style.border-radius: 6
+  }
+}
+
+# ─── Clean top-down connections (container-to-container) ───
+row1 -> row2: "Informs" {
+  style.stroke: "#1565C0"
+  style.stroke-width: 2
+}
+row2 -> framework_terms: "Aligns to" {
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}

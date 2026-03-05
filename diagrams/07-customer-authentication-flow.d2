@@ -1,0 +1,64 @@
+title: |md
+  # Identity Flow: Customer Registration and Authentication
+  **SRA §4** — Identity and Access Architecture (Customer)
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 200
+  height: 80
+  style.border-radius: 6
+}
+
+access: "Access Event" {
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+}
+
+provisioning: {
+  label: "Provisioning"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  s1: "Self-Service\nPortal"
+  s2: "Credential\nVerification"
+  s3: "MFA Setup"
+}
+
+auth: {
+  label: "Access Control"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  s4: "Risk-Sensitive\nSession Policy"
+  s5: "Token-Based\nAuthorization"
+}
+
+access -> provisioning.s1: Signup
+access -> auth.s4: Sign In
+provisioning.s1 -> provisioning.s2 -> provisioning.s3
+auth.s4 -> auth.s5
+provisioning -> access: Provisioned

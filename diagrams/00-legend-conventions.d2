@@ -1,0 +1,159 @@
+title: |md
+  # Legend: TSRA Diagram Conventions
+  **TSRA** — Cross-Cutting Diagram Reference
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+legend_scope: {
+  label: "Presentation Profile"
+  style: {
+    fill: "#ECEFF1"
+    stroke: "#607D8B"
+    stroke-width: 2
+  }
+  p1: {
+    label: "Executive presentations"
+    width: 320
+    height: 76
+  }
+  p2: {
+    label: "Architecture deep-dives"
+    width: 320
+    height: 76
+  }
+  p3: {
+    label: "Governance and audit reviews"
+    width: 320
+    height: 76
+  }
+  p4: {
+    label: "Program planning and\nroadmap discussions"
+    width: 320
+    height: 76
+  }
+}
+
+color_legend: {
+  label: "Color Semantics"
+  style: {
+    fill: "#FAFAFA"
+    stroke: "#B0BEC5"
+    stroke-width: 2
+  }
+  identity: {
+    label: "Identity / Access"
+    width: 250
+    height: 88
+    style: {
+      fill: "#E3F2FD"
+      stroke: "#1565C0"
+      stroke-width: 2
+    }
+  }
+  trust: {
+    label: "Trust Decision / Policy"
+    width: 250
+    height: 88
+    style: {
+      fill: "#E8F5E9"
+      stroke: "#2E7D32"
+      stroke-width: 2
+    }
+  }
+  posture: {
+    label: "Exposure / Posture / Device"
+    width: 250
+    height: 88
+    style: {
+      fill: "#FFF8E1"
+      stroke: "#F57F17"
+      stroke-width: 2
+    }
+  }
+  cloud: {
+    label: "Cloud Context / Platform"
+    width: 250
+    height: 88
+    style: {
+      fill: "#F3E5F5"
+      stroke: "#6A1B9A"
+      stroke-width: 2
+    }
+  }
+  risk: {
+    label: "Risk / Compliance / Control"
+    width: 250
+    height: 88
+    style: {
+      fill: "#FFEBEE"
+      stroke: "#C62828"
+      stroke-width: 2
+    }
+  }
+}
+
+shape_legend: {
+  label: "Shape and Sizing"
+  style: {
+    fill: "#FAFAFA"
+    stroke: "#B0BEC5"
+    stroke-width: 2
+  }
+  standard_node: {
+    label: "Standard control node"
+    shape: rectangle
+    width: 250
+    height: 88
+  }
+  cloud_icon: {
+    label: "Cloud provider icon"
+    shape: image
+    width: 72
+    height: 72
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg"
+  }
+  text_rule: {
+    label: "Long labels use line breaks;\navoid over-wide nodes"
+    width: 250
+    height: 88
+  }
+}
+
+edge_legend: {
+  label: "Connection Conventions"
+  style: {
+    fill: "#FAFAFA"
+    stroke: "#B0BEC5"
+    stroke-width: 2
+  }
+  src: {
+    label: "Source"
+    width: 250
+    height: 88
+  }
+  dst: {
+    label: "Destination"
+    width: 250
+    height: 88
+  }
+  src -> dst: "Primary flow"
+  (src -> dst)[0].style: {
+    stroke: "#455A64"
+    stroke-width: 1
+    border-radius: 0
+  }
+}
+
+legend_scope.p1 -> color_legend.identity
+legend_scope.p2 -> edge_legend.src
+legend_scope.p3 -> shape_legend.standard_node
+legend_scope.p4 -> shape_legend.cloud_icon

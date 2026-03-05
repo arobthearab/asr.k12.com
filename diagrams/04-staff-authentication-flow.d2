@@ -1,0 +1,92 @@
+title: |md
+  # Identity Flow: Staff Authentication
+  **SRA §4** — Identity and Access Architecture (Staff)
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+    elk-crossingMinimization: LAYER_SWEEP
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+
+# --- shared styles ---
+classes: {
+  step: {
+    width: 220
+    height: 80
+    style: {
+      fill: "#E3F2FD"
+      stroke: "#1565C0"
+      stroke-width: 2
+      border-radius: 6
+      shadow: true
+    }
+  }
+  decision: {
+    width: 240
+    height: 90
+    style: {
+      fill: "#d3e595"
+      stroke: "#1565C0"
+      stroke-width: 2
+      border-radius: 6
+      shadow: true
+    }
+  }
+}
+
+# === Row 1: main left-to-right happy path ===
+s1: "1  Access Request\n(Open App)" {class: step}
+ra: "2  Entra CA\nRisk Assessment" {class: decision}
+s4: "4  Token + Authorization\nwith RBAC" {class: step}
+
+# === Row 2: high-risk detour ===
+s3: "3  Strong Authentication\n(MFA / FIDO2 / WHfB)" {class: step}
+
+# --- main flow ---
+s1 -> ra: "Evaluate" {
+  style.stroke: "#455A64"
+  style.stroke-width: 2
+}
+ra -> s4: "Low Risk" {
+  style.stroke: "#2E7D32"
+  style.stroke-width: 2
+}
+ra -> s3: "High Risk" {
+  style.stroke: "#C62828"
+  style.stroke-width: 2
+}
+s3 -> s4: "Authenticated" {
+  style.stroke: "#455A64"
+  style.stroke-width: 2
+}
+
+# --- feedback loop (kept as a label-only note to avoid ugly backward edge) ---
+ctx: "Context Change\n→ Re-evaluate" {
+  width: 180
+  height: 60
+  style: {
+    fill: "#FFF3E0"
+    stroke: "#E65100"
+    stroke-width: 1
+    border-radius: 6
+    font-size: 13
+    italic: true
+  }
+}
+s4 -> ctx: "" {
+  style.stroke: "#E65100"
+  style.stroke-width: 1
+  style.stroke-dash: 5
+}
+ctx -> ra: "" {
+  style.stroke: "#E65100"
+  style.stroke-width: 1
+  style.stroke-dash: 5
+}

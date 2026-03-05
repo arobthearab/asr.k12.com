@@ -1,0 +1,98 @@
+title: |md
+  # Executive Summary and Integrated Platform Stack
+  **SRA §1** — Executive Summary
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 220
+  height: 70
+  style.border-radius: 6
+}
+
+mission: {
+  label: "TSRA Mission"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  statement: "Establish, evaluate, enforce,\ndegrade, and restore trust"
+  audiences: "Staff, students, customers\nin cloud-native edtech"
+}
+
+objectives: {
+  label: "Strategic Objectives"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  o1: "Identity-centric\nrisk-adaptive controls"
+  o2: "Unified governance\nvia SailPoint"
+  o3: "Privileged trust\nDelinea + Entra PIM"
+  o4: "Device trust\nCrowdStrike + Defender"
+  o5: "Exposure + CSPM\nTenable"
+  o6: "Secure SDLC/API\nSonatype, Burp, Salt"
+  o7: "Operational trust\nServiceNow SecOps"
+  o8: "SOX + FERPA\nmeasurable controls"
+}
+
+frameworks: {
+  label: "Frameworks"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  f1: "TOGAF"
+  f2: "NIST CSF 2.0"
+  f3: "NIST SP 800-207"
+}
+
+platform_stack: {
+  label: "Integrated Platform Stack"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  workforce: "Entra ID (workforce)"
+  external: "Okta CIAM (external)"
+  governance: "SailPoint IdentityNow"
+  privileged: "Delinea + Entra PIM"
+  device: "CrowdStrike + Defender"
+  posture: "Tenable VM + CSPM"
+  app: "Sonatype + Burp"
+  api: "Salt Security (future)"
+  ops: "ServiceNow SecOps"
+}
+
+frameworks -> mission.statement
+mission.statement -> objectives.o1
+
+objectives.o1 -> platform_stack.workforce
+objectives.o1 -> platform_stack.external
+objectives.o2 -> platform_stack.governance
+objectives.o3 -> platform_stack.privileged
+objectives.o4 -> platform_stack.device
+objectives.o5 -> platform_stack.posture
+objectives.o6 -> platform_stack.app
+objectives.o6 -> platform_stack.api
+objectives.o7 -> platform_stack.ops

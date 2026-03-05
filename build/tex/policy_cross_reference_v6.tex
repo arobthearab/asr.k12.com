@@ -1,0 +1,1281 @@
+
+\documentclass[11pt,landscape]{article}
+\usepackage[landscape,margin=1in]{geometry}
+\usepackage{longtable,booktabs,array,tabularx,xcolor,hyperref,fancyhdr,graphicx,colortbl,enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{stridegreen}{HTML}{2E7D32}
+\definecolor{strideblue}{HTML}{1565C0}
+\definecolor{stridegray}{HTML}{F5F5F5}
+\definecolor{gapred}{HTML}{C62828}
+\definecolor{rulegray}{HTML}{BDBDBD}
+\definecolor{headgray}{HTML}{E0E0E0}
+
+% Light gray borders on all table rules
+\arrayrulecolor{rulegray}
+\setlength{\arrayrulewidth}{0.4pt}
+
+\hypersetup{colorlinks=true,linkcolor=strideblue,urlcolor=strideblue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{gray}{\small Stride (K12) --- Policy Cross Reference V6}}
+\fancyhead[R]{\textcolor{gray}{\small CONFIDENTIAL}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\small March 2, 2026}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+% --- Title Page ---
+\begin{titlepage}
+\vspace*{2cm}
+\begin{center}
+{\Huge\bfseries\textcolor{stridegreen}{Stride Policy Cross Reference}}\\[0.5cm]
+{\LARGE Version 6.0}\\[1cm]
+{\large Stride — K12 Inc.}\\[0.3cm]
+{\large Information Security \& Governance}\\[2cm]
+{\normalsize\textcolor{gray}{Regulatory Cross-Reference Frameworks:}}\\[0.3cm]
+{\normalsize NIST Cybersecurity Framework 2.0}\\
+{\normalsize FERPA (34 CFR Part 99)}\\
+{\normalsize SOX Section 404 — IT General Controls}\\[2cm]
+{\small Document Date: March 2, 2026}\\
+{\small Classification: Confidential}\\[1cm]
+\textcolor{gapred}{\textbf{Note:} IISP 6.0 is reserved and not yet published. Gap annotations are included throughout.}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% --- Section 1: Policy Inventory Overview ---
+\section{Policy Inventory Overview}
+
+The Stride information security program comprises \textbf{21 Information Security Policies (ISPs)} aligned to NIST CSF 2.0 functions and \textbf{10 Integrated Information Security Policies (IISPs)} addressing cross-cutting operational domains. Together, these 31 policy documents (30 published + 1 reserved) establish the governance foundation for cybersecurity risk management.
+
+\vspace{0.3cm}
+\textbf{NIST CSF 2.0 Function Coverage:}
+\begin{itemize}
+    \item \textbf{GOVERN (GV):} ISP 1.0--1.2, ISP 2.1--2.6, IISP 4.0, 5.0, 8.0
+    \item \textbf{IDENTIFY (ID):} ISP 3.1--3.3, IISP 7.0
+    \item \textbf{PROTECT (PR):} ISP 4.1--4.5, IISP 2.0, 3.0, 9.0
+    \item \textbf{DETECT (DE):} ISP 5.1--5.2
+    \item \textbf{RESPOND (RS):} ISP 6.1--6.2, IISP 10.0
+    \item \textbf{RECOVER (RC):} IISP 1.0
+\end{itemize}
+
+\textcolor{gapred}{\textbf{Gap:} IISP 6.0 is reserved and not yet published. No policy currently occupies this slot in the numbering scheme.}
+
+\newpage
+
+\section{Per-Policy Cross-Reference Detail}
+
+Each policy below includes a summary, NIST CSF 2.0 subcategory alignment, FERPA applicability, and SOX §404 ITGC relevance.
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 1.0} --- Information Security Program Policy}
+\label{pol:ISP10}
+
+\textbf{Summary:} This document contains a Stride Corporate Directive; all business units must comply per Stride recognizes the critical nature of information security and the need to demonstrate administrative, technical, and physical safeguards to assure the confidentiality, integrity, and availability of essential assets that store or process information. This policy sets high-level requirements for enhanced IT policy, controls, standards, and procedures for managing data and information entrusted to Stride...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.OC-01, GV.OC-02, GV.OC-03, GV.OC-04, GV.OC-05, GV.RM-01 \textit{(+8 more)} \\
+\hline
+FERPA (34 CFR Part 99) & §99.1, §99.2 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 1.1} --- IT Security Policy Index}
+\label{pol:ISP11}
+
+\textbf{Summary:} These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activities, and assets owned, leased, controlled, or used by Stride, its agents,...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 1.2} --- IT Security Policy Definitions}
+\label{pol:ISP12}
+
+\textbf{Summary:} This document contains Stride’s definitions and terms related to IT Security Policy, These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, syst...
+
+\textbf{Key Definitions (selected):}
+
+\begin{longtable}{|p{3.5cm}|p{6in}|}
+\hline
+\rowcolor{headgray} \textbf{Term} & \textbf{Definition} \\
+\hline
+AAR & After Action Review --- postmortem review of timeline, results, and required actions on failed or partially successful changes \\
+\hline
+Access & The ability to use, modify, or manipulate an information resource or gain entry to a physical area \\
+\hline
+Agentic AI & AI that takes initiative, understands goals, makes decisions, and carries out tasks with minimal supervision \\
+\hline
+Artificial Intelligence & A machine-based system that infers from input how to generate outputs such as predictions, content, recommendations, or decisions \\
+\hline
+Break Glass Account & Emergency account providing immediate access to critical systems when standard methods are unavailable \\
+\hline
+Business Continuity & Activity to ensure critical business functions remain available; encompasses Disaster Recovery \\
+\hline
+Business Critical Applications & Financially Significant Applications (FSAs) identified based on SOX materiality scoping \\
+\hline
+Change & Any alteration to state or configuration of production software or hardware under Enterprise \& Learning Technologies management \\
+\hline
+Cloud Computing & Model for ubiquitous, on-demand network access to shared configurable computing resources \\
+\hline
+Control & Technical, administrative, or physical safeguard used to manage risk through preventing, detecting, or lessening threats \\
+\hline
+Control Objective & Target or desired condition; statement describing what is to be achieved as a result of implementing a control \\
+\hline
+Customers & Consumers of products without the ability to modify data identified as in the purview of privacy, financial impact, or IP \\
+\hline
+Encryption & Conversion of data into a form that cannot be easily understood by unauthorized people or systems \\
+\hline
+Guideline & Recommended practices based on industry-recognized secure practices; allows discretion unlike Standards \\
+\hline
+Non-Human Accounts & Accounts used for scripts, bots, APIs, or other automated processes \\
+\hline
+Policy & High-level statements of management intent designed to influence decisions and guide desired outcomes \\
+\hline
+Principle of Least Privilege & Limit access privileges for any user to those essential for assigned duties and nothing more \\
+\hline
+Principle of Separation of Duties & Ensure duties that can lead to fraud, abuse, or harm are separated or controlled \\
+\hline
+Privileged User & Someone with administrative or higher-level access beyond a typical user, performing critical system tasks \\
+\hline
+Procedure & Documented set of steps to perform a specific task in conformance with an applicable standard \\
+\hline
+Risk & Potential exposure to harm or loss, often calculated as Threat $\times$ Vulnerability $\times$ Consequence \\
+\hline
+Service Accounts & Accounts used by multiple people; pose security risks since tracking individual activity is difficult \\
+\hline
+SOX & Sarbanes-Oxley Act --- US federal law setting enhanced standards for public company boards, management, and accounting \\
+\hline
+Standard & Mandatory requirements regarding processes, actions, and configurations designed to satisfy Control Objectives \\
+\hline
+System Accounts & Accounts used by operating systems or applications to perform background tasks \\
+\hline
+\end{longtable}
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02, GV.OC-01, GV.OC-02, GV.OC-03, GV.OC-04, GV.OC-05 \\
+\hline
+FERPA (34 CFR Part 99) & §99.3 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.1} --- Organizational Context (GV.OC)}
+\label{pol:ISP21}
+
+\textbf{Summary:} This policy underscores the vital role of Stride’s mission in shaping cybersecurity risk management decisions. By seamlessly aligning cybersecurity strategies with the organization's mission, vision, and corporate objectives, Stride ensures that its technology and security initiatives actively drive and support its overarching goals. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business o...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.OC-01, GV.OC-02, GV.OC-03, GV.OC-04, GV.OC-05 \\
+\hline
+FERPA (34 CFR Part 99) & §99.2 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.2} --- Risk Management Strategy (GV.RM)}
+\label{pol:ISP22}
+
+\textbf{Summary:} This document defines the Stride standards related to Risk Management. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activitie...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.RM-01, GV.RM-02, GV.RM-03, GV.RM-04, GV.RM-05, GV.RM-06, GV.RM-07 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.3} --- Roles, Responsibilities, and Authorities (GV.RR)}
+\label{pol:ISP23}
+
+\textbf{Summary:} This document defines the Stride standards related to the Roles, Responsibilities, and Authorities component of the NIST Cybersecurity Framework (NIST CSF). These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stri...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.RR-01, GV.RR-02, GV.RR-03, GV.RR-04 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Access Controls \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.4} --- Policies, Processes, and Procedures (GV.PO)}
+\label{pol:ISP24}
+
+\textbf{Summary:} The purpose of this policy is to establish a structured framework for creating, communicating, and enforcing organizational technology and cybersecurity policies, processes, and procedures. This framework ensures that cybersecurity risks are managed effectively and align with Stride’s strategic objectives, organizational context, and priorities. By standardizing the approach to policy management, Stride aims to promote consistency, reduce risk, and enhance the security and resilience of its T...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02 \\
+\hline
+FERPA (34 CFR Part 99) & §99.7 \\
+\hline
+SOX §404 ITGC Domains & Change Management \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.5} --- Oversight (GV.OV)}
+\label{pol:ISP25}
+
+\textbf{Summary:} This document defines the Stride standards related to Risk Management Oversight. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems,...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.OV-01, GV.OV-02, GV.OV-03 \\
+\hline
+FERPA (34 CFR Part 99) & §99.60-67 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 2.6} --- Cybersecurity Supply Chain Risk Management (GV.SC)}
+\label{pol:ISP26}
+
+\textbf{Summary:} This document defines the Stride standards related to Supply Chain Risk Management. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, syste...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.SC-01, GV.SC-02, GV.SC-03, GV.SC-04, GV.SC-05, GV.SC-06, GV.SC-07, GV.SC-08, GV.SC-09, GV.SC-10 \\
+\hline
+FERPA (34 CFR Part 99) & §99.33, §99.35 \\
+\hline
+SOX §404 ITGC Domains & Access Controls \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 3.1} --- Asset Management (ID.AM)}
+\label{pol:ISP31}
+
+\textbf{Summary:} This document defines the Stride standards related to Asset Management. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activiti...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & ID --- IDENTIFY \\
+\hline
+NIST CSF 2.0 Subcategories & ID.AM-01, ID.AM-02, ID.AM-03, ID.AM-04, ID.AM-05, ID.AM-07, ID.AM-08 \\
+\hline
+FERPA (34 CFR Part 99) & §99.3 \\
+\hline
+SOX §404 ITGC Domains & Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 3.2} --- Risk Assessment (ID.RA)}
+\label{pol:ISP32}
+
+\textbf{Summary:} This document defines the Stride standards related to Risk Assessment. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activitie...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & ID --- IDENTIFY \\
+\hline
+NIST CSF 2.0 Subcategories & ID.RA-01, ID.RA-02, ID.RA-03, ID.RA-04, ID.RA-05, ID.RA-06, ID.RA-07, ID.RA-08, ID.RA-09, ID.RA-10 \\
+\hline
+FERPA (34 CFR Part 99) & §99.36 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 3.3} --- Response Improvement (ID.IM)}
+\label{pol:ISP33}
+
+\textbf{Summary:} This document defines the Stride standards related to Response Improvements. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, act...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & ID --- IDENTIFY \\
+\hline
+NIST CSF 2.0 Subcategories & ID.IM-01, ID.IM-02, ID.IM-03, ID.IM-04 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 4.1} --- Identity Management, Authentication, and Access Control (PR.AA)}
+\label{pol:ISP41}
+
+\textbf{Summary:} This document defines the Stride standards related to Identity Management, These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activ...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.AA-01, PR.AA-02, PR.AA-03, PR.AA-04, PR.AA-05, PR.AA-06 \\
+\hline
+FERPA (34 CFR Part 99) & §99.31, §99.32 \\
+\hline
+SOX §404 ITGC Domains & Access Controls \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 4.2} --- Awareness and Training Standards (PR.AT)}
+\label{pol:ISP42}
+
+\textbf{Summary:} This document defines the Stride standards related to Awareness and Training. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, ac...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.AT-01, PR.AT-02 \\
+\hline
+FERPA (34 CFR Part 99) & §99.7 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 4.3} --- Data Security (PR.DS)}
+\label{pol:ISP43}
+
+\textbf{Summary:} This document defines the Stride standards related to Data Security. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activities,...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.DS-01, PR.DS-02, PR.DS-10, PR.DS-11 \\
+\hline
+FERPA (34 CFR Part 99) & §99.30, §99.31, §99.33 \\
+\hline
+SOX §404 ITGC Domains & Access Controls, Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 4.4} --- Platform Security (PR.PS)}
+\label{pol:ISP44}
+
+\textbf{Summary:} This document defines the Stride standards related to Information Protection Processes These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, sy...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.PS-01, PR.PS-02, PR.PS-03, PR.PS-04, PR.PS-05, PR.PS-06 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Change Management, Program Development \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 4.5} --- Technology Infrastructure Resilience (PR.IR)}
+\label{pol:ISP45}
+
+\textbf{Summary:} This document defines the Stride standards related to Protective Technology. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, act...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.IR-01, PR.IR-02, PR.IR-03, PR.IR-04 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 5.1} --- Continuous Monitoring (DE.CM)}
+\label{pol:ISP51}
+
+\textbf{Summary:} This document defines the Stride standards related to Security Continuous Monitoring. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, sys...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & DE --- DETECT \\
+\hline
+NIST CSF 2.0 Subcategories & DE.CM-01, DE.CM-02, DE.CM-03, DE.CM-06, DE.CM-09 \\
+\hline
+FERPA (34 CFR Part 99) & §99.32 \\
+\hline
+SOX §404 ITGC Domains & Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 5.2} --- Adverse Event Analysis (DE.AE)}
+\label{pol:ISP52}
+
+\textbf{Summary:} This document defines the Stride standards related to Anomalies and Events. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, acti...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & DE --- DETECT \\
+\hline
+NIST CSF 2.0 Subcategories & DE.AE-02, DE.AE-03, DE.AE-04, DE.AE-06, DE.AE-07, DE.AE-08 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 6.1} --- Incident Management (RS.MA)}
+\label{pol:ISP61}
+
+\textbf{Summary:} This document defines the Stride standards related to Response Planning. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activit...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & RS --- RESPOND \\
+\hline
+NIST CSF 2.0 Subcategories & RS.MA-01, RS.MA-02, RS.MA-03, RS.MA-04, RS.MA-05, RS.CO-02, RS.CO-03 \\
+\hline
+FERPA (34 CFR Part 99) & §99.36, §99.33 \\
+\hline
+SOX §404 ITGC Domains & Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE ISP 6.2} --- Incident Analysis (RS.AN)}
+\label{pol:ISP62}
+
+\textbf{Summary:} This document defines the Stride standards related to Response Analysis. These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third party contracted by Stride to handle, process, transmit, store, or dispose of Stride data are subject to the requirements of this document. All data, systems, activit...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & RS --- RESPOND \\
+\hline
+NIST CSF 2.0 Subcategories & RS.AN-03, RS.AN-06, RS.AN-07, RS.AN-08 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 1.0} --- Business Continuity Policy}
+\label{pol:IISP10}
+
+\textbf{Summary:} Stride must be prepared for events that may disrupt normal operations, including but not limited to business process failure, loss of workforce, facility outages, technology outages, and vendor disruptions. These disruptions may be local, regional, national, or international events. Stride recognizes all critical business functions require plans to mitigate impacts to business caused by disruptions to business processes, personnel, This policy applies to all critical Business Units (BUs) with...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & RC --- RECOVER \\
+\hline
+NIST CSF 2.0 Subcategories & RC.RP-01, RC.RP-02, RC.RP-03, RC.RP-04, RC.RP-05, RC.RP-06, PR.IR-01, PR.IR-02, PR.IR-03, PR.IR-04 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Computer Operations \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 2.0} --- Data Classification}
+\label{pol:IISP20}
+
+\textbf{Summary:} The purpose of this standard is to classify institutional data based on its sensitivity, value, and criticality to Stride, in alignment with Stride’s Information Security Policy. This classification process ensures that data is appropriately categorized, enabling the organization to apply tailored protection measures that mitigate risks and safeguard critical assets. By defining clear classification levels, Stride can establish baseline data protection controls, facilitate secure information ...
+
+\textbf{Data Classification Levels:}
+
+\begin{longtable}{|p{2.5cm}|p{4in}|p{3in}|}
+\hline
+\rowcolor{headgray} \textbf{Level} & \textbf{Description \& Controls} & \textbf{Examples} \\
+\hline
+Public & Freely disclosed; intended for public use; minimum security controls & Course catalogs, press releases, published marketing materials, regulatory filings \\
+\hline
+Internal & Limited to Stride employees; low sensitivity; internal controls apply & Intranet, training materials, org charts, internal emails, Stride-wide policies \\
+\hline
+Confidential & Access based on business need-to-know; medium sensitivity; confidentiality agreements & Non-directory student info, personnel records, non-public financial data, vendor contract data, source code \\
+\hline
+Restricted / Highly Protected & High sensitivity; strict controls; disclosure risks serious harm & Passwords, private keys, government IDs (SSN, passport), financial account info, HIPAA/ADA/IDEA data, biometric data, trade secrets \\
+\hline
+\end{longtable}
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.DS-01, PR.DS-02, PR.DS-10, PR.DS-11, ID.AM-01, ID.AM-02, ID.AM-03, ID.AM-04, ID.AM-05, ID.AM-07, ID.AM-08 \\
+\hline
+FERPA (34 CFR Part 99) & §99.3, §99.37 \\
+\hline
+SOX §404 ITGC Domains & Access Controls \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 3.0} --- International Travel Policy}
+\label{pol:IISP30}
+
+\textbf{Summary:} This International Travel Policy ensures the protection of both physical company assets and data assets when workforce members travel abroad for both leisure and business- This overseas travel policy applies to Stride employees involved in business operations and the processing of Stride data during international travel. All definitions are located within Stride - ISP 1.2 -- IT Policy Definitions. Any inquiries regarding terminology or clarity may be directed to Stride’s Information Security T...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.DS-01, PR.DS-02, PR.DS-10, PR.DS-11, PR.AA-01, PR.AA-02, PR.AA-03, PR.AA-04, PR.AA-05, PR.AA-06 \\
+\hline
+FERPA (34 CFR Part 99) & §99.33 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 4.0} --- Acceptable Use Policy}
+\label{pol:IISP40}
+
+\textbf{Summary:} The purpose of this Acceptable Use Policy (AUP) is to define the acceptable and responsible use of Stride’s information systems, networks, and resources. This policy aims to protect the integrity, confidentiality, and availability of company data while ensuring compliance with applicable laws, regulations, and organizational security These policies and standards apply to all Stride-owned technology and business All workforce members and their respective facilities supporting Stride business o...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02, PR.AT-01, PR.AT-02 \\
+\hline
+FERPA (34 CFR Part 99) & §99.7 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 5.0} --- Artificial Intelligence Acceptable Use Policy (AI-AUP)}
+\label{pol:IISP50}
+
+\textbf{Summary:} This policy governs the use of Artificial Intelligence Technology in Stride’s diverse This policy applies to all Stride personnel, including employees, contractors, sub- contractors, and their respective facilities supporting Stride business operations, technology, or both, wherever Stride data is stored or processed, including any third- party contracted by Stride to handle, process, transmit, store, or dispose of Stride data. All definitions are located within the document Stride - ISP 1.2 ...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02, GV.RM-01, GV.RM-02, GV.RM-03, GV.RM-04 \textit{(+7 more)} \\
+\hline
+FERPA (34 CFR Part 99) & §99.30, §99.31 \\
+\hline
+SOX §404 ITGC Domains & Program Development \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{gapred}{STRIDE IISP 6.0} --- \textit{[RESERVED — Policy Not Yet Published]}}
+\label{pol:IISP60}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\textcolor{gapred}{This policy number is reserved but has not yet been published. This represents a gap in the current policy framework.}}}
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & --- --- --- \\
+\hline
+NIST CSF 2.0 Subcategories & --- \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 7.0} --- Vulnerability Management Policy}
+\label{pol:IISP70}
+
+\textbf{Summary:} This Vulnerability Management Policy is designed to serve as a comprehensive resource for multiple stakeholders. It guides internal teams responsible for executing vulnerability management processes, informs external partners about Stride’s security expectations, and provides transparency for regulators and auditors evaluating our The policy reflects Stride’s commitment to open, responsible, and collaborative information security practices. By clearly defining our approach to vulnerability id...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & ID --- IDENTIFY \\
+\hline
+NIST CSF 2.0 Subcategories & ID.RA-01, ID.RA-02, ID.RA-03, ID.RA-04, ID.RA-05, ID.RA-06 \textit{(+9 more)} \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Change Management \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 8.0} --- Non-Employee Acceptable Use}
+\label{pol:IISP80}
+
+\textbf{Summary:} The purpose of this Acceptable Use Policy (AUP) is to define the minimum security, privacy, and usage requirements for any contractor or third-party entity accessing Stride systems, networks, or data. This policy ensures the protection of Stride’s digital assets, the confidentiality of sensitive information, and compliance with applicable legal, This policy applies to all contractors, third-party service providers, and their representatives, including but not limited to affiliates, subsidiari...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & GV --- GOVERN \\
+\hline
+NIST CSF 2.0 Subcategories & GV.PO-01, GV.PO-02, PR.AA-01, PR.AA-02, PR.AA-03, PR.AA-04, PR.AA-05, PR.AA-06 \\
+\hline
+FERPA (34 CFR Part 99) & §99.31 \\
+\hline
+SOX §404 ITGC Domains & Access Controls \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 9.0} --- Secure Software Development Policy}
+\label{pol:IISP90}
+
+\textbf{Summary:} This policy defines mandatory requirements to ensure that all software developed or acquired by Stride is secure, resilient, and fully aligned with applicable security and compliance standards across every phase of the Software Development Life Cycle • Third-party or open-source software integrated into Stride's environment. • Software-as-a-Service (SaaS) platforms involving configurable components or • All development teams, DevOps personnel, contractors, and third-party entities All definit...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & PR --- PROTECT \\
+\hline
+NIST CSF 2.0 Subcategories & PR.PS-01, PR.PS-02, PR.PS-03, PR.PS-04, PR.PS-05, PR.PS-06 \\
+\hline
+FERPA (34 CFR Part 99) & --- \\
+\hline
+SOX §404 ITGC Domains & Program Development, Change Management \\
+\hline
+\end{tabularx}
+
+
+\subsection{\textcolor{strideblue}{STRIDE IISP 10.0} --- Forensics Handling of Sensitive Matters}
+\label{pol:IISP100}
+
+\textbf{Summary:} This policy establishes mandatory requirements for handling digital devices and data involved in any legal, human resources (HR), regulatory, or law enforcement matter. Its goal is to ensure evidentiary integrity, maintain privilege, and reduce organizational risk by defining strict boundaries for internal security operations and • All company owned or company managed devices, systems, and storage media. • Any personal devices enrolled in company management systems or used for • All employees...
+
+\begin{tabularx}{\textwidth}{|p{4cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Framework} & \textbf{Alignment} \\
+\hline
+NIST CSF 2.0 Function & RS --- RESPOND \\
+\hline
+NIST CSF 2.0 Subcategories & RS.AN-03, RS.AN-06, RS.AN-07, RS.AN-08, RS.MA-01, RS.MA-02, RS.MA-03, RS.MA-04, RS.MA-05 \\
+\hline
+FERPA (34 CFR Part 99) & §99.31, §99.36 \\
+\hline
+SOX §404 ITGC Domains & --- \\
+\hline
+\end{tabularx}
+
+
+\newpage
+\appendix
+\section{APPENDIX A --- NIST CSF 2.0 Reverse Mapping}
+\label{app:nist}
+
+This appendix maps each NIST CSF 2.0 subcategory back to the Stride policies that address it.
+
+\subsection{GV --- GOVERN}
+
+\subsubsection{GV.OC: Organizational Context}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.OC-01 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+GV.OC-02 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+GV.OC-03 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+GV.OC-04 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+GV.OC-05 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+\end{tabularx}
+
+\subsubsection{GV.RM: Risk Management Strategy}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.RM-01 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-02 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-03 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-04 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-05 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-06 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+GV.RM-07 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP22]{ISP 2.2}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{GV.RR: Roles, Responsibilities, and Authorities}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.RR-01 & \hyperref[pol:ISP23]{ISP 2.3} \\
+\hline
+GV.RR-02 & \hyperref[pol:ISP23]{ISP 2.3} \\
+\hline
+GV.RR-03 & \hyperref[pol:ISP23]{ISP 2.3} \\
+\hline
+GV.RR-04 & \hyperref[pol:ISP23]{ISP 2.3} \\
+\hline
+\end{tabularx}
+
+\subsubsection{GV.PO: Policy}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.PO-01 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP11]{ISP 1.1}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP24]{ISP 2.4}, \hyperref[pol:IISP40]{IISP 4.0}, \hyperref[pol:IISP50]{IISP 5.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+GV.PO-02 & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP11]{ISP 1.1}, \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP24]{ISP 2.4}, \hyperref[pol:IISP40]{IISP 4.0}, \hyperref[pol:IISP50]{IISP 5.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{GV.OV: Oversight}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.OV-01 & \hyperref[pol:ISP25]{ISP 2.5} \\
+\hline
+GV.OV-02 & \hyperref[pol:ISP25]{ISP 2.5} \\
+\hline
+GV.OV-03 & \hyperref[pol:ISP25]{ISP 2.5} \\
+\hline
+\end{tabularx}
+
+\subsubsection{GV.SC: Cybersecurity Supply Chain Risk Management}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+GV.SC-01 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-02 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-03 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-04 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-05 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-06 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-07 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-08 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-09 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+GV.SC-10 & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+\end{tabularx}
+
+\subsection{ID --- IDENTIFY}
+
+\subsubsection{ID.AM: Asset Management}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+ID.AM-01 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-02 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-03 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-04 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-05 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-07 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+ID.AM-08 & \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{ID.RA: Risk Assessment}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+ID.RA-01 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-02 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-03 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-04 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-05 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-06 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-07 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-08 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-09 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+ID.RA-10 & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{ID.IM: Improvement}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+ID.IM-01 & \hyperref[pol:ISP33]{ISP 3.3} \\
+\hline
+ID.IM-02 & \hyperref[pol:ISP33]{ISP 3.3} \\
+\hline
+ID.IM-03 & \hyperref[pol:ISP33]{ISP 3.3} \\
+\hline
+ID.IM-04 & \hyperref[pol:ISP33]{ISP 3.3} \\
+\hline
+\end{tabularx}
+
+\subsection{PR --- PROTECT}
+
+\subsubsection{PR.AA: Identity Management, Authentication, and Access Control}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+PR.AA-01 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+PR.AA-02 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+PR.AA-03 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+PR.AA-04 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+PR.AA-05 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+PR.AA-06 & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP80]{IISP 8.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{PR.AT: Awareness and Training}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+PR.AT-01 & \hyperref[pol:ISP42]{ISP 4.2}, \hyperref[pol:IISP40]{IISP 4.0} \\
+\hline
+PR.AT-02 & \hyperref[pol:ISP42]{ISP 4.2}, \hyperref[pol:IISP40]{IISP 4.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{PR.DS: Data Security}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+PR.DS-01 & \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP20]{IISP 2.0}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+PR.DS-02 & \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP20]{IISP 2.0}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+PR.DS-10 & \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP20]{IISP 2.0}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+PR.DS-11 & \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP20]{IISP 2.0}, \hyperref[pol:IISP30]{IISP 3.0}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{PR.PS: Platform Security}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+PR.PS-01 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+PR.PS-02 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+PR.PS-03 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+PR.PS-04 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+PR.PS-05 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+PR.PS-06 & \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP90]{IISP 9.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{PR.IR: Technology Infrastructure Resilience}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+PR.IR-01 & \hyperref[pol:ISP45]{ISP 4.5}, \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+PR.IR-02 & \hyperref[pol:ISP45]{ISP 4.5}, \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+PR.IR-03 & \hyperref[pol:ISP45]{ISP 4.5}, \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+PR.IR-04 & \hyperref[pol:ISP45]{ISP 4.5}, \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+\end{tabularx}
+
+\subsection{DE --- DETECT}
+
+\subsubsection{DE.CM: Continuous Monitoring}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+DE.CM-01 & \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+DE.CM-02 & \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+DE.CM-03 & \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+DE.CM-06 & \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+DE.CM-09 & \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:IISP70]{IISP 7.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{DE.AE: Adverse Event Analysis}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+DE.AE-02 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+DE.AE-03 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+DE.AE-04 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+DE.AE-06 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+DE.AE-07 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+DE.AE-08 & \hyperref[pol:ISP52]{ISP 5.2} \\
+\hline
+\end{tabularx}
+
+\subsection{RS --- RESPOND}
+
+\subsubsection{RS.MA: Incident Management}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+RS.MA-01 & \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.MA-02 & \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.MA-03 & \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.MA-04 & \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.MA-05 & \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{RS.AN: Incident Analysis}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+RS.AN-03 & \hyperref[pol:ISP62]{ISP 6.2}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.AN-06 & \hyperref[pol:ISP62]{ISP 6.2}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.AN-07 & \hyperref[pol:ISP62]{ISP 6.2}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+RS.AN-08 & \hyperref[pol:ISP62]{ISP 6.2}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{RS.CO: Incident Response Reporting and Communication}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+RS.CO-02 & \hyperref[pol:ISP61]{ISP 6.1} \\
+\hline
+RS.CO-03 & \hyperref[pol:ISP61]{ISP 6.1} \\
+\hline
+\end{tabularx}
+
+\subsection{RC --- RECOVER}
+
+\subsubsection{RC.RP: Incident Recovery Plan Execution}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+RC.RP-01 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+RC.RP-02 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+RC.RP-03 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+RC.RP-04 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+RC.RP-05 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+RC.RP-06 & \hyperref[pol:IISP10]{IISP 1.0} \\
+\hline
+\end{tabularx}
+
+\subsubsection{RC.CO: Incident Recovery Communication}
+
+\begin{tabularx}{\textwidth}{|p{3.5cm}|X|}
+\hline
+\rowcolor{headgray} \textbf{Subcategory} & \textbf{Stride Policies} \\
+\hline
+RC.CO-03 & \textit{No direct mapping} \\
+\hline
+RC.CO-04 & \textit{No direct mapping} \\
+\hline
+\end{tabularx}
+
+
+\section{APPENDIX B --- FERPA (34 CFR Part 99) Reverse Mapping}
+\label{app:ferpa}
+
+\begin{longtable}{|p{2cm}|p{4.5in}|p{3in}|}
+\hline
+\rowcolor{headgray} \textbf{Section} & \textbf{Description} & \textbf{Stride Policies} \\
+\hline
+\endhead
+§99.1 & Purpose --- To set forth requirements for the protection of privacy of parents and students under FERPA & \hyperref[pol:ISP10]{ISP 1.0} \\
+\hline
+§99.2 & Applicability --- Applies to all educational agencies receiving DOE funding & \hyperref[pol:ISP10]{ISP 1.0}, \hyperref[pol:ISP21]{ISP 2.1} \\
+\hline
+§99.3 & Definitions --- Education records, directory information, personally identifiable information (PII), legitimate educational interest & \hyperref[pol:ISP12]{ISP 1.2}, \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+§99.4 & Student rights --- Transfer of rights at age 18 or postsecondary enrollment & \textit{No direct mapping} \\
+\hline
+§99.5 & Right of access --- Right to inspect and review education records; 45-day compliance window & \textit{No direct mapping} \\
+\hline
+§99.7 & Annual notification --- Schools must annually notify parents/students of their FERPA rights & \hyperref[pol:ISP24]{ISP 2.4}, \hyperref[pol:ISP42]{ISP 4.2}, \hyperref[pol:IISP40]{IISP 4.0} \\
+\hline
+§99.10 & Right to inspect --- Parents/eligible students may inspect and review education records & \textit{No direct mapping} \\
+\hline
+§99.12 & Right to amend --- Right to request amendment of records believed to be inaccurate & \textit{No direct mapping} \\
+\hline
+§99.20 & Amendment hearing --- Hearing procedures when amendment is refused & \textit{No direct mapping} \\
+\hline
+§99.30 & Prior consent --- Written consent required before disclosing PII from education records & \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP50]{IISP 5.0} \\
+\hline
+§99.31 & Consent exceptions --- Exceptions including school officials with legitimate educational interest, directory info, health/safety emergencies, judicial orders & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP50]{IISP 5.0}, \hyperref[pol:IISP80]{IISP 8.0}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+§99.32 & Record of disclosures --- Institutions must maintain records of each request for and disclosure of PII & \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:ISP51]{ISP 5.1} \\
+\hline
+§99.33 & Redisclosure limitations --- Recipients may not redisclose PII without consent & \hyperref[pol:ISP26]{ISP 2.6}, \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP30]{IISP 3.0} \\
+\hline
+§99.34 & Transfer conditions --- Conditions for disclosure to other schools & \textit{No direct mapping} \\
+\hline
+§99.35 & Research exceptions --- Disclosure for studies for, or on behalf of, educational agencies & \hyperref[pol:ISP26]{ISP 2.6} \\
+\hline
+§99.36 & Health/safety emergency --- Disclosure permitted in health or safety emergencies & \hyperref[pol:ISP32]{ISP 3.2}, \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP100]{IISP 10.0} \\
+\hline
+§99.37 & Directory information --- Designation, opt-out rights, and de-identification requirements & \hyperref[pol:IISP20]{IISP 2.0} \\
+\hline
+§99.60-67 & Enforcement --- Investigation and enforcement procedures by the Family Policy Compliance Office & \hyperref[pol:ISP25]{ISP 2.5} \\
+\hline
+\end{longtable}
+
+
+\section{APPENDIX C --- SOX \S 404 ITGC Reverse Mapping}
+\label{app:sox}
+
+\subsection{Access Controls}
+
+Restrict system access to authorized individuals; enforce least privilege and separation of duties
+
+\textbf{Stride Policies:} \hyperref[pol:ISP23]{ISP 2.3}, \hyperref[pol:ISP26]{ISP 2.6}, \hyperref[pol:ISP41]{ISP 4.1}, \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:IISP20]{IISP 2.0}, \hyperref[pol:IISP80]{IISP 8.0}
+
+\textbf{Representative Controls:}
+\begin{itemize}[leftmargin=*]
+  \item AC-1: Logical access provisioning/deprovisioning aligned with HR lifecycle events
+  \item AC-2: Periodic user access reviews (quarterly for privileged, semi-annual for standard)
+  \item AC-3: Privileged access management --- just-in-time elevation, session recording, break-glass procedures
+  \item AC-4: Authentication controls --- MFA for all administrative and financially-significant system access
+  \item AC-5: Service account governance --- inventory, ownership, credential rotation
+\end{itemize}
+
+\subsection{Change Management}
+
+Ensure changes to IT systems are authorized, tested, and approved before production deployment
+
+\textbf{Stride Policies:} \hyperref[pol:ISP24]{ISP 2.4}, \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP70]{IISP 7.0}, \hyperref[pol:IISP90]{IISP 9.0}
+
+\textbf{Representative Controls:}
+\begin{itemize}[leftmargin=*]
+  \item CM-1: Change request documentation including business justification and impact assessment
+  \item CM-2: Segregation of development, test, and production environments
+  \item CM-3: Code review / peer review before production deployment
+  \item CM-4: Change approval by designated change authority (CAB or equivalent)
+  \item CM-5: Emergency change procedures with post-implementation review
+  \item CM-6: Release management and deployment automation controls
+\end{itemize}
+
+\subsection{Computer Operations}
+
+Ensure reliable processing of financial data through job scheduling, backup, and monitoring
+
+\textbf{Stride Policies:} \hyperref[pol:ISP31]{ISP 3.1}, \hyperref[pol:ISP43]{ISP 4.3}, \hyperref[pol:ISP45]{ISP 4.5}, \hyperref[pol:ISP51]{ISP 5.1}, \hyperref[pol:ISP61]{ISP 6.1}, \hyperref[pol:IISP10]{IISP 1.0}
+
+\textbf{Representative Controls:}
+\begin{itemize}[leftmargin=*]
+  \item CO-1: Job scheduling controls --- automated scheduling with failure alerting
+  \item CO-2: Backup and recovery --- automated backups with tested restoration procedures
+  \item CO-3: Incident management --- defined escalation and resolution procedures
+  \item CO-4: Batch processing integrity --- reconciliation and completeness checks
+\end{itemize}
+
+\subsection{Program Development}
+
+Ensure systems are developed, tested, and implemented with appropriate controls
+
+\textbf{Stride Policies:} \hyperref[pol:ISP44]{ISP 4.4}, \hyperref[pol:IISP50]{IISP 5.0}, \hyperref[pol:IISP90]{IISP 9.0}
+
+\textbf{Representative Controls:}
+\begin{itemize}[leftmargin=*]
+  \item PD-1: System development lifecycle (SDLC) methodology with security requirements
+  \item PD-2: Security testing --- SAST, DAST, SCA integrated into CI/CD pipeline
+  \item PD-3: User acceptance testing (UAT) for financially-significant system changes
+  \item PD-4: Data migration controls with reconciliation and validation
+\end{itemize}
+
+
+\end{document}

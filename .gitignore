@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# LaTeX intermediates
+build/tex/*.aux
+build/tex/*.log
+build/tex/*.out
+build/tex/*.toc
+build/tex/missfont.log
+
+# Build outputs (regenerable)
+build/output/
+build/extracted/
+
+# IDE
+.vscode/
+*.code-workspace

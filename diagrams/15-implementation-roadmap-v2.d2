@@ -1,0 +1,89 @@
+title: |md
+  # Implementation Roadmap
+  **SRA §11** — Implementation Roadmap
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 200
+  height: 100
+  style.border-radius: 6
+}
+
+phase1: {
+  label: "Phase 1\nTrust Baseline"
+  width: 220
+  height: 180
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  p1d: "Signal normalization\nasset + identity inventory\npolicy baseline"
+}
+
+phase2: {
+  label: "Phase 2\nIdentity + Privileged"
+  width: 220
+  height: 180
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  p2d: "Entra/Okta hardening\nDelinea expansion\nEntra PIM rollout + planning"
+}
+
+phase3: {
+  label: "Phase 3\nDevice + Exposure"
+  width: 220
+  height: 180
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  p3d: "CrowdStrike posture\nDefender correlation\nTenable posture + SLA"
+}
+
+phase4: {
+  label: "Phase 4\nApp + API Trust"
+  width: 220
+  height: 180
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  p4d: "Sonatype + Burp\nstandardization\nSalt discovery + validation"
+}
+
+phase5: {
+  label: "Phase 5\nOperational Trust"
+  width: 220
+  height: 180
+  style: {
+    fill: "#FCE4EC"
+    stroke: "#AD1457"
+    stroke-width: 2
+  }
+  p5d: "ServiceNow automation\nCMDB + tagging maturity"
+}
+
+phase1 -> phase2 -> phase3 -> phase4 -> phase5

@@ -1,0 +1,47 @@
+title: |md
+  # Identity Flow: Staff Authentication
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+flow_label: "Staff Trust Flow"
+flow_label.shape: text
+
+s1: "1. Access Request\nEmployee opens app"
+s2: "2. Identity + Risk Check\nEntra CA evaluates context"
+s3: "3. Strong Auth if Needed\nMFA/FIDO2/WHfB step-up"
+s4: "4. Token + App Authorization\nRBAC claims; re-check on elevated risk"
+
+s1 -> s2 -> s3 -> s4
+s2 -> s4: "low-risk path"
+
+s*.style: {
+  fill: "#E3F2FD"
+  stroke: "#1565C0"
+  stroke-width: 2
+}
+
+s*.width: 280
+s*.height: 96
+
+flow_label -> s1

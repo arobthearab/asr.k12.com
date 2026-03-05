@@ -1,0 +1,672 @@
+
+\documentclass[11pt,landscape]{article}
+\usepackage[landscape,margin=1in]{geometry}
+\usepackage{longtable,booktabs,array,tabularx,xcolor,hyperref,fancyhdr,graphicx,float}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{stridegreen}{HTML}{2E7D32}
+\definecolor{strideblue}{HTML}{1565C0}
+\definecolor{stridegray}{HTML}{757575}
+\definecolor{csfbox}{HTML}{E3F2FD}
+\definecolor{ferpabox}{HTML}{FFF3E0}
+\definecolor{soxbox}{HTML}{F3E5F5}
+\definecolor{gapred}{HTML}{C62828}
+
+\hypersetup{colorlinks=true,linkcolor=strideblue,urlcolor=strideblue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{stridegray}{Stride Security Reference Architecture V7}}
+\fancyhead[R]{\small\textcolor{stridegray}{CONFIDENTIAL}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\small March 2, 2026}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\newcommand{\csfbox}[1]{\colorbox{csfbox}{\parbox{0.95\textwidth}{\small\textbf{NIST CSF 2.0 Alignment:} #1}}}
+\newcommand{\ferpabox}[1]{\colorbox{ferpabox}{\parbox{0.95\textwidth}{\small\textbf{FERPA Relevance:} #1}}}
+\newcommand{\soxbox}[1]{\colorbox{soxbox}{\parbox{0.95\textwidth}{\small\textbf{SOX §404 Relevance:} #1}}}
+
+\begin{document}
+
+% --- Title Page ---
+\begin{titlepage}
+\vspace*{1.5cm}
+\begin{center}
+{\Huge\bfseries\textcolor{stridegreen}{Stride Security Reference Architecture}}\\[0.5cm]
+{\LARGE Version 7.0}\\[0.8cm]
+{\large Enterprise Trust Security Reference Architecture}\\[0.3cm]
+{\large Stride — K12 Inc.}\\[2cm]
+{\normalsize Incorporating:}\\[0.2cm]
+{\normalsize 22 D2 Architecture Diagrams (Landscape-Optimized)}\\
+{\normalsize Per-Section NIST CSF 2.0 Cross-References}\\
+{\normalsize FERPA and SOX §404 Regulatory Alignment}\\[2cm]
+{\small Document Date: March 2, 2026}\\
+{\small Classification: Confidential}\\[0.5cm]
+{\small\textcolor{stridegray}{Supersedes: SRA V6 (February 27, 2026)}}\\
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+
+\section*{Diagram Legend and Conventions}
+\addcontentsline{toc}{section}{Diagram Legend and Conventions}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/00-legend-conventions.png}
+\end{center}
+
+\newpage
+\section{Executive Summary}
+\label{sra:s1}
+
+\csfbox{GV.OC-01, GV.RM-01, GV.OV-01}
+
+\vspace{0.3cm}
+
+This Enterprise Trust Security Reference Architecture (TSRA) defines how Stride establishes, evaluates, enforces, degrades, and restores trust across identities, devices, workloads, APIs, data, and operations for cloud-native education technology platforms serving staff, students, and customers.
+
+The architecture uses NIST CSF 2.0 as the primary outcomes framework and aligns to NIST SP 800-207 principles. It integrates current and planned security capabilities into a coherent model that is actionable, auditable, and resilient to tool changes, while remaining explicit about enforcement points and evidence sources.
+
+\begin{itemize}
+
+  \item Implement trust principles across all personas with identity-centric, risk-adaptive controls.
+
+  \item Establish unified identity governance via SailPoint for provisioning, deprovisioning, access certification, and SoD.
+
+  \item Protect privileged access using Delinea for vaulting, rotation, and session control; mature privileged role governance with Entra PIM (future).
+
+  \item Maintain high-confidence device trust using CrowdStrike Falcon as the primary enforcement signal with Defender for Endpoint telemetry in monitor mode.
+
+  \item Continuously assess exposure using Tenable VM for vulnerability management and Tenable.cs for CSPM posture and drift.
+
+  \item Secure SDLC and supply-chain risk with Sonatype SCA, validate runtime security using Burp Suite DAST, and mature API security with Salt (future).
+
+  \item Centralize operational trust and evidence via ServiceNow SecOps; mature CMDB and cloud tagging for ownership and criticality (future).
+
+  \item Meet SOX and FERPA obligations with measurable controls and auditable evidence trails.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/16-executive-summary-and-platform-stack.png}
+\caption{16 Executive Summary And Platform Stack}
+\end{figure}
+
+\newpage
+
+\section{Trust Security Architecture Overview}
+\label{sra:s2}
+
+\csfbox{GV.PO-01, PR.AA-01, PR.PS-01}
+
+\vspace{0.3cm}
+
+The TSRA implements the principle of 'never trust, always verify' as a continuous trust computation model. Trust is non-binary and time-bound: it is established with evidence, degraded when risk increases, and restored only after validation.
+
+Zero Trust focuses on access decisioning. Trust Architecture extends this by governing the confidence required for specific actions over time, including data actions (view/export), privileged elevations, and API behaviors.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/01-trust-security-architecture-overview.png}
+\caption{01 Trust Security Architecture Overview}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/02-trust-logical-architecture-components.png}
+\caption{02 Trust Logical Architecture Components}
+\end{figure}
+
+\newpage
+
+\section{Personas and Trust Boundaries}
+\label{sra:s3}
+
+\csfbox{PR.AA-01, PR.AA-03, ID.AM-01}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+
+  \item Stride serves three primary user populations with differentiated identity, session requirements, and trust assumptions.
+
+  \item Staff are the highest-risk population due to access to sensitive data, administrative systems, and infrastructure.
+
+  \item Students represent the largest population. Access is governed through Okta CIAM with lifecycle driven by SIS via SailPoint. Trust is primarily contextual and behavioral due to unmanaged endpoints.
+
+  \item Customers (parents/guardians) use self-service registration with verification. Step-up trust is required for payments and PII access.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/03-persona-trust-boundaries.png}
+\caption{03 Persona Trust Boundaries}
+\end{figure}
+
+\newpage
+
+\section{Identity and Access Architecture}
+\label{sra:s4}
+
+\csfbox{PR.AA-01, PR.AA-02, PR.PS-01}
+
+\vspace{0.3cm}
+
+\ferpabox{FERPA §99.31 (consent exceptions for legitimate educational interest) and §99.32 (disclosure records) require identity controls that enforce role-based access aligned with educational purpose.}
+
+\vspace{0.2cm}
+
+\soxbox{SOX §404 AC-1 through AC-5: logical access provisioning, periodic reviews, PAM, MFA, and service account controls directly implement IAM architecture requirements.}
+
+\vspace{0.2cm}
+
+\vspace{0.2cm}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\small\textbf{Gap ---} FERPA Consent and Disclosure Controls: §99.30 (consent for disclosures) and §99.35 (access by state/local officials) lack explicit architectural controls for consent management and disclosure tracking beyond role-based access. NIST CSF PR.AA-04 (identity assertions managed) and PR.AA-06 (access rights managed) are not addressed in the current SRA subcategory mapping. A formal consent-management workflow and disclosure-audit mechanism should be established within the SailPoint/Entra governance layer.}}
+
+\vspace{0.2cm}
+
+The identity architecture is hybrid: Entra ID is authoritative for workforce identities and Okta CIAM is authoritative for external identities. SailPoint provides unified governance and attestation across both.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/04-staff-authentication-flow.png}
+\caption{04 Staff Authentication Flow}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/05-staff-conditional-access-policy-matrix.png}
+\caption{05 Staff Conditional Access Policy Matrix}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/06-student-authentication-flow.png}
+\caption{06 Student Authentication Flow}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/07-customer-authentication-flow.png}
+\caption{07 Customer Authentication Flow}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/08-identity-and-access-architecture.png}
+\caption{08 Identity And Access Architecture}
+\end{figure}
+
+\newpage
+
+\section{Privileged Trust (Delinea and Entra PIM)}
+\label{sra:s5}
+
+\csfbox{PR.AA-05, PR.PS-02, DE.CM-03}
+
+\vspace{0.3cm}
+
+\soxbox{SOX §404 AC-3: privileged access management with JIT elevation and session recording.}
+
+\vspace{0.2cm}
+
+Privileged access is controlled through Delinea for credential vaulting, rotation, and session control for privileged accounts, with Entra PIM planned to mature privileged role governance for Entra roles.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/09-privileged-trust-architecture.png}
+\caption{09 Privileged Trust Architecture}
+\end{figure}
+
+\newpage
+
+\section{Device Trust (CrowdStrike and Defender)}
+\label{sra:s6}
+
+\csfbox{PR.PS-03, DE.CM-01}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+
+  \item CrowdStrike Falcon provides primary endpoint protection and device trust signals. Microsoft Defender for Endpoint is deployed in monitor mode to provide supplemental telemetry.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/10-device-trust-architecture.png}
+\caption{10 Device Trust Architecture}
+\end{figure}
+
+\newpage
+
+\section{Exposure and Posture (Tenable VM and CSPM)}
+\label{sra:s7}
+
+\csfbox{ID.RA-01, DE.CM-02, PR.PS-04}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+
+  \item Tenable VM provides vulnerability identification across infrastructure and endpoints. Tenable.cs provides CSPM posture coverage and drift detection.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/11-exposure-and-posture-architecture.png}
+\caption{11 Exposure And Posture Architecture}
+\end{figure}
+
+\newpage
+
+\section{Application and API Trust (Sonatype, Burp Suite, Salt)}
+\label{sra:s8}
+
+\csfbox{PR.DS-01, PR.PS-05, DE.CM-09}
+
+\vspace{0.3cm}
+
+\soxbox{SOX §404 PD-1 through PD-2 and CM-2 through CM-6: SDLC methodology, security testing in CI/CD, environment segregation, and change approval.}
+
+\vspace{0.2cm}
+
+\vspace{0.2cm}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\small\textbf{Gap ---} API Authentication Controls: The current architecture addresses application-layer testing (SAST/DAST/SCA) and future API behavioral analytics (Salt) but does not prescribe specific API authentication standards (e.g., OAuth 2.0/OIDC scoped tokens vs. static API keys). A formal API authentication standard should be developed under ISP 4.1 (PR.AA) to define acceptable mechanisms, token lifecycle management, and mutual-TLS requirements for service-to-service communication. The ASR Questionnaire (V4) now includes an API authentication assessment question to capture the current state per application. Additionally, SOX CM-1 (change management policy documentation) is referenced but the architecture does not prescribe a formal change management policy artefact. PD-3 (security testing sign-off) and PD-4 (system conversion testing) lack documented verification gates for security test acceptance and data-migration validation.}}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+
+  \item Sonatype SCA manages dependency risk; Burp Suite DAST validates runtime security; Salt (future) provides API discovery and behavior analytics.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/12-application-and-api-trust-architecture.png}
+\caption{12 Application And Api Trust Architecture}
+\end{figure}
+
+\newpage
+
+\section{Operational Trust (ServiceNow SecOps, CMDB, Tagging)}
+\label{sra:s9}
+
+\csfbox{DE.CM-06, RS.MA-01, RC.RP-01}
+
+\vspace{0.3cm}
+
+\soxbox{SOX §404 CO-1 through CO-4: job scheduling, backup/recovery, incident management, and batch processing integrity.}
+
+\vspace{0.2cm}
+
+\vspace{0.2cm}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\small\textbf{Gap ---} Operational Monitoring and Event Analysis: DE.CM-06 (external service provider activities monitored) is In Progress---ServiceNow integration with third-party telemetry feeds is not yet operational. SOX CO-1 (job scheduling) and CO-4 (batch processing integrity) lack specific ServiceNow automation evidence. The NIST CSF DE.AE (Adverse Event Analysis) function---covering DE.AE-02 through DE.AE-08---is entirely absent from the SRA subcategory mapping; correlation, enrichment, and escalation of security events require formal architectural treatment.}}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+
+  \item ServiceNow SecOps is the central record for security incidents, vulnerability response, and evidence trails. CMDB and tagging enhance ownership and prioritization (future).
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/13-operational-trust-architecture.png}
+\caption{13 Operational Trust Architecture}
+\end{figure}
+
+\newpage
+
+\section{NIST CSF 2.0 Outcome Mapping}
+\label{sra:s10}
+
+\csfbox{GV.OV-01, ID.RA-01, PR.AA-01, DE.CM-01, RS.MA-01, RC.RP-01}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+
+  \item NIST CSF 2.0 is used as the primary outcomes framework across Govern, Identify, Protect, Detect, Respond, and Recover.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/14-nist-csf-outcome-mapping.png}
+\caption{14 Nist Csf Outcome Mapping}
+\end{figure}
+
+\newpage
+
+\section{Implementation Roadmap}
+\label{sra:s11}
+
+\csfbox{GV.SC-01, GV.RM-02}
+
+\vspace{0.3cm}
+
+\vspace{0.2cm}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\small\textbf{Gap ---} Supply Chain and Risk Appetite: GV.SC-01 (supply chain risk management program) is Planned and not yet initiated. GV.RM-02 (risk appetite and tolerance statements) is In Progress. Additional CSF subcategories GV.SC-02 through GV.SC-10---covering supplier due-diligence, contractual security requirements, supply chain integrity verification, and post-acquisition monitoring---are not mapped in the SRA. A formal third-party risk management program aligned to ISP 3.2 and NIST SP 800-161r1 should be established.}}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+
+  \item Roadmap phases describe maturity sequencing across trust domains.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/15-implementation-roadmap.png}
+\caption{15 Implementation Roadmap}
+\end{figure}
+
+\newpage
+
+\section{Key Performance Indicators (KPIs)}
+\label{sra:s12}
+
+\csfbox{GV.OV-02, DE.CM-09, RS.MA-04}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+
+  \item KPIs track adoption and effectiveness of trust controls (examples: MFA adoption, vuln SLAs, MTTD/MTTR).
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/17-kpi-framework.png}
+\caption{17 Kpi Framework}
+\end{figure}
+
+\newpage
+
+\section{Regulatory Compliance Alignment (SOX, FERPA)}
+\label{sra:s13}
+
+\csfbox{GV.RM-03, GV.OV-03}
+
+\vspace{0.3cm}
+
+\ferpabox{This section provides the comprehensive FERPA alignment matrix covering all applicable sections of 34 CFR Part 99.}
+
+\vspace{0.2cm}
+
+\soxbox{This section provides the comprehensive SOX §404 ITGC alignment matrix.}
+
+\vspace{0.2cm}
+
+\vspace{0.2cm}
+
+\colorbox{gapred!10}{\parbox{0.95\textwidth}{\small\textbf{Gap ---} FERPA Coverage Gaps and Awareness Training: FERPA 34 CFR §§99.4 (student rights notification), 99.7 (annual FERPA notice requirements), 99.12 (limitations on re-disclosure), 99.33 (conditions on re-disclosure to third parties), and 99.37 (directory information opt-out procedures) lack specific architectural controls or evidence sources in the SRA. NIST CSF PR.AT (Awareness and Training) subcategories PR.AT-01 and PR.AT-02 are not addressed in the operational control architecture; a formal security awareness and role-based training program should be mapped.}}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+
+  \item SOX: Access governance, change hygiene, and auditable evidence. FERPA: Protect education records via least privilege, governance, and auditable incident handling.
+
+\end{itemize}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/18-regulatory-compliance-alignment.png}
+\caption{18 Regulatory Compliance Alignment}
+\end{figure}
+
+\newpage
+
+
+\appendix
+\section{APPENDIX A --- Acronyms and Definitions}
+\label{app:acronyms}
+
+\begin{center}
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/19-acronyms-and-definitions-map.png}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{longtable}{lp{7in}}
+\toprule
+\textbf{Term} & \textbf{Definition} \\
+\midrule
+\endhead
+CA & Conditional Access --- policy-based access control in Microsoft Entra that evaluates signals (user, device, location, risk) to enforce authentication requirements. \\
+CIAM & Customer Identity and Access Management --- IAM specifically for external/customer-facing authentication (e.g., Okta CIC for students and families). \\
+CMDB & Configuration Management Database --- central repository of IT asset records and relationships (ServiceNow CMDB). \\
+CSF & Cybersecurity Framework --- NIST framework (v2.0) organizing cybersecurity outcomes across Govern, Identify, Protect, Detect, Respond, and Recover functions. \\
+CSPM & Cloud Security Posture Management --- continuous monitoring of cloud configurations against security baselines (Tenable Cloud Security). \\
+EDR & Endpoint Detection and Response --- real-time endpoint monitoring and threat response (CrowdStrike Falcon). \\
+FERPA & Family Educational Rights and Privacy Act --- 34 CFR Part 99, protecting student education records. \\
+FIDO2 & Fast Identity Online 2 --- passwordless authentication standard using hardware security keys or platform authenticators. \\
+IAM & Identity and Access Management --- policies and technologies ensuring the right individuals access the right resources at the right time. \\
+IGA & Identity Governance and Administration --- lifecycle management, access certification, and compliance reporting for identities. \\
+ITGC & IT General Controls --- SOX \S 404 controls over access, change management, computer operations, and program development. \\
+JEA & Just-Enough Administration --- restricting privileged sessions to the minimum set of commands required for the task. \\
+JIT & Just-in-Time Access --- time-bound privilege elevation that expires automatically (Entra PIM, Delinea). \\
+MDM & Mobile Device Management --- device enrollment, policy enforcement, and remote wipe capabilities. \\
+MFA & Multi-Factor Authentication --- requiring two or more verification factors for access. \\
+MTTR & Mean Time to Remediate/Respond --- average time between detection of a vulnerability or incident and its resolution. \\
+NIST & National Institute of Standards and Technology --- U.S. federal agency publishing cybersecurity standards and guidelines. \\
+PAM & Privileged Access Management --- controls for discovering, managing, and auditing privileged accounts and sessions (Delinea). \\
+PIM & Privileged Identity Management --- role-based JIT elevation with approval workflows (Microsoft Entra PIM). \\
+RBAC & Role-Based Access Control --- access permissions assigned by organizational role rat her than individual identity. \\
+SecOps & Security Operations --- the team and processes for monitoring, detecting, and responding to security events. \\
+SLA & Service Level Agreement --- formal commitment on service availability, response time, or remediation timelines. \\
+SOX & Sarbanes-Oxley Act --- U.S. legislation requiring internal controls over financial reporting (\S 404). \\
+SRA & Security Reference Architecture --- this document; the enterprise trust and security architecture blueprint. \\
+TOGAF & The Open Group Architecture Framework --- enterprise architecture methodology used for platform and security architecture alignment. \\
+VM & Vulnerability Management --- continuous process of identifying, classifying, prioritizing, and remediating vulnerabilities (Tenable). \\
+WHfB & Windows Hello for Business --- passwordless, certificate-based authentication using biometrics or PIN bound to a device. \\
+ZT & Zero Trust --- security model requiring continuous verification of every user, device, and transaction regardless of network location (NIST SP 800-207). \\
+\bottomrule
+\end{longtable}
+
+\newpage
+
+\section{APPENDIX B --- Document Control}
+\label{app:doccontrol}
+
+\begin{center}
+\includegraphics[width=0.92\textwidth,height=0.72\textheight,keepaspectratio]{/Volumes/Overflow/Repositories/d2.rescor.net/diagrams/security-reference-architecture/rendering_png_v2/20-document-control-metadata.png}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Attribute} & \textbf{Value} \\
+\midrule
+Document Title & Stride Security Reference Architecture \\
+Version & 7.0 \\
+Date & March 3, 2026 \\
+Classification & Confidential \\
+Author & Security Architecture / GRC \\
+Supersedes & SRA V6 (February 27, 2026) \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5cm}
+
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Version} & \textbf{Date} & \textbf{Change Description} \\
+\midrule
+V6.0 & February 27, 2026 & Initial trust security architecture; 22 D2 diagrams; NIST CSF 2.0 alignment. \\
+V7.0 & March 3, 2026 & Enhanced appendices (A--E); per-section FERPA/SOX alignment; gap annotations; consolidated gap register; diagram routing improvements; acronym and definitions table; NIST CSF and evidence traceability appendices. \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+
+\section{APPENDIX C --- NIST CSF 2.0 Mapping and Implementation Status}
+\label{app:csf_mapping}
+
+This appendix maps NIST Cybersecurity Framework 2.0 subcategories referenced in this SRA
+to the corresponding architecture sections and their current implementation status.
+
+\vspace{0.3cm}
+
+\begin{longtable}{lp{3in}p{2in}l}
+\toprule
+\textbf{CSF Subcategory} & \textbf{Outcome Description} & \textbf{SRA Section} & \textbf{Status} \\
+\midrule
+\endhead
+GV.OC-01 & Organizational context for cybersecurity risk management & §1 Executive Summary & \textcolor{stridegreen}{Implemented} \\
+GV.RM-01 & Risk management objectives established and communicated & §1 Executive Summary & \textcolor{stridegreen}{Implemented} \\
+GV.RM-02 & Risk appetite and tolerance statements defined & §11 Implementation Roadmap & \textcolor{orange}{In Progress} \\
+GV.RM-03 & Risk management activities integrated across enterprise & §13 Regulatory Compliance & \textcolor{stridegreen}{Implemented} \\
+GV.OV-01 & Cybersecurity strategy outcomes assessed & §1, §10 NIST CSF Mapping & \textcolor{stridegreen}{Implemented} \\
+GV.OV-02 & Cybersecurity performance evaluated against KPIs & §12 KPIs & \textcolor{stridegreen}{Implemented} \\
+GV.OV-03 & Regulatory requirements integrated into governance & §13 Regulatory Compliance & \textcolor{stridegreen}{Implemented} \\
+GV.PO-01 & Cybersecurity policy established and communicated & §2 Architecture Overview & \textcolor{stridegreen}{Implemented} \\
+GV.SC-01 & Supply chain risk management program established & §11 Implementation Roadmap & \textcolor{gapred}{Planned} \\
+ID.AM-01 & Asset inventories maintained & §3 Personas and Trust Boundaries & \textcolor{stridegreen}{Implemented} \\
+ID.RA-01 & Vulnerabilities identified, validated, and recorded & §7 Exposure and Posture, §10 & \textcolor{stridegreen}{Implemented} \\
+PR.AA-01 & Identities and credentials managed & §4 Identity and Access & \textcolor{stridegreen}{Implemented} \\
+PR.AA-02 & Identity proofing and binding to credentials & §4 Identity and Access & \textcolor{stridegreen}{Implemented} \\
+PR.AA-03 & Users, services, and hardware authenticated & §3, §4 Identity and Access & \textcolor{stridegreen}{Implemented} \\
+PR.AA-05 & Least privilege and separation of duties enforced & §5 Privileged Trust & \textcolor{stridegreen}{Implemented} \\
+PR.DS-01 & Data-at-rest and data-in-transit protected & §8 Application and API Trust & \textcolor{stridegreen}{Implemented} \\
+PR.PS-01 & Configuration baselines maintained & §2, §4 Architecture Overview & \textcolor{stridegreen}{Implemented} \\
+PR.PS-02 & Software maintained and replaced per policy & §5 Privileged Trust & \textcolor{stridegreen}{Implemented} \\
+PR.PS-03 & Hardware maintained and replaced per policy & §6 Device Trust & \textcolor{stridegreen}{Implemented} \\
+PR.PS-04 & Log integrity and availability ensured & §7 Exposure and Posture & \textcolor{stridegreen}{Implemented} \\
+PR.PS-05 & Installation and execution of unauthorized software prevented & §8 Application and API & \textcolor{orange}{In Progress} \\
+DE.CM-01 & Networks monitored for anomalies and attacks & §6 Device Trust & \textcolor{stridegreen}{Implemented} \\
+DE.CM-02 & Physical environment monitored for anomalies & §7 Exposure and Posture & \textcolor{stridegreen}{Implemented} \\
+DE.CM-03 & Personnel activity monitored for anomalies & §5 Privileged Trust & \textcolor{stridegreen}{Implemented} \\
+DE.CM-06 & External service provider activities monitored & §9 Operational Trust & \textcolor{orange}{In Progress} \\
+DE.CM-09 & Computing hardware and software monitored & §8, §12 KPIs & \textcolor{stridegreen}{Implemented} \\
+RS.MA-01 & Incident response plan executed & §9 Operational Trust & \textcolor{stridegreen}{Implemented} \\
+RS.MA-04 & Incident response performance evaluated & §12 KPIs & \textcolor{stridegreen}{Implemented} \\
+RC.RP-01 & Recovery plan executed during/after incident & §9 Operational Trust & \textcolor{stridegreen}{Implemented} \\
+\bottomrule
+\end{longtable}
+
+{\small\textit{Status definitions: \textcolor{stridegreen}{Implemented} = controls active and evidenced;
+\textcolor{orange}{In Progress} = controls partially deployed or in current roadmap phase;
+\textcolor{gapred}{Planned} = controls identified but not yet initiated.}}
+
+\newpage
+
+\section{APPENDIX D --- Evidence Traceability Matrix}
+\label{app:evidence}
+
+This appendix identifies the primary evidence artifacts for each NIST CSF 2.0 subcategory,
+supporting audit readiness and attestation preparation.
+
+\vspace{0.3cm}
+
+\begin{longtable}{lp{3.5in}p{2in}}
+\toprule
+\textbf{CSF Subcategory} & \textbf{Evidence Artifacts} & \textbf{Evidence Owner} \\
+\midrule
+\endhead
+GV.OC-01 & SRA document, governance charter & Security Architecture \\
+GV.RM-01 & Risk register, risk appetite statement & GRC / Risk Management \\
+GV.OV-01 & CSF outcome mapping (§10), annual review records & Security Architecture \\
+GV.OV-02 & KPI dashboard (§12), quarterly metrics reports & Security Operations \\
+GV.PO-01 & ISP 1.0–12.0 policy library, IISP 2.0 & Information Security \\
+ID.AM-01 & ServiceNow CMDB asset inventory, Entra directory & IT Operations \\
+ID.RA-01 & Tenable scan reports, risk assessment records & Vulnerability Management \\
+PR.AA-01 & Entra ID configurations, Okta CIC tenant configs & Identity Engineering \\
+PR.AA-02 & FIDO2 key enrollment records, MFA registration logs & Identity Engineering \\
+PR.AA-03 & Conditional Access policy exports, sign-in logs & Identity Engineering \\
+PR.AA-05 & Delinea session recordings, PIM activation logs & Privileged Access Mgmt \\
+PR.DS-01 & TLS configurations, encryption-at-rest settings & Application Security \\
+PR.PS-01 & CIS benchmark scan results, baseline configs & Infrastructure Security \\
+PR.PS-03 & CrowdStrike sensor deployment reports, Defender status & Endpoint Security \\
+PR.PS-05 & Sonatype policy results, application allowlists & Application Security \\
+DE.CM-01 & CrowdStrike detection logs, network alert reports & Security Operations \\
+DE.CM-03 & PIM audit logs, privileged session recordings & Security Operations \\
+DE.CM-09 & Burp Suite scan reports, Salt Security API findings & Application Security \\
+RS.MA-01 & ServiceNow incident records, runbook executions & Incident Response \\
+RS.MA-04 & MTTR reports, incident post-mortem records & Incident Response \\
+RC.RP-01 & Recovery test results, backup verification logs & Business Continuity \\
+\bottomrule
+\end{longtable}
+
+{\small\textit{Evidence sources should be aligned to the formal control library and refreshed
+during each assessment cycle. Artifacts are referenced in the control mapping tables
+throughout this SRA.}}
+
+\newpage
+
+\section{APPENDIX E --- Consolidated Gap Register}
+\label{app:gaps}
+
+This appendix consolidates all identified gaps across NIST CSF 2.0 subcategory coverage,
+FERPA regulatory requirements, and SOX §404 ITGC controls. Each gap references the SRA
+section where the deficiency is annotated and includes a priority for remediation planning.
+
+\vspace{0.3cm}
+
+\begin{longtable}{lp{1.2in}lp{3.5in}l}
+\toprule
+\textbf{Gap ID} & \textbf{CSF / Regulatory Ref} & \textbf{SRA §} & \textbf{Description} & \textbf{Priority} \\
+\midrule
+\endhead
+GAP-01 & PR.AA-04, PR.AA-06 & §4 & FERPA §99.30/§99.35 consent and disclosure controls lack explicit architectural enforcement; PR.AA-04 and PR.AA-06 unmapped. & \textcolor{gapred}{High} \\
+GAP-02 & PR.AA (API) & §8 & No formal API authentication standard (OAuth 2.0/OIDC vs. static keys); mutual-TLS and token lifecycle undefined. & \textcolor{gapred}{High} \\
+GAP-03 & CM-1, PD-3, PD-4 & §8 & SOX CM-1 change management policy artefact not prescribed; PD-3/PD-4 security testing sign-off and conversion validation gates missing. & \textcolor{orange}{Medium} \\
+GAP-04 & DE.CM-06 & §9 & External service provider monitoring In Progress — ServiceNow integration with third-party telemetry not yet operational. & \textcolor{gapred}{High} \\
+GAP-05 & CO-1, CO-4 & §9 & SOX CO-1 (job scheduling) and CO-4 (batch processing integrity) lack specific ServiceNow automation evidence. & \textcolor{orange}{Medium} \\
+GAP-06 & DE.AE-02–08 & §9 & Entire DE.AE (Adverse Event Analysis) function absent from SRA mapping; event correlation, enrichment, and escalation unaddressed. & \textcolor{gapred}{High} \\
+GAP-07 & GV.SC-01 & §11 & Supply chain risk management program Planned but not initiated. & \textcolor{gapred}{High} \\
+GAP-08 & GV.RM-02 & §11 & Risk appetite and tolerance statements In Progress. & \textcolor{orange}{Medium} \\
+GAP-09 & GV.SC-02–10 & §11 & Supplier due-diligence, contractual security, supply chain integrity, and post-acquisition monitoring subcategories unmapped. & \textcolor{gapred}{High} \\
+GAP-10 & §99.4, §99.7, §99.12, §99.33, §99.37 & §13 & Five FERPA sections lack specific architectural controls or evidence sources in the SRA. & \textcolor{gapred}{High} \\
+GAP-11 & PR.AT-01, PR.AT-02 & §13 & Awareness and Training subcategories not addressed in operational control architecture. & \textcolor{orange}{Medium} \\
+GAP-12 & PR.PS-05 & §8 & Unauthorized software prevention In Progress — Sonatype policy enforcement not fully deployed. & \textcolor{orange}{Medium} \\
+GAP-13 & GV.RM, PR.AT, DE.AE & ASR & ASR questionnaire lacks questions covering risk management governance, awareness training, and adverse event analysis domains. & \textcolor{gapred}{High} \\
+\bottomrule
+\end{longtable}
+
+{\small\textit{Gaps are derived from the comprehensive control-target analysis performed in
+March 2026 comparing NIST CSF 2.0 (100 subcategories), FERPA 34 CFR Part 99 (18 sections),
+and SOX §404 ITGC (19 controls) against the SRA and ASR questionnaire coverage.
+Priority reflects the assessed impact on audit readiness and regulatory compliance.}}
+
+\end{document}

@@ -1,0 +1,104 @@
+title: |md
+  # Device Trust Architecture
+  **SRA §6** — Device Trust
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+
+signals: {
+  grid-rows: 3
+  label: "Endpoint + Exposure Signals"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  crowdstrike: "CrowdStrike Falcon\nprimary endpoint trust signal" {
+    width: 250
+    height: 70
+    style.border-radius: 6
+  }
+  defender: "Defender for Endpoint\nmonitor-mode telemetry" {
+    width: 250
+    height: 70
+    style.border-radius: 6
+  }
+  tenable: "Tenable exposure context\nvulnerability-informed risk" {
+    width: 250
+    height: 70
+    style.border-radius: 6
+  }
+}
+
+decisioning: {
+  grid-rows: 2
+  label: "Access Decision Inputs"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  risk_score: "Composite device\ntrust score" {
+    width: 220
+    height: 70
+    style.border-radius: 6
+  }
+  conditional_access: "Conditional Access\npolicies" {
+    width: 220
+    height: 70
+    style.border-radius: 6
+  }
+}
+
+outcomes: {
+  grid-rows: 4
+  label: "Trust Outcomes"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  allow: "Allow" {
+    width: 180
+    height: 55
+    style.border-radius: 6
+    style.fill: "#C8E6C9"
+  }
+  step_up: "Step-up MFA" {
+    width: 180
+    height: 55
+    style.border-radius: 6
+    style.fill: "#FFF9C4"
+  }
+  limit: "Limit session" {
+    width: 180
+    height: 55
+    style.border-radius: 6
+    style.fill: "#FFE0B2"
+  }
+  deny: "Deny" {
+    width: 180
+    height: 55
+    style.border-radius: 6
+    style.fill: "#FFCDD2"
+  }
+}
+
+# --- Container-to-container connections (clean horizontal routing) ---
+signals -> decisioning: "Aggregate" {
+  style.stroke: "#F57F17"
+  style.stroke-width: 2
+}
+decisioning -> outcomes: "Evaluate" {
+  style.stroke: "#1976D2"
+  style.stroke-width: 2
+}

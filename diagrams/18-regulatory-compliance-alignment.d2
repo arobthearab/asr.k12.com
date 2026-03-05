@@ -1,0 +1,152 @@
+title: |md
+  # Regulatory and Compliance Alignment
+  **SRA §13** — Regulatory Compliance Alignment
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+
+# ─── Layer 1: Regulatory Drivers ───
+regulatory_drivers: {
+  grid-rows: 3
+  label: "Regulatory\nDrivers"
+  style: {
+    fill: "#FFEBEE"
+    stroke: "#C62828"
+    stroke-width: 2
+  }
+  sox: "SOX §404\nITGC" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  ferpa: "FERPA\n34 CFR Part 99" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  contractual: "Contractual\nCommitments" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+}
+
+# ─── Layer 2: Control Frameworks ───
+control_frameworks: {
+  grid-rows: 3
+  label: "Control\nFrameworks"
+  style: {
+    fill: "#E8EAF6"
+    stroke: "#3949AB"
+    stroke-width: 2
+  }
+  nist_csf: "NIST CSF 2.0" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  zero_trust: "Zero Trust\n(SP 800-207)" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  enterprise_arch: "TOGAF\nEnterprise Arch" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+}
+
+# ─── Layer 3: Control Domains ───
+control_domains: {
+  grid-rows: 3
+  grid-columns: 2
+  label: "Implemented\nControl Domains"
+  label.near: top-center
+  style: {
+    fill: "#E0F2F1"
+    stroke: "#00695C"
+    stroke-width: 2
+  }
+  iam: "Identity & Access\nManagement" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  pam: "Privileged Access\nManagement" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  appsec: "Application Security\nControls" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  endpoint: "Device Posture\nControls" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  vuln: "Exposure & Vuln\nManagement" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  secops: "Incident Detection\n& Response" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+}
+
+# ─── Layer 4: Evidence & Assurance ───
+evidence: {
+  grid-rows: 3
+  label: "Evidence &\nAssurance"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F9A825"
+    stroke-width: 2
+  }
+  artifacts: "Control Evidence\nArtifacts" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  traceability: "Risk-Control\nTraceability" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+  audit: "Audit & Attestation\nReadiness" {
+    width: 140
+    height: 50
+    style.border-radius: 6
+  }
+}
+
+# ─── Connections: left-to-right flow ───
+regulatory_drivers -> control_frameworks: "Mandate" {
+  style.stroke: "#C62828"
+  style.stroke-width: 2
+}
+
+control_frameworks -> control_domains: "Inform" {
+  style.stroke: "#3949AB"
+  style.stroke-width: 2
+}
+
+control_domains -> evidence: "Produce" {
+  style.stroke: "#00695C"
+  style.stroke-width: 2
+}

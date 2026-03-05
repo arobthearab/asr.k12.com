@@ -1,0 +1,80 @@
+vars: {
+  d2-config: {
+    layout-engine: dagre
+  }
+}
+title: |md
+  # Personas and Trust Boundaries
+  **SRA §3** — Personas and Trust Boundaries
+| {near: top-center}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+personas: {
+  grid-columns: 3
+  label: "Primary Populations"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  staff: "Staff / Corporate\nRisk: High"
+  students: "Students\nRisk: Medium (scale-driven)"
+  customers: "Customers\nRisk: Medium (PII/payments)"
+}
+
+identity_boundary: {
+  grid-columns: 4
+  label: "Identity Boundary"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  entra: "Microsoft Entra ID\n(workforce)"
+  okta_student: "Okta CIAM\n(students)"
+  okta_customer: "Okta CIAM\n(customers)"
+  sailpoint: "SailPoint IdentityNow\nLifecycle + governance"
+}
+
+trust_controls: {
+  grid-columns: 3
+  label: "Boundary Controls"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  device: "Device trust required for workforce\ncontextual for students/customers"
+  privileged: "Privileged access for staff only\n(Delinea, Entra PIM future)"
+  session: "Session + sign-in frequency\nvaries by app risk and persona"
+}
+
+personas.staff -> identity_boundary.entra
+personas.students -> identity_boundary.okta_student
+personas.customers -> identity_boundary.okta_customer
+
+identity_boundary.entra -> identity_boundary.sailpoint
+identity_boundary.okta_student -> identity_boundary.sailpoint
+identity_boundary.okta_customer -> identity_boundary.sailpoint
+
+identity_boundary.entra -> trust_controls.device
+identity_boundary.okta_student -> trust_controls.device
+identity_boundary.okta_customer -> trust_controls.device
+trust_controls.device -> trust_controls.session
+personas.staff -> trust_controls.privileged

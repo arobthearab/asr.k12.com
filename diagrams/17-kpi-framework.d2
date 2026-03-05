@@ -1,0 +1,99 @@
+title: |md
+  # KPI Framework and Performance Management
+  **SRA §12** — Key Performance Indicators
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 320
+  height: 120
+  style.border-radius: 6
+}
+domains: {
+  label: "Trust KPI Domains"
+  style: {
+    fill: "#E1F5FE"
+    stroke: "#0277BD"
+    stroke-width: 2
+  }
+  identity: "Identity Trust KPIs"
+  privileged: "Privileged Trust KPIs"
+  device: "Device Trust KPIs"
+  posture: "Exposure/Posture KPIs"
+  appapi: "Application/API Trust KPIs"
+  operational: "Operational Trust KPIs"
+}
+
+metrics: {
+  label: "Representative Metric Types"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  m1: "Coverage %\n(identities, assets, APIs, privileges)"
+  m2: "Time-Based\n(onboarding latency, MTTR, SLAs)"
+  m3: "Risk Outcomes\n(risk reduction, policy efficacy)"
+  m4: "Control Quality\n(false-positive rate, exception rate, drift)"
+  m5: "Compliance Evidence\n(audit-ready artifact completeness)"
+}
+
+governance: {
+  label: "KPI Governance Cadence"
+  style: {
+    fill: "#FFF3E0"
+    stroke: "#EF6C00"
+    stroke-width: 2
+  }
+  monthly: "Monthly Operational Review"
+  quarterly: "Quarterly GRC Steering"
+  owners: "Domain Control Owners"
+  reporting: "ServiceNow dashboards,\nPlatform-Native Telemetry"
+}
+
+outcomes: {
+  label: "Business Outcomes"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  o1: "Operational & Security Risk Reduction"
+  o2: "Improved Customer &\nRegulator Confidence"
+  o3: "Fast, Defensible Audit Response"
+  o4: "Prioritized Investment Decisions"
+}
+
+domains.identity -> metrics.m1
+domains.privileged -> metrics.m1
+domains.device -> metrics.m2
+domains.posture -> metrics.m3
+domains.appapi -> metrics.m4
+domains.operational -> metrics.m5
+
+metrics.m1 -> governance.monthly
+metrics.m2 -> governance.monthly
+metrics.m3 -> governance.quarterly
+metrics.m4 -> governance.owners
+metrics.m5 -> governance.reporting
+
+governance.monthly -> outcomes.o1
+governance.owners -> outcomes.o2
+governance.reporting -> outcomes.o3
+governance.quarterly -> outcomes.o4

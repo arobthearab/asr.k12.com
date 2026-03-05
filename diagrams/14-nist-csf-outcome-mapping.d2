@@ -1,0 +1,78 @@
+title: |md
+  # NIST CSF 2.0 Outcome Mapping
+  **SRA §10** — NIST CSF 2.0 Outcome Mapping
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 340
+  height: 124
+  style.border-radius: 6
+}
+csf: {
+  label: "CSF Functions"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  govern: "Govern"
+  identify: "Identify"
+  protect: "Protect"
+  detect: "Detect"
+  respond: "Respond"
+  recover: "Recover"
+}
+
+trust_coverage: {
+  label: "Trust Architecture Coverage"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  g: "Trust policy\naccountability\nrisk ownership"
+  i: "Asset/identity/data context"
+  p: "Trust-based access\nprivileged controls\nSDLC gates"
+  d: "Continuous\nendpoint/identity/posture/API\nmonitoring"
+  r: "Workflow-based containment\nplus case management"
+  rc: "Evidence-based restoration\nand control improvement"
+}
+
+evidence: {
+  label: "Primary Evidence Systems"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  e1: "ServiceNow + SailPoint"
+  e2: "SailPoint + Tenable\nCMDB/tagging (future)"
+  e3: "Entra + Okta + Delinea\nSonatype + Burp"
+  e4: "CrowdStrike + Defender\nTenable CSPM"
+  e5: "ServiceNow SecOps"
+  e6: "ServiceNow SecOps\nreporting"
+}
+
+csf.govern -> trust_coverage.g -> evidence.e1
+csf.identify -> trust_coverage.i -> evidence.e2
+csf.protect -> trust_coverage.p -> evidence.e3
+csf.detect -> trust_coverage.d -> evidence.e4
+csf.respond -> trust_coverage.r -> evidence.e5
+csf.recover -> trust_coverage.rc -> evidence.e6

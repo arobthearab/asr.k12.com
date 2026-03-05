@@ -1,0 +1,70 @@
+title: |md
+  # Trust Logical Architecture Components
+  **SRA §2** — Logical Architecture Detail
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 320
+  height: 108
+  style.border-radius: 6
+}
+components: {
+  label: "Core Components"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  policy_engine: "Policy Engine\nDecides trust level per action"
+  policy_admin: "Policy Administrator\nEstablishes session and elevation"
+  enforcement: "Enforcement Points\nallow/deny/step-up/limit"
+  identity_stores: "Identity Stores\nEntra, Okta CIAM, SailPoint"
+  device_signals: "Device Trust Signals\nCrowdStrike primary\nDefender monitor"
+  workload_signals: "Workload/Posture Signals\nTenable CSPM + CI/CD attestations"
+  app_api_signals: "App/API Signals\nSonatype, Burp, Salt (future)"
+  operational_evidence: "Operational Evidence\nServiceNow SecOps\nCMDB/tagging (future)"
+}
+
+tooling: {
+  label: "Enterprise Tooling"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  entra: "Entra Conditional Access\nand session controls"
+  okta: "Okta Adaptive Policies"
+  delinea: "Delinea Workflows"
+  gateways: "App/API Gateways\nplus privileged session proxy"
+}
+
+components.identity_stores -> components.policy_engine
+components.device_signals -> components.policy_engine
+components.workload_signals -> components.policy_engine
+components.app_api_signals -> components.policy_engine
+components.operational_evidence -> components.policy_engine
+
+components.policy_engine -> components.policy_admin
+components.policy_admin -> components.enforcement
+
+tooling.entra -> components.policy_engine
+tooling.okta -> components.policy_engine
+tooling.delinea -> components.policy_admin
+tooling.gateways -> components.enforcement

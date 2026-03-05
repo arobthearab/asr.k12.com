@@ -1,0 +1,62 @@
+title: |md
+  # Application and API Trust Architecture
+  **SRA §8** — Application and API Trust
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 220
+  height: 80
+  style.border-radius: 6
+}
+
+pipeline: {
+  label: "Delivery + Runtime Security"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  source: "Code +\nDependencies"
+  sca: "Sonatype SCA\nOSS risk + license"
+  build_gate: "Policy Gate\nblock non-compliant"
+  dast: "Burp Suite DAST\nruntime validation"
+  deploy: "Deployment"
+  api: "API traffic"
+  salt: "Salt Security (future)\nAPI discovery + analytics"
+}
+
+outcomes: {
+  label: "Trust Outcomes"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  risk_reduction: "Supply-chain\nrisk reduction"
+  runtime_assurance: "Runtime\nassurance"
+  api_visibility: "API visibility\nand enforcement"
+}
+
+pipeline.source -> pipeline.sca -> pipeline.build_gate -> pipeline.dast -> pipeline.deploy
+pipeline.deploy -> pipeline.api -> pipeline.salt
+
+pipeline.sca -> outcomes.risk_reduction
+pipeline.dast -> outcomes.runtime_assurance
+pipeline.salt -> outcomes.api_visibility

@@ -1,0 +1,66 @@
+title: |md
+  # Identity and Access Architecture
+  **SRA §4** — Identity and Access Architecture
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 290
+  height: 104
+  style.border-radius: 6
+}
+workforce: {
+  label: "Workforce Identity"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  entra: "Microsoft Entra ID\nConditional Access + Identity Protection"
+  workforce_apps: "Workforce Apps\nSAML/OIDC app registrations"
+}
+
+external: {
+  label: "External Identity"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  okta: "Okta CIAM\nadaptive policies, auth, token services"
+  external_apps: "Student + Customer Apps\nOIDC/OAuth authorization server"
+}
+
+governance: {
+  label: "Unified Governance"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  sailpoint: "SailPoint IdentityNow\nunified identity cube\njoiner/mover/leaver\ncertifications + SoD"
+  servicenow: "ServiceNow workflows\nattestation + evidence trails"
+}
+
+workforce.entra -> workforce.workforce_apps
+external.okta -> external.external_apps
+
+workforce.entra -> governance.sailpoint
+external.okta -> governance.sailpoint
+governance.sailpoint -> governance.servicenow

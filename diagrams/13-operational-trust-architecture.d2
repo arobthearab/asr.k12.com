@@ -1,0 +1,88 @@
+title: |md
+  # Operational Trust Architecture
+  **SRA §9** — Operational Trust
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 290
+  height: 104
+  style.border-radius: 6
+}
+inputs: {
+  label: "Security Signal Inputs"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  crowdstrike: "CrowdStrike"
+  tenable: "Tenable"
+  sonatype: "Sonatype"
+  burp: "Burp"
+}
+
+core: {
+  label: "Central Operations Plane"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  servicenow: "ServiceNow SecOps\nincidents, vuln response, evidence"
+  workflow: "Workflow automation\nownership, SLA, verification"
+}
+
+future: {
+  label: "Maturity Enhancements (Future)"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  cmdb: "CMDB maturity"
+  tagging: "Cloud tagging\ncriticality + ownership context"
+}
+
+outputs: {
+  label: "Operational Outcomes"
+  style: {
+    fill: "#FCE4EC"
+    stroke: "#AD1457"
+    stroke-width: 2
+  }
+  accountability: "Clear ownership"
+  prioritization: "Risk-based prioritization"
+  auditability: "Audit-ready evidence"
+}
+
+inputs.crowdstrike -> core.servicenow
+inputs.tenable -> core.servicenow
+inputs.sonatype -> core.servicenow
+inputs.burp -> core.servicenow
+
+core.servicenow -> core.workflow
+core.servicenow -> future.cmdb
+core.servicenow -> future.tagging
+
+core.workflow -> outputs.accountability
+future.cmdb -> core.workflow
+future.tagging -> core.workflow
+core.workflow -> outputs.prioritization
+core.servicenow -> outputs.auditability

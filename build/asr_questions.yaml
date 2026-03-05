@@ -1,0 +1,693 @@
+# ═══════════════════════════════════════════════════════════════════════
+# Stride ASR Questionnaire — Question Bank (Single Source of Truth)
+# ═══════════════════════════════════════════════════════════════════════
+# Used by both build_docx.py (Word) and build_excel_asr.py (Excel).
+#
+# Scoring:
+#   • Each answer has a risk level: L (Low), G (Guarded), M (Moderate),
+#     E (Elevated), H (High).  Scores are derived from the risk level
+#     and number of non-NA choices (see score_scales below).
+#   • N/A (score = na_score) is automatically appended to every question.
+#     Selecting N/A requires a justification in the Notes column.
+#   • Answers are ordered from lowest risk (L) to highest risk (H).
+#   • measurement = RSK(answer)/100 × RSK(weight)/100 × RSK(classification)
+#     truncated to integer for display; fractional part carried in aggregates.
+#
+# Weight tiers (question importance, rescaled to 0–100):
+#   Critical = 100   High = 67   Medium = 33   Info = 13
+#
+# Classification factor (transcendental question — multiplier for all):
+#   Yes-Low = 40   Yes-Medium = 60   Yes-High = 80
+#   Yes-Critical = 100   None assigned = 100
+
+weight_tiers:
+  Critical: 100
+  High: 67
+  Medium: 33
+  Info: 13
+
+# ── Transcendental classification question ─────────────────────────
+# Asked once at the top of the questionnaire; its factor multiplies
+# every other question's measurement.  N/A is NOT available.
+classification_question:
+  text: "Has a risk classification been assigned to this application?"
+  choices:
+    - text: "Yes — Low"
+      factor: 40
+    - text: "Yes — Medium"
+      factor: 60
+    - text: "Yes — High"
+      factor: 80
+    - text: "Yes — Critical"
+      factor: 100
+    - text: "No classification assigned"
+      factor: 100
+
+score_scales:
+  3:   # 3 non-NA choices
+    L: 20
+    M: 50
+    H: 70
+  4:   # 4 non-NA choices
+    L: 20
+    G: 40
+    M: 60
+    H: 80
+  5:   # 5 non-NA choices
+    L: 15
+    G: 35
+    M: 50
+    E: 70
+    H: 85
+
+na_score: 1
+
+domains:
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 1: Governance and Program Management
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Governance and Program Management"
+    policy_refs:
+      - ISP 1.0
+      - ISP 2.1
+      - ISP 2.4
+      - ISP 2.5
+    csf_refs:
+      - GV.OC
+      - GV.PO
+      - GV.OV
+    questions:
+      - text: "Does the application have a designated security owner or steward?"
+        weight: High
+        choices:
+          - text: "Yes — named owner in CMDB"
+            risk: L
+          - text: "Yes — informal ownership"
+            risk: M
+          - text: "No — ownership not established"
+            risk: H
+
+      - text: "Is the application included in the organization's security policy scope?"
+        weight: Medium
+        choices:
+          - text: "Yes — explicitly referenced"
+            risk: L
+          - text: "Yes — covered by umbrella policy"
+            risk: G
+          - text: "No — not in scope"
+            risk: M
+          - text: "Unknown"
+            risk: H
+
+      - text: "When was the last security review or assessment performed?"
+        weight: High
+        choices:
+          - text: "Within 6 months"
+            risk: L
+          - text: "6–12 months ago"
+            risk: G
+          - text: "More than 12 months ago"
+            risk: M
+          - text: "Never assessed"
+            risk: H
+
+      - text: "Does the application have documented data flow diagrams?"
+        weight: Medium
+        choices:
+          - text: "Yes — current and reviewed"
+            risk: L
+          - text: "Yes — but outdated"
+            risk: M
+          - text: "No — not documented"
+            risk: H
+
+      - text: "Has a RACI matrix been established for this application's security controls?"
+        weight: High
+        choices:
+          - text: "Yes — documented and current"
+            risk: L
+          - text: "Yes — but outdated or incomplete"
+            risk: G
+          - text: "No — roles informally understood"
+            risk: M
+          - text: "No — accountability not defined"
+            risk: H
+
+      - text: "Are escalation paths and notification responsibilities documented for security incidents involving this application?"
+        weight: High
+        choices:
+          - text: "Yes — RACI-aligned runbook with named contacts"
+            risk: L
+          - text: "Yes — general escalation via IRP"
+            risk: G
+          - text: "Partial — ad-hoc escalation only"
+            risk: M
+          - text: "No — not documented"
+            risk: H
+
+      - text: "What is the business necessity classification for this application?"
+        weight: Medium
+        choices:
+          - text: "Nice to have — productivity enhancement (MAY)"
+            risk: L
+          - text: "Business need — supports key objectives (SHOULD)"
+            risk: G
+          - text: "KTLO — operationally required (MUST)"
+            risk: M
+          - text: "Not classified"
+            risk: H
+
+      - text: "Which teams and departments are authorized to use this application?"
+        weight: Medium
+        choices:
+          - text: "Single team or department"
+            risk: L
+          - text: "Multiple departments — formally scoped"
+            risk: G
+          - text: "Enterprise-wide — all departments"
+            risk: M
+          - text: "Not formally scoped"
+            risk: H
+
+      - text: "Are productivity improvement estimates or benchmarks documented for this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — quantified with baseline metrics and KPIs"
+            risk: L
+          - text: "Yes — qualitative estimates documented"
+            risk: G
+          - text: "Informal understanding only"
+            risk: M
+          - text: "No estimates or benchmarks"
+            risk: H
+
+      - text: "Has legal counsel reviewed this application's terms of service, data handling, and intellectual property implications?"
+        weight: High
+        choices:
+          - text: "Yes — reviewed and approved"
+            risk: L
+          - text: "Yes — reviewed with conditions or caveats"
+            risk: G
+          - text: "Review requested but not completed"
+            risk: M
+          - text: "Not reviewed"
+            risk: H
+
+      - text: "Has the application been reviewed and approved through the enterprise architecture governance process?"
+        weight: High
+        choices:
+          - text: "Yes — approved with defined boundaries and controls"
+            risk: L
+          - text: "Yes — approved for limited or pilot use"
+            risk: G
+          - text: "Under review"
+            risk: M
+          - text: "No — not submitted for architecture review"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 2: Identity and Access Management
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Identity and Access Management"
+    policy_refs:
+      - ISP 4.1
+      - ISP 2.3
+      - IISP 8.0
+    csf_refs:
+      - PR.AA
+    questions:
+      - text: "What authentication mechanism does the application use?"
+        weight: Critical
+        choices:
+          - text: "SSO with MFA (Entra ID)"
+            risk: L
+          - text: "SSO without MFA"
+            risk: G
+          - text: "Local authentication with MFA"
+            risk: M
+          - text: "Local authentication without MFA"
+            risk: H
+
+      - text: "What authentication method do APIs exposed or consumed by this application use?"
+        weight: Critical
+        choices:
+          - text: "OAuth 2.0 / OIDC with scoped tokens"
+            risk: L
+          - text: "API key with IP allowlisting and rate limiting"
+            risk: G
+          - text: "API key without restrictions"
+            risk: M
+          - text: "No API authentication required"
+            risk: H
+
+      - text: "Are user roles and permissions based on the principle of least privilege?"
+        weight: High
+        choices:
+          - text: "Yes — RBAC/ABAC enforced"
+            risk: L
+          - text: "Partially — some roles over-privileged"
+            risk: G
+          - text: "No — broad access grants"
+            risk: M
+          - text: "Unknown"
+            risk: H
+
+      - text: "How are service accounts and API keys managed?"
+        weight: Critical
+        choices:
+          - text: "Vault/managed identities with rotation"
+            risk: L
+          - text: "Stored securely with manual rotation"
+            risk: M
+          - text: "Hard-coded or shared credentials"
+            risk: H
+
+      - text: "Is there automated provisioning/deprovisioning tied to HR events?"
+        weight: High
+        choices:
+          - text: "Yes — fully automated via SCIM/JIT"
+            risk: L
+          - text: "Partially automated"
+            risk: G
+          - text: "Manual process only"
+            risk: M
+          - text: "No process in place"
+            risk: H
+
+      - text: "Are access reviews performed periodically?"
+        weight: High
+        choices:
+          - text: "Quarterly or more frequently"
+            risk: L
+          - text: "Semi-annually"
+            risk: G
+          - text: "Annually"
+            risk: M
+          - text: "No periodic reviews"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 3: Data Protection and Privacy
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Data Protection and Privacy"
+    policy_refs:
+      - ISP 4.3
+      - IISP 2.0
+      - IISP 3.0
+    csf_refs:
+      - PR.DS
+    ferpa_note: "Applications processing student education records must comply with FERPA §99.30 (consent), §99.31 (exceptions), and §99.37 (directory information)."
+    questions:
+      - text: "Does the application process, store, or transmit student education records (FERPA-protected data)?"
+        weight: Critical
+        choices:
+          - text: "No — no education records"
+            risk: L
+          - text: "Yes — incidental processing"
+            risk: G
+          - text: "Yes — primary function"
+            risk: M
+          - text: "Unknown / Not assessed"
+            risk: H
+
+      - text: "Is data encrypted at rest?"
+        weight: High
+        choices:
+          - text: "Yes — AES-256 or equivalent"
+            risk: L
+          - text: "Yes — platform-managed encryption"
+            risk: G
+          - text: "Partial encryption"
+            risk: M
+          - text: "No encryption at rest"
+            risk: H
+
+      - text: "Is data encrypted in transit?"
+        weight: Critical
+        choices:
+          - text: "Yes — TLS 1.2+ enforced"
+            risk: L
+          - text: "Yes — TLS with older versions allowed"
+            risk: G
+          - text: "Partial — some endpoints unencrypted"
+            risk: M
+          - text: "No encryption in transit"
+            risk: H
+
+      - text: "What is the data classification level of information processed?"
+        weight: High
+        choices:
+          - text: "Public"
+            risk: L
+          - text: "Internal / Confidential"
+            risk: G
+          - text: "Restricted / Highly Sensitive"
+            risk: M
+          - text: "Not classified"
+            risk: H
+
+      - text: "Are data retention and disposal procedures implemented?"
+        weight: Medium
+        choices:
+          - text: "Yes — automated lifecycle management"
+            risk: L
+          - text: "Yes — manual procedures documented"
+            risk: G
+          - text: "Partial — some data managed"
+            risk: M
+          - text: "No retention/disposal procedures"
+            risk: H
+
+      - text: "Does the application maintain disclosure records as required by FERPA §99.32?"
+        weight: High
+        choices:
+          - text: "Yes — automated logging"
+            risk: L
+          - text: "Yes — manual records"
+            risk: M
+          - text: "No — not implemented"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 4: Secure Development and Change Management
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Secure Development and Change Management"
+    policy_refs:
+      - ISP 4.4
+      - IISP 9.0
+    csf_refs:
+      - PR.PS
+    sox_note: "SOX §404 ITGC domains CM-1 through CM-6 and PD-1 through PD-4 require documented change management and security testing controls."
+    questions:
+      - text: "Is the application developed using a documented SDLC methodology?"
+        weight: High
+        choices:
+          - text: "Yes — with security gates"
+            risk: L
+          - text: "Yes — without explicit security gates"
+            risk: M
+          - text: "Informal development process"
+            risk: H
+
+      - text: "Are SAST and/or SCA scans integrated into the CI/CD pipeline?"
+        weight: Critical
+        choices:
+          - text: "Yes — blocking on critical findings"
+            risk: L
+          - text: "Yes — advisory only"
+            risk: G
+          - text: "Manual scans only"
+            risk: M
+          - text: "No security scanning"
+            risk: H
+
+      - text: "Is DAST or penetration testing performed?"
+        weight: High
+        choices:
+          - text: "Yes — automated DAST in CI/CD + annual pentest"
+            risk: L
+          - text: "Annual penetration test only"
+            risk: G
+          - text: "Ad-hoc testing"
+            risk: M
+          - text: "No DAST or penetration testing"
+            risk: H
+
+      - text: "Are development, test, and production environments segregated?"
+        weight: High
+        choices:
+          - text: "Yes — fully segregated with access controls"
+            risk: L
+          - text: "Partially segregated"
+            risk: M
+          - text: "Shared environments"
+            risk: H
+
+      - text: "Is there a formal change approval process for production deployments?"
+        weight: High
+        choices:
+          - text: "Yes — CAB/change authority approval required"
+            risk: L
+          - text: "Yes — peer review only"
+            risk: M
+          - text: "No formal approval process"
+            risk: H
+
+      - text: "Is the application managed through the enterprise endpoint or patch management system, or does it require an out-of-band update mechanism?"
+        weight: High
+        choices:
+          - text: "Fully managed via enterprise MDM/SCCM"
+            risk: L
+          - text: "Partially managed — some updates out-of-band"
+            risk: M
+          - text: "Entirely out-of-band (CLI / manual / vendor-pushed)"
+            risk: H
+
+      - text: "Are human review and approval required before application outputs are used in production or decision-making?"
+        weight: High
+        choices:
+          - text: "Yes — mandatory human review with sign-off"
+            risk: L
+          - text: "Yes — sampling-based or risk-tiered review"
+            risk: M
+          - text: "No — outputs used directly without review"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 5: Vulnerability and Threat Management
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Vulnerability and Threat Management"
+    policy_refs:
+      - IISP 7.0
+      - ISP 3.2
+      - ISP 5.1
+    csf_refs:
+      - ID.RA
+      - DE.CM
+    questions:
+      - text: "Is the application included in vulnerability scanning scope?"
+        weight: Critical
+        choices:
+          - text: "Yes — authenticated scans weekly+"
+            risk: L
+          - text: "Yes — unauthenticated scans"
+            risk: G
+          - text: "Ad-hoc scanning only"
+            risk: M
+          - text: "Not in scanning scope"
+            risk: H
+
+      - text: "What is the SLA for remediating critical vulnerabilities?"
+        weight: High
+        choices:
+          - text: "7 days or fewer"
+            risk: L
+          - text: "8–30 days"
+            risk: G
+          - text: "31–90 days"
+            risk: M
+          - text: "> 90 days or no SLA"
+            risk: H
+
+      - text: "Is the application monitored for security events?"
+        weight: High
+        choices:
+          - text: "Yes — SIEM integration with alerting"
+            risk: L
+          - text: "Yes — log collection without alerting"
+            risk: G
+          - text: "Partial monitoring"
+            risk: M
+          - text: "No security monitoring"
+            risk: H
+
+      - text: "Does the application have a web application firewall (WAF)?"
+        weight: Medium
+        choices:
+          - text: "Yes — managed WAF with tuned rules"
+            risk: L
+          - text: "Yes — default WAF rules"
+            risk: G
+          - text: "No WAF — network firewall only"
+            risk: M
+          - text: "No protection layer"
+            risk: H
+
+      - text: "Are detective controls implemented to identify unauthorized or anomalous use of this application?"
+        weight: High
+        choices:
+          - text: "Yes — automated detection with real-time alerting"
+            risk: L
+          - text: "Yes — log-based detection requiring manual review"
+            risk: G
+          - text: "Partial — some detection capabilities"
+            risk: M
+          - text: "No detective controls implemented"
+            risk: H
+
+      - text: "Are corrective controls defined to remediate or contain issues detected during application use?"
+        weight: High
+        choices:
+          - text: "Yes — automated remediation and rollback capabilities"
+            risk: L
+          - text: "Yes — documented manual corrective procedures"
+            risk: G
+          - text: "Partial — ad-hoc correction only"
+            risk: M
+          - text: "No corrective controls defined"
+            risk: H
+
+      - text: "Is application usage monitored with defined KPIs escalated to both team-level and enterprise-level analysis?"
+        weight: Medium
+        choices:
+          - text: "Yes — dashboards with KPIs at both levels"
+            risk: L
+          - text: "Yes — team-level metrics only"
+            risk: G
+          - text: "Partial — ad-hoc reporting"
+            risk: M
+          - text: "No usage monitoring"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 6: Incident Response and Business Continuity
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Incident Response and Business Continuity"
+    policy_refs:
+      - ISP 6.1
+      - ISP 6.2
+      - IISP 1.0
+      - IISP 10.0
+    csf_refs:
+      - RS.MA
+      - RS.AN
+      - RC.RP
+    questions:
+      - text: "Is the application covered by the incident response plan?"
+        weight: High
+        choices:
+          - text: "Yes — application-specific runbook"
+            risk: L
+          - text: "Yes — covered by general IRP"
+            risk: G
+          - text: "Partial coverage"
+            risk: M
+          - text: "Not covered"
+            risk: H
+
+      - text: "What is the Recovery Time Objective (RTO)?"
+        weight: High
+        choices:
+          - text: "1 hour or less"
+            risk: L
+          - text: "1–4 hours"
+            risk: G
+          - text: "4–24 hours"
+            risk: M
+          - text: "> 24 hours or undefined"
+            risk: H
+
+      - text: "What is the Recovery Point Objective (RPO)?"
+        weight: High
+        choices:
+          - text: "1 hour or less"
+            risk: L
+          - text: "1–4 hours"
+            risk: G
+          - text: "4–24 hours"
+            risk: M
+          - text: "> 24 hours or undefined"
+            risk: H
+
+      - text: "When was the last backup restoration test performed?"
+        weight: High
+        choices:
+          - text: "Within 6 months"
+            risk: L
+          - text: "6–12 months ago"
+            risk: G
+          - text: "> 12 months ago"
+            risk: M
+          - text: "Never tested"
+            risk: H
+
+      - text: "Is forensic evidence preservation addressed for this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — log retention and chain of custody documented"
+            risk: L
+          - text: "Partial — logs retained but no formal process"
+            risk: M
+          - text: "No forensic readiness"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 7: Third-Party and Supply Chain Risk
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Third-Party and Supply Chain Risk"
+    policy_refs:
+      - ISP 2.6
+    csf_refs:
+      - GV.SC
+    questions:
+      - text: "Is the application a third-party or SaaS product?"
+        weight: Info
+        choices:
+          - text: "No — internally developed"
+            risk: L
+          - text: "Yes — on-premises third-party"
+            risk: G
+          - text: "Yes — SaaS / cloud-hosted"
+            risk: M
+          - text: "Hybrid"
+            risk: H
+
+      - text: "Has a vendor security assessment been completed?"
+        weight: High
+        choices:
+          - text: "Yes — within 12 months"
+            risk: L
+          - text: "Yes — older than 12 months"
+            risk: M
+          - text: "No assessment performed"
+            risk: H
+
+      - text: "Does the vendor contract include security requirements?"
+        weight: High
+        choices:
+          - text: "Yes — comprehensive security addendum"
+            risk: L
+          - text: "Yes — basic security clauses"
+            risk: M
+          - text: "No security requirements in contract"
+            risk: H
+
+      - text: "Is there a defined exit strategy for vendor transition?"
+        weight: Medium
+        choices:
+          - text: "Yes — documented with data portability plan"
+            risk: L
+          - text: "Partial plan"
+            risk: M
+          - text: "No exit strategy"
+            risk: H
+
+      - text: "Is there a phased deployment plan with maturity-gated control enhancements (e.g., crawl/walk/run)?"
+        weight: High
+        choices:
+          - text: "Yes — defined phases with control gates at each stage"
+            risk: L
+          - text: "Yes — informal phased approach"
+            risk: M
+          - text: "No — full deployment without phased controls"
+            risk: H
+
+      - text: "Have AI-specific risks been formally assessed for this application (e.g., overreliance, output accuracy, prompt consistency, IP leakage)?"
+        weight: High
+        choices:
+          - text: "Yes — formal AI risk assessment completed"
+            risk: L
+          - text: "Yes — partial assessment of key risks"
+            risk: M
+          - text: "No — AI risks not assessed"
+            risk: H

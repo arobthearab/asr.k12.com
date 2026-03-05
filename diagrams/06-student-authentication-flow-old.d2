@@ -1,0 +1,53 @@
+title: |md
+  # Identity Flow: Student Authentication
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+flow: {
+  label: "Student Trust Flow"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  s1: "1. Enrollment Event\nSIS updates identity"
+  s2: "2. Provisioning\nSailPoint -> Okta CIAM"
+  s3: "3. Sign-In + Policy\nSSO with adaptive checks"
+  s4: "4. Token + Access\nScoped OIDC/OAuth token"
+  s5: "5. Lifecycle Exit\nWithdrawal or graduation deprovision"
+}
+
+flow.s1 -> flow.s2 -> flow.s3 -> flow.s4
+flow.s1 -> flow.s5
+
+flow.s1.width: 280
+flow.s2.width: 280
+flow.s3.width: 280
+flow.s4.width: 280
+flow.s5.width: 280
+flow.s1.height: 96
+flow.s2.height: 96
+flow.s3.height: 96
+flow.s4.height: 96
+flow.s5.height: 96

@@ -1,0 +1,84 @@
+title: |md
+  # Exposure and Posture Architecture
+  **SRA §7** — Exposure and Posture
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 220
+  height: 80
+  style.border-radius: 6
+}
+**: {
+  &shape: image
+  width: 60
+  height: 60
+}
+
+clouds: {
+  label: "Cloud Estate"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  aws: {
+    label: "AWS"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg"
+  }
+  azure: {
+    label: "Azure"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftazure.svg"
+  }
+  gcp: {
+    label: "GCP"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg"
+  }
+}
+
+assessment: {
+  label: "Assessment + Drift Detection"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  tenable_vm: "Tenable VM\nvulnerability identification"
+  tenable_cspm: "Tenable CSPM\nposture + drift detection"
+}
+
+ops: {
+  label: "Operationalization"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  servicenow: "ServiceNow workflows\nownership, SLA, verification"
+  owners: "Asset owners +\naccountable teams"
+}
+
+clouds -> assessment.tenable_cspm
+clouds -> assessment.tenable_vm
+assessment.tenable_vm -> ops.servicenow
+assessment.tenable_cspm -> ops.servicenow
+ops.servicenow -> ops.owners

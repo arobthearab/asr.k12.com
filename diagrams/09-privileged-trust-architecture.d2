@@ -1,0 +1,67 @@
+title: |md
+  # Privileged Trust Architecture
+  **SRA §5** — Privileged Trust
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 240
+  height: 80
+  style.border-radius: 6
+}
+
+current: {
+  label: "Current State"
+  style: {
+    fill: "#FFEBEE"
+    stroke: "#C62828"
+    stroke-width: 2
+  }
+  delinea_vault: "Delinea Secret Server\ncredential vault + rotation"
+  delinea_session: "Delinea session proxy\nrecording + controls"
+  manual_roles: "Limited/manual\nprivileged role governance"
+}
+
+future: {
+  label: "Future State"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  pim: "Entra PIM\ntime-bound activation\napprovals + JIT"
+  expanded_recording: "Expanded recording\nand reporting"
+  integrated_governance: "Integrated privileged\ngovernance with identity"
+}
+
+controls: {
+  label: "Control Outcomes"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1565C0"
+    stroke-width: 2
+  }
+  least_privilege: "Least privilege"
+  accountable_access: "Auditable\nprivileged access"
+  reduced_standing_admin: "Reduced standing\nprivilege"
+}
+
+current.delinea_vault -> current.delinea_session -> future.expanded_recording -> controls.accountable_access
+current.manual_roles -> future.pim -> future.integrated_governance -> controls.least_privilege
+future.pim -> controls.reduced_standing_admin

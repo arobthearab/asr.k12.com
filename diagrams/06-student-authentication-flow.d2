@@ -1,0 +1,49 @@
+title: |md
+  # Identity Flow: Student Authentication
+  **SRA §4** — Identity and Access Architecture (Student)
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 220
+  height: 80
+  style.border-radius: 6
+}
+
+flow: {
+  label: "Student Trust Flow"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  s1: "Access Event"
+  s2: "Provision\n(SailPoint → Okta CIAM)"
+  s3: "Policy SSO\nAdaptive Checks"
+  s4: "Token\nAuthentication"
+  s5: "Deprovision"
+}
+
+flow.s1 -> flow.s2: Enrollment
+flow.s1 -> flow.s3: Sign In
+flow.s3 -> flow.s4
+flow.s1 -> flow.s5: Withdrawal
+
+flow.s*.width: 220
+flow.s*.height: 80

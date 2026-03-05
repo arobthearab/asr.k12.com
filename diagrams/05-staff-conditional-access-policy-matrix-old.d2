@@ -1,0 +1,120 @@
+title: |md
+  # Conditional Access Policy Matrix — Staff
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+conditions: {
+  label: "Conditions"
+  style: {
+    fill: "#FFF3E0"
+    stroke: "#E65100"
+    stroke-width: 2
+  }
+  compliant: "Compliant Device"
+  cs_healthy: "CrowdStrike Healthy"
+  mfa: "MFA Strength"
+  timeout: "Session Timeout"
+  signin: "Sign-in Frequency"
+}
+
+low: {
+  label: "Low Risk Apps"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  a1: "Device: Required"
+  a2: "CrowdStrike: Required"
+  a3: "MFA: Standard"
+  a4: "Timeout: 8h"
+  a5: "Sign-in: 7d"
+}
+
+medium: {
+  label: "Medium Risk Apps"
+  style: {
+    fill: "#FFFDE7"
+    stroke: "#F9A825"
+    stroke-width: 2
+  }
+  b1: "Device: Required"
+  b2: "CrowdStrike: Required"
+  b3: "MFA: Number matching"
+  b4: "Timeout: 4h"
+  b5: "Sign-in: 1d"
+}
+
+high: {
+  label: "High Risk Apps"
+  style: {
+    fill: "#FFEBEE"
+    stroke: "#C62828"
+    stroke-width: 2
+  }
+  c1: "Device: Required"
+  c2: "CrowdStrike: Required"
+  c3: "MFA: Strong (FIDO2/WHfB)"
+  c4: "Timeout: 1h"
+  c5: "Sign-in: Every session"
+}
+
+admin: {
+  label: "Admin Access"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  d1: "Device: Required"
+  d2: "CrowdStrike: Required"
+  d3: "MFA: Strong only"
+  d4: "Timeout: 15m"
+  d5: "Sign-in: Every session"
+}
+
+conditions.compliant -> low.a1
+conditions.compliant -> medium.b1
+conditions.compliant -> high.c1
+conditions.compliant -> admin.d1
+
+conditions.cs_healthy -> low.a2
+conditions.cs_healthy -> medium.b2
+conditions.cs_healthy -> high.c2
+conditions.cs_healthy -> admin.d2
+
+conditions.mfa -> low.a3
+conditions.mfa -> medium.b3
+conditions.mfa -> high.c3
+conditions.mfa -> admin.d3
+
+conditions.timeout -> low.a4
+conditions.timeout -> medium.b4
+conditions.timeout -> high.c4
+conditions.timeout -> admin.d4
+
+conditions.signin -> low.a5
+conditions.signin -> medium.b5
+conditions.signin -> high.c5
+conditions.signin -> admin.d5

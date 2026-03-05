@@ -1,0 +1,125 @@
+title: |md
+  # Trust Security Architecture Overview
+  **SRA §2** — Trust Security Architecture Overview
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+**: {
+  &shape: image
+  width: 72
+  height: 72
+}
+users: {
+  label: "Personas"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  staff: "Staff / Corporate"
+  students: "Students"
+  customers: "Customers"
+}
+
+trust_plane: {
+  label: "Trust Decision Plane"
+  style: {
+    fill: "#E8F5E9"
+    stroke: "#2E7D32"
+    stroke-width: 2
+  }
+  policy_engine: "Policy Engine\n(never trust, always verify)"
+  policy_admin: "Policy Administrator\n(session + elevation controls)"
+  enforcement: "Enforcement Points\nallow/deny/step-up/limit"
+}
+
+signals: {
+  label: "Trust Signals"
+  style: {
+    fill: "#FFF8E1"
+    stroke: "#F57F17"
+    stroke-width: 2
+  }
+  identity: "Identity\nEntra ID, Okta, SailPoint"
+  device: "Device\nCrowdStrike + Defender"
+  posture: "Exposure/Posture\nTenable VM + CSPM"
+  appapi: "App/API\nSonatype, Burp, Salt(future)"
+  operations: "Operational Evidence\nServiceNow SecOps"
+}
+
+cloud_platforms: {
+  label: "Multi-Cloud Workload Context"
+  style: {
+    fill: "#F3E5F5"
+    stroke: "#6A1B9A"
+    stroke-width: 2
+  }
+  aws: {
+    label: "AWS"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg"
+  }
+  azure: {
+    label: "Azure"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftazure.svg"
+  }
+  gcp: {
+    label: "GCP"
+    shape: image
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg"
+  }
+}
+
+outcomes: {
+  label: "Outcomes"
+  style: {
+    fill: "#FCE4EC"
+    stroke: "#AD1457"
+    stroke-width: 2
+  }
+  access: "Risk-adaptive access"
+  resilience: "Degrade + restore trust"
+  evidence: "Auditable evidence trails"
+}
+
+users.staff -> trust_plane.policy_engine
+users.students -> trust_plane.policy_engine
+users.customers -> trust_plane.policy_engine
+
+signals.identity -> trust_plane.policy_engine
+signals.device -> trust_plane.policy_engine
+signals.posture -> trust_plane.policy_engine
+signals.appapi -> trust_plane.policy_engine
+signals.operations -> trust_plane.policy_engine
+
+cloud_platforms.aws -> signals.posture
+cloud_platforms.azure -> signals.posture
+cloud_platforms.gcp -> signals.posture
+
+trust_plane.policy_engine -> trust_plane.enforcement
+trust_plane.policy_admin -> trust_plane.enforcement
+trust_plane.enforcement -> outcomes.access
+trust_plane.enforcement -> outcomes.resilience
+trust_plane.enforcement -> outcomes.evidence

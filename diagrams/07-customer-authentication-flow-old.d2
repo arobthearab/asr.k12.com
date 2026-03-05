@@ -1,0 +1,52 @@
+title: |md
+  # Identity Flow: Customer Registration and Authentication
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: down
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 250
+  height: 88
+  style.border-radius: 6
+}
+flow: {
+  label: "Customer Trust Flow"
+  style: {
+    fill: "#E3F2FD"
+    stroke: "#1976D2"
+    stroke-width: 2
+  }
+  s1: "1. Registration\nPortal self-signup"
+  s2: "2. Verification\nEmail or phone plus linkage checks"
+  s3: "3. MFA Setup\nRequired for sensitive actions"
+  s4: "4. Session Policy\nBaseline + step-up on risk"
+  s5: "5. Tokenized Access\nScoped OIDC/OAuth authorization"
+}
+
+flow.s1 -> flow.s2 -> flow.s3 -> flow.s4 -> flow.s5
+
+flow.s1.width: 280
+flow.s2.width: 280
+flow.s3.width: 280
+flow.s4.width: 280
+flow.s5.width: 280
+flow.s1.height: 96
+flow.s2.height: 96
+flow.s3.height: 96
+flow.s4.height: 96
+flow.s5.height: 96

@@ -1,0 +1,759 @@
+
+\documentclass[11pt,landscape]{article}
+\usepackage[landscape,margin=1in]{geometry}
+\usepackage{longtable,booktabs,array,tabularx,xcolor,hyperref,fancyhdr,enumitem,amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{stridegreen}{HTML}{2E7D32}
+\definecolor{strideblue}{HTML}{1565C0}
+\definecolor{stridegray}{HTML}{757575}
+\definecolor{critbg}{HTML}{FFEBEE}
+\definecolor{highbg}{HTML}{FFF3E0}
+\definecolor{medbg}{HTML}{E8F5E9}
+\definecolor{ferpabox}{HTML}{FFF3E0}
+\definecolor{soxbox}{HTML}{F3E5F5}
+
+\hypersetup{colorlinks=true,linkcolor=strideblue,urlcolor=strideblue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{stridegray}{Stride ASR Questionnaire V3}}
+\fancyhead[R]{\small\textcolor{stridegray}{CONFIDENTIAL}}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\small March 2, 2026}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\newcommand{\ferpabox}[1]{\colorbox{ferpabox}{\parbox{0.95\textwidth}{\small\textbf{FERPA Note:} #1}}}
+\newcommand{\soxbox}[1]{\colorbox{soxbox}{\parbox{0.95\textwidth}{\small\textbf{SOX §404 Note:} #1}}}
+
+\begin{document}
+
+% --- Title Page ---
+\begin{titlepage}
+\vspace*{2cm}
+\begin{center}
+{\Huge\bfseries\textcolor{stridegreen}{Stride Application Security Review}}\\[0.3cm]
+{\Huge\bfseries\textcolor{stridegreen}{Questionnaire}}\\[0.5cm]
+{\LARGE Version 3.0}\\[1cm]
+{\large Stride — K12 Inc.}\\[0.3cm]
+{\large Information Security \& Governance}\\[2cm]
+{\normalsize Discrete-choice questionnaire for application security risk assessment.}\\
+{\normalsize Organized by policy domain with regulatory cross-references.}\\[1cm]
+{\normalsize Frameworks: NIST CSF 2.0 \textbar{} FERPA (34 CFR Part 99) \textbar{} SOX §404 ITGC}\\[2cm]
+{\small Document Date: March 2, 2026}\\
+{\small Classification: Confidential}\\
+{\small Supersedes: ASR Checklist V2}\\
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% --- Instructions ---
+\section{Instructions}
+
+\subsection{Purpose}
+This questionnaire is used to assess the security posture of applications within the Stride technology portfolio. Each question maps to specific Stride ISP/IISP policies, NIST CSF 2.0 subcategories, and where applicable, FERPA and SOX §404 ITGC requirements.
+
+\subsection{How to Complete}
+\begin{enumerate}
+    \item For each question, select \textbf{exactly one} response that best describes the current state.
+    \item Mark your selection with \textbf{$\checkmark$} or \textbf{X} in the checkbox.
+    \item Questions marked \textbf{Critical} require immediate attention if the response indicates a gap.
+    \item If a question is not applicable, select ``N/A'' and provide a brief justification in the notes column.
+\end{enumerate}
+
+\subsection{Scoring Model}
+
+This questionnaire uses a \textbf{weighted scoring model} that assigns decreasing
+importance to successive findings so that overall risk is dominated by the most
+severe gaps rather than their count.
+
+\subsubsection*{Per-Question Scoring}
+\begin{enumerate}[leftmargin=*]
+    \item Each answer choice carries an ordinal score reflecting maturity or risk.
+    \item The \textbf{weight tier} of the question multiplies the raw score to
+          produce a \textbf{weighted measurement} visible as a gray annotation
+          next to each choice.
+\end{enumerate}
+
+\begin{tabularx}{\textwidth}{lcXl}
+\toprule
+\textbf{Weight Tier} & \textbf{Priority} & \textbf{Description} & \textbf{Escalation} \\
+\midrule
+\colorbox{critbg}{Critical} & Highest & Fundamental control --- gap requires immediate remediation & CISO notification \\
+\colorbox{highbg}{High} & High & Important control --- gap requires 30-day remediation & Security Architecture review \\
+\colorbox{medbg}{Medium} & Moderate & Supporting control --- address in next planning cycle & Risk acceptance option \\
+Info & Low & Contextual / informational only & None \\
+\bottomrule
+\end{tabularx}
+
+\subsubsection*{Composite Scoring}
+
+Weighted measurements are combined using a \textbf{proprietary composite function}
+that emphasizes the most severe finding and progressively discounts lesser ones.
+This prevents score inflation from many low-severity gaps.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Section Score:} composite of all question measurements within a domain.
+    \item \textbf{Questionnaire Score:} composite across the entire questionnaire.
+    \item \textbf{Normalized Score:} mapped to a 0--100\% scale for comparison.
+\end{itemize}
+
+\vspace{0.2cm}
+{\small\textbf{Interpretation:} 0--25\% = strong posture; 26--50\% = adequate; 51--75\% = elevated risk; 76--100\% = critical gaps requiring immediate action.}
+
+\subsection{Application Information}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Field} & \textbf{Value} \\
+\midrule
+Application Name & \\
+Business Owner & \\
+Technical Owner & \\
+CMDB ID & \\
+Risk Classification & \\
+Assessment Date & \\
+Assessor & \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+\section{Governance and Program Management}
+
+\textbf{Policy References:} STRIDE ISP 1.0, STRIDE ISP 2.1, STRIDE ISP 2.4, STRIDE ISP 2.5 \hfill \textbf{CSF:} GV.OC, GV.PO, GV.OV
+
+\noindent\colorbox{highbg}{\textbf{Q1} [High]} Does the application have a designated security owner or steward?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- named owner in CMDB \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- informal ownership \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- ownership not established \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q2} [High]} Has a risk classification been assigned to this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- High/Critical \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- Medium \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Yes --- Low \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No classification assigned \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q3} [Medium]} Is the application included in the organization's security policy scope?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- explicitly referenced \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- covered by umbrella policy \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- not in scope \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Unknown \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q4} [High]} When was the last security review or assessment performed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Within 6 months \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & 6--12 months ago \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & More than 12 months ago \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Never assessed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q5} [Medium]} Does the application have documented data flow diagrams?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- current and reviewed \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- but outdated \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- not documented \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q6} [High]} Has a RACI matrix been established for this application's security controls?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- documented and current \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- but outdated or incomplete \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- roles informally understood \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No --- accountability not defined \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q7} [High]} Are escalation paths and notification responsibilities documented for security incidents involving this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- RACI-aligned runbook with named contacts \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- general escalation via IRP \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- ad-hoc escalation only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No --- not documented \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q8} [Medium]} What is the business necessity classification for this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & KTLO --- operationally required (MUST) \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Business need --- supports key objectives (SHOULD) \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Nice to have --- productivity enhancement (MAY) \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not classified \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q9} [Medium]} Which teams and departments are authorized to use this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Enterprise-wide --- all departments \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Multiple departments --- formally scoped \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Single team or department \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not formally scoped \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q10} [Medium]} Are productivity improvement estimates or benchmarks documented for this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- quantified with baseline metrics and KPIs \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- qualitative estimates documented \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Informal understanding only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No estimates or benchmarks \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q11} [High]} Has legal counsel reviewed this application's terms of service, data handling, and intellectual property implications?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- reviewed and approved \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- reviewed with conditions or caveats \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Review requested but not completed \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not reviewed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q12} [High]} Has the application been reviewed and approved through the enterprise architecture governance process?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- approved with defined boundaries and controls \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- approved for limited or pilot use \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Under review \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No --- not submitted for architecture review \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Identity and Access Management}
+
+\textbf{Policy References:} STRIDE ISP 4.1, STRIDE ISP 2.3, STRIDE IISP 8.0 \hfill \textbf{CSF:} PR.AA
+
+\noindent\colorbox{critbg}{\textbf{Q13} [Critical]} What authentication mechanism does the application use?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & SSO with MFA (Entra ID) \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & SSO without MFA \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Local authentication with MFA \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Local authentication without MFA \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q14} [High]} Are user roles and permissions based on the principle of least privilege?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- RBAC/ABAC enforced \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partially --- some roles over-privileged \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- broad access grants \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Unknown \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{critbg}{\textbf{Q15} [Critical]} How are service accounts and API keys managed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Vault/managed identities with rotation \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Stored securely with manual rotation \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Hard-coded or shared credentials \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No service accounts used \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q16} [High]} Is there automated provisioning/deprovisioning tied to HR events?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- fully automated via SCIM/JIT \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partially automated \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Manual process only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No process in place \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q17} [High]} Are access reviews performed periodically?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Quarterly or more frequently \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Semi-annually \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Annually \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No periodic reviews \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Data Protection and Privacy}
+
+\textbf{Policy References:} STRIDE ISP 4.3, STRIDE IISP 2.0, STRIDE IISP 3.0 \hfill \textbf{CSF:} PR.DS
+
+\ferpabox{Applications processing student education records must comply with FERPA §99.30 (consent), §99.31 (exceptions), and §99.37 (directory information). Responses in this section directly support FERPA compliance evidence.}
+
+\vspace{0.2cm}
+
+\noindent\colorbox{critbg}{\textbf{Q18} [Critical]} Does the application process, store, or transmit student education records (FERPA-protected data)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- primary function \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- incidental processing \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- no education records \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Unknown / Not assessed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q19} [High]} Is data encrypted at rest?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- AES-256 or equivalent \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- platform-managed encryption \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial encryption \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No encryption at rest \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{critbg}{\textbf{Q20} [Critical]} Is data encrypted in transit?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- TLS 1.2+ enforced \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- TLS with older versions allowed \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- some endpoints unencrypted \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No encryption in transit \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q21} [High]} What is the data classification level of information processed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Public \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Internal / Confidential \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Restricted / Highly Sensitive \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not classified \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q22} [Medium]} Are data retention and disposal procedures implemented?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- automated lifecycle management \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- manual procedures documented \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- some data managed \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No retention/disposal procedures \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q23} [High]} Does the application maintain disclosure records as required by FERPA §99.32?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- automated logging \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- manual records \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Not applicable (no education records) \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No --- not implemented \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Secure Development and Change Management}
+
+\textbf{Policy References:} STRIDE ISP 4.4, STRIDE IISP 9.0 \hfill \textbf{CSF:} PR.PS
+
+\soxbox{SOX §404 ITGC domains CM-1 through CM-6 and PD-1 through PD-4 require documented change management and security testing controls for financially-significant applications.}
+
+\vspace{0.2cm}
+
+\noindent\colorbox{highbg}{\textbf{Q24} [High]} Is the application developed using a documented SDLC methodology?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- with security gates \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- without explicit security gates \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Informal development process \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Third-party managed / SaaS \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{critbg}{\textbf{Q25} [Critical]} Are SAST and/or SCA scans integrated into the CI/CD pipeline?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- blocking on critical findings \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- advisory only \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Manual scans only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No security scanning \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q26} [High]} Is DAST or penetration testing performed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- automated DAST in CI/CD + annual pentest \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Annual penetration test only \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Ad-hoc testing \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No DAST or penetration testing \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q27} [High]} Are development, test, and production environments segregated?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- fully segregated with access controls \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partially segregated \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Shared environments \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A --- SaaS application \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q28} [High]} Is there a formal change approval process for production deployments?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- CAB/change authority approval required \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- peer review only \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No formal approval process \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A --- vendor managed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q29} [High]} Is the application managed through the enterprise endpoint or patch management system (e.g., Intune, SCCM), or does it require an out-of-band update mechanism?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Fully managed via enterprise MDM/SCCM \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partially managed --- some updates out-of-band \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Entirely out-of-band (CLI, manual, or vendor-pushed) \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A --- SaaS / vendor-managed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q30} [High]} Are human review and approval required before application outputs are used in production or decision-making?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- mandatory human review with sign-off \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- sampling-based or risk-tiered review \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- outputs used directly without review \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A --- application does not generate decision outputs \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Vulnerability and Threat Management}
+
+\textbf{Policy References:} STRIDE IISP 7.0, STRIDE ISP 3.2, STRIDE ISP 5.1 \hfill \textbf{CSF:} ID.RA, DE.CM
+
+\noindent\colorbox{critbg}{\textbf{Q31} [Critical]} Is the application included in vulnerability scanning scope?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- authenticated scans weekly+ \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- unauthenticated scans \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Ad-hoc scanning only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not in scanning scope \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q32} [High]} What is the SLA for remediating critical vulnerabilities?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & 7 days or fewer \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & 8--30 days \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & 31--90 days \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & > 90 days or no SLA \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q33} [High]} Is the application monitored for security events?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- SIEM integration with alerting \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- log collection without alerting \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial monitoring \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No security monitoring \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q34} [Medium]} Does the application have a web application firewall (WAF)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- managed WAF with tuned rules \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- default WAF rules \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No WAF --- network firewall only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No protection layer \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q35} [High]} Are detective controls implemented to identify unauthorized or anomalous use of this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- automated detection with real-time alerting \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- log-based detection requiring manual review \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- some detection capabilities \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No detective controls implemented \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q36} [High]} Are corrective controls defined to remediate or contain issues detected during application use?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- automated remediation and rollback capabilities \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- documented manual corrective procedures \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- ad-hoc correction only \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No corrective controls defined \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q37} [Medium]} Is application usage monitored with defined KPIs escalated to both team-level and enterprise-level analysis?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- dashboards with KPIs at both levels \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- team-level metrics only \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial --- ad-hoc reporting \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No usage monitoring \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Incident Response and Business Continuity}
+
+\textbf{Policy References:} STRIDE ISP 6.1, STRIDE ISP 6.2, STRIDE IISP 1.0, STRIDE IISP 10.0 \hfill \textbf{CSF:} RS.MA, RS.AN, RC.RP
+
+\noindent\colorbox{highbg}{\textbf{Q38} [High]} Is the application covered by the incident response plan?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- application-specific runbook \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- covered by general IRP \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Partial coverage \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Not covered \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q39} [High]} What is the Recovery Time Objective (RTO)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & 1 hour or less \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & 1--4 hours \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & 4--24 hours \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & > 24 hours or undefined \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q40} [High]} What is the Recovery Point Objective (RPO)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & 1 hour or less \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & 1--4 hours \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & 4--24 hours \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & > 24 hours or undefined \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q41} [High]} When was the last backup restoration test performed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Within 6 months \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & 6--12 months ago \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & > 12 months ago \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Never tested \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q42} [Medium]} Is forensic evidence preservation addressed for this application?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- log retention and chain of custody documented \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partial --- logs retained but no formal process \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No forensic readiness \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+\section{Third-Party and Supply Chain Risk}
+
+\textbf{Policy References:} STRIDE ISP 2.6 \hfill \textbf{CSF:} GV.SC
+
+\noindent\colorbox{white}{\textbf{Q43} [Info]} Is the application a third-party or SaaS product?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- SaaS / cloud-hosted \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- on-premises third-party \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- internally developed \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & Hybrid \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q44} [High]} Has a vendor security assessment been completed?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- within 12 months \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- older than 12 months \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No assessment performed \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A --- internal application \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q45} [High]} Does the vendor contract include security requirements?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- comprehensive security addendum \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- basic security clauses \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No security requirements in contract \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{medbg}{\textbf{Q46} [Medium]} Is there a defined exit strategy for vendor transition?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- documented with data portability plan \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Partial plan \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No exit strategy \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q47} [High]} Is there a phased deployment plan with maturity-gated control enhancements (e.g., crawl/walk/run)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- defined phases with control gates at each stage \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- informal phased approach \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & No --- full deployment without phased controls \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & N/A \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\noindent\colorbox{highbg}{\textbf{Q48} [High]} Have AI-specific risks been formally assessed for this application (e.g., overreliance, output accuracy, prompt consistency, IP leakage)?
+
+\begin{tabularx}{\textwidth}{cXX}
+$\square$ & Yes --- formal AI risk assessment completed \textsuperscript{\scriptsize\textcolor{stridegray}{25}} & Notes: \rule{4cm}{0.4pt} \\
+$\square$ & Yes --- partial assessment of key risks \textsuperscript{\scriptsize\textcolor{stridegray}{50}} &  \\
+$\square$ & Not applicable --- no AI/ML capabilities \textsuperscript{\scriptsize\textcolor{stridegray}{75}} &  \\
+$\square$ & No --- AI risks not assessed \textsuperscript{\scriptsize\textcolor{stridegray}{100}} &  \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\newpage
+
+
+\section{Assessment Summary}
+
+\subsection{Domain Summary}
+Complete after all sections are answered. Record each domain's risk rating below.
+
+\begin{tabularx}{\textwidth}{lcccl}
+\toprule
+\textbf{Domain} & \textbf{\#\,Questions} & \textbf{Score\,\%} & \textbf{Rating} & \textbf{Notes} \\
+\midrule
+Governance and Program Management & 12 &  & & \\
+Identity and Access Management & 5 &  & & \\
+Data Protection and Privacy & 6 &  & & \\
+Secure Development and Change Management & 7 &  & & \\
+Vulnerability and Threat Management & 7 &  & & \\
+Incident Response and Business Continuity & 5 &  & & \\
+Third-Party and Supply Chain Risk & 6 &  & & \\
+\midrule
+\textbf{OVERALL} & 48 &  & & \\
+\bottomrule
+\end{tabularx}
+
+
+{\small\textit{Scores are computed by the assessor using the proprietary composite function.
+Recording the normalized 0--100\% score per domain and overall enables tracking over time.}}
+
+\subsection{Risk Rating Scale}
+
+\begin{tabularx}{\textwidth}{lXl}
+\toprule
+\textbf{Norm\,\%} & \textbf{Description} & \textbf{Rating} \\
+\midrule
+0--25\% & Strong posture --- controls are mature and effective & \textcolor{stridegreen}{\textbf{Low}} \\
+26--50\% & Adequate posture --- minor gaps with compensating controls & \textbf{Moderate} \\
+51--75\% & Elevated risk --- material gaps requiring remediation plans & \textcolor{orange}{\textbf{Elevated}} \\
+76--100\% & Critical risk --- fundamental controls missing or ineffective & \textcolor{red}{\textbf{Critical}} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.3cm}
+{\small\textit{Domains with Norm\,\% above 50\% should trigger a remediation workstream.
+The composite scoring method ensures that the single most severe gap dominates
+the aggregate, reflecting operational reality.}}
+
+\subsection{Assessor Certification}
+
+\vspace{0.5cm}
+\begin{tabularx}{\textwidth}{lX}
+Assessor Signature: & \rule{6cm}{0.4pt} \\[0.5cm]
+Date: & \rule{4cm}{0.4pt} \\[0.5cm]
+Reviewer Signature: & \rule{6cm}{0.4pt} \\[0.5cm]
+Date: & \rule{4cm}{0.4pt} \\
+\end{tabularx}
+
+\end{document}

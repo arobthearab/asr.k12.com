@@ -1,0 +1,104 @@
+title: |md
+  # Staff Conditional Access Policy Matrix
+  **SRA §4** — Identity and Access Architecture (Conditional Access)
+| {near: top-center}
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+direction: right
+style: {
+  fill: "#FFFFFF"
+  stroke: "#CFD8DC"
+  stroke-width: 1
+}
+(*** -> ***)[*]: {
+  style.border-radius: 0
+  style.stroke: "#455A64"
+  style.stroke-width: 1
+}
+**: {
+  &leaf: true
+  !&shape: image
+  width: 200
+  height: 50
+  style.border-radius: 6
+}
+
+conditions: {
+  label: "Conditions"
+  style: {
+    fill: "#FFF3E0"
+    stroke: "#E65100"
+    stroke-width: 2
+  }
+  c1: "Device Compliance"
+  c2: "Endpoint Protection"
+  c3: "Authentication Method"
+  c4: "Session Timeout"
+  c5: "Reauth Frequency"
+}
+
+tiers: {
+  label: "Risk Tiers"
+  grid-columns: 2
+
+  admin: {
+    label: "Privileged Access"
+    style: {
+      fill: "#F3E5F5"
+      stroke: "#6A1B9A"
+      stroke-width: 2
+    }
+    d1: "Device — Required"
+    d2: "CrowdStrike — Required"
+    d3: "Auth — Strong MFA"
+    d4: "Session — 15 min"
+    d5: "Reauth — Every Session"
+  }
+
+  high: {
+    label: "High Risk"
+    style: {
+      fill: "#FFEBEE"
+      stroke: "#C62828"
+      stroke-width: 2
+    }
+    c1: "Device — Required"
+    c2: "CrowdStrike — Required"
+    c3: "Auth — FIDO, WHfB"
+    c4: "Session — 1 hour"
+    c5: "Reauth — Every Session"
+  }
+
+  medium: {
+    label: "Medium Risk"
+    style: {
+      fill: "#FFFDE7"
+      stroke: "#F9A825"
+      stroke-width: 2
+    }
+    b1: "Device — Required"
+    b2: "CrowdStrike — Required"
+    b3: "Auth — Numeric OTP"
+    b4: "Session — 4 hours"
+    b5: "Reauth — 1 day"
+  }
+
+  low: {
+    label: "Low Risk"
+    style: {
+      fill: "#E8F5E9"
+      stroke: "#2E7D32"
+      stroke-width: 2
+    }
+    a1: "Device — Required"
+    a2: "CrowdStrike — Required"
+    a3: "Auth — Standard"
+    a4: "Session — 8 hours"
+    a5: "Reauth — 7 days"
+  }
+}
+
+conditions -> tiers
