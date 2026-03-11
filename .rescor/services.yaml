@@ -1,0 +1,5 @@
+# ASR k12.com Services
+# Document-build project — no long-running services.
+# Inherits: infisical from core.rescor.net (for credential access)
+
+services: {}
