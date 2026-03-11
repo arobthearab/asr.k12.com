@@ -1,7 +1,8 @@
 # ═══════════════════════════════════════════════════════════════════════
 # Stride ASR Questionnaire — Question Bank (Single Source of Truth)
 # ═══════════════════════════════════════════════════════════════════════
-# Used by both build_docx.py (Word) and build_excel_asr.py (Excel).
+# Used by build_docx.py (Word), build_excel_asr.py (Excel), and
+# the YAML-to-Cypher configuration tool (configureFromYaml.mjs).
 #
 # Scoring:
 #   • Each answer has a risk level: L (Low), G (Guarded), M (Moderate),
@@ -19,9 +20,12 @@
 # Classification factor (transcendental question — multiplier for all):
 #   Yes-Low = 40   Yes-Medium = 60   Yes-High = 80
 #   Yes-Critical = 100   None assigned = 100
-# ** ADD AI GOVERNANCE SECTION **
-# ** Any thid party RA? ** <== GOVERNANCE (TPRM)
-# ** PRIVILEGED ACCESS - IAM 
+#
+# Deployment archetypes (routing question — controls question visibility):
+#   ON_PREM_INTERNAL = On-premises, internally developed
+#   ON_PREM_VENDOR   = On-premises, third-party / canned software
+#   CLOUD_SAAS       = Cloud / SaaS
+#   HYBRID           = Mixed deployment (all questions visible)
 
 weight_tiers:
   Critical: 100
@@ -64,6 +68,38 @@ score_scales:
     H: 85
 
 na_score: 1
+
+# ── Deployment archetypes (routing question) ───────────────────────
+# Controls which questions are visible.  If a question has no
+# applicability list, it is shown for all archetypes.
+deployment_archetypes:
+  ON_PREM_INTERNAL:
+    label: "On-Premises — Internally Developed"
+    description: "Application developed and hosted internally"
+  ON_PREM_VENDOR:
+    label: "On-Premises — Third-Party / Canned"
+    description: "Vendor software deployed on organization infrastructure"
+  CLOUD_SAAS:
+    label: "Cloud / SaaS"
+    description: "Cloud-hosted or SaaS application"
+  HYBRID:
+    label: "Hybrid"
+    description: "Mixed deployment model — all questions visible"
+
+# ── Deployment routing question (transcendental) ──────────────────
+# Asked once alongside classification; determines which domain
+# questions are visible.  N/A is NOT available.
+deployment_question:
+  text: "What is the application's deployment model?"
+  choices:
+    - text: "On-premises — internally developed"
+      archetype: ON_PREM_INTERNAL
+    - text: "On-premises — third-party / canned software"
+      archetype: ON_PREM_VENDOR
+    - text: "Cloud / SaaS"
+      archetype: CLOUD_SAAS
+    - text: "Hybrid"
+      archetype: HYBRID
 
 domains:
   # ─────────────────────────────────────────────────────────────────
@@ -211,11 +247,6 @@ domains:
   # ─────────────────────────────────────────────────────────────────
   # Domain 2: Identity and Access Management
   # ─────────────────────────────────────────────────────────────────
-  ## ** Session management - add questions
-  ## ** Session timeout - how long before session expires - add question
-  ## ** Privileged access - how is this managed, monitored, and reviewed? <--
-  ## ** Monitoring privileged access - are there alerts for anomalous privileged activity? <--
-  ## ** Impersonation is possible, how traced, etc.? - validation and verification - who did what and when
   - name: "Identity and Access Management"
     policy_refs:
       - ISP 4.1
@@ -225,30 +256,30 @@ domains:
       - PR.AA
     questions:
       - text: "What authentication mechanism does the application use?"
-      ## ** Add choice passwordless - key, client certifcate, passkey
-      ## ** get lower score for passkey authentication
         weight: Critical
         choices:
-          - text: "SSO with MFA (Entra ID)"
+          - text: "Passwordless (FIDO2 / passkey / client certificate)"
             risk: L
-          - text: "SSO without MFA"
+          - text: "SSO with MFA (Entra ID)"
             risk: G
-          - text: "Local authentication with MFA"
+          - text: "SSO without MFA"
             risk: M
+          - text: "Local authentication with MFA"
+            risk: E
           - text: "Local authentication without MFA"
             risk: H
 
       - text: "What authentication method do APIs exposed or consumed by this application use?"
         weight: Critical
         choices:
-        ## ** Remove OAuth 2.0
-          - text: "OAuth 2.0 / OIDC with scoped tokens"
+          - text: "mTLS with certificate pinning"
             risk: L
-        ## ** Bare token answer
-          - text: "API key with IP allowlisting and rate limiting"
+          - text: "OAuth 2.0 / OIDC with scoped tokens"
             risk: G
-          - text: "API key without restrictions"
+          - text: "API key with IP allowlisting and rate limiting"
             risk: M
+          - text: "Bearer token without scoping or rotation"
+            risk: E
           - text: "No API authentication required"
             risk: H
 
@@ -298,6 +329,90 @@ domains:
           - text: "No periodic reviews"
             risk: H
 
+      - text: "What session management controls does the application implement?"
+        weight: High
+        choices:
+          - text: "Enforced idle and absolute timeouts with secure token handling"
+            risk: L
+          - text: "Idle timeout only"
+            risk: G
+          - text: "Long or configurable timeouts without enforcement"
+            risk: M
+          - text: "No session timeout controls"
+            risk: H
+
+      - text: "What is the session timeout duration for the application?"
+        weight: Medium
+        choices:
+          - text: "15 minutes or less"
+            risk: L
+          - text: "16–30 minutes"
+            risk: G
+          - text: "31–60 minutes"
+            risk: M
+          - text: "> 60 minutes or no timeout"
+            risk: H
+
+      - text: "How is privileged access managed, monitored, and reviewed?"
+        weight: Critical
+        applicability: [ON_PREM_INTERNAL, ON_PREM_VENDOR]
+        choices:
+          - text: "PAM solution with session recording and approval workflows"
+            risk: L
+          - text: "PAM solution without session recording"
+            risk: G
+          - text: "Shared admin accounts with manual oversight"
+            risk: M
+          - text: "No privileged access controls"
+            risk: H
+
+      - text: "Are there alerts for anomalous privileged activity?"
+        weight: High
+        applicability: [ON_PREM_INTERNAL, ON_PREM_VENDOR]
+        choices:
+          - text: "Yes — real-time alerting with automated response"
+            risk: L
+          - text: "Yes — alerting requiring manual review"
+            risk: G
+          - text: "Log-based detection only"
+            risk: M
+          - text: "No monitoring of privileged activity"
+            risk: H
+
+      - text: "If impersonation or delegation is supported, is it traceable and auditable?"
+        weight: High
+        choices:
+          - text: "Yes — full audit trail with distinct identity attribution"
+            risk: L
+          - text: "Yes — logged but not attributed to the impersonating user"
+            risk: M
+          - text: "No audit trail for impersonation"
+            risk: H
+
+      - text: "Are identity assertions (e.g., SAML claims, OIDC tokens) validated and managed per a documented standard?"
+        weight: High
+        choices:
+          - text: "Yes — assertion validation with claim mapping"
+            risk: L
+          - text: "Yes — default IdP configuration"
+            risk: G
+          - text: "No documented standard"
+            risk: M
+          - text: "Unknown"
+            risk: H
+
+      - text: "Is there a formal process for managing and certifying access rights granted to this application?"
+        weight: High
+        choices:
+          - text: "Yes — automated access certification (e.g., SailPoint)"
+            risk: L
+          - text: "Yes — manual periodic review"
+            risk: G
+          - text: "No certification process"
+            risk: M
+          - text: "Unknown"
+            risk: H
+
   # ─────────────────────────────────────────────────────────────────
   # Domain 3: Data Protection and Privacy
   # ─────────────────────────────────────────────────────────────────
@@ -322,8 +437,6 @@ domains:
           - text: "Unknown / Not assessed"
             risk: H
 
-     ## ** SFTP/SCP - AWS transfer family - for file transfers - is this used for data in transit or at rest? 
-     ## ** - if so, what controls are in place (encryption, key management, access controls)
       - text: "Is data encrypted at rest?"
         weight: High
         choices:
@@ -338,15 +451,16 @@ domains:
 
       - text: "Is data encrypted in transit?"
         weight: Critical
+        guidance: "Validate via CloudFront TLS policy and AWS Config rules (e.g., cloudfront-viewer-policy-https). TLS < 1.2 is a failure condition."
         choices:
-          - text: "Yes — TLS 1.2+ enforced" ## ** standard is TLS 1.2, anything below is fail
-                                            ## ** policy on CloudFront - see what connections are coming (CDN) >1.2
-                                            ## ** AWS Config rules
+          - text: "Yes — TLS 1.3 enforced"
             risk: L
-          - text: "Yes — TLS with older versions allowed"
+          - text: "Yes — TLS 1.2 enforced"
             risk: G
-          - text: "Partial — some endpoints unencrypted"
+          - text: "Yes — TLS with older versions allowed"
             risk: M
+          - text: "Partial — some endpoints unencrypted"
+            risk: E
           - text: "No encryption in transit"
             risk: H
 
@@ -361,7 +475,31 @@ domains:
             risk: M
           - text: "Not classified"
             risk: H
-      ## ** What kind of data in addition to classification - is this processing PII/student info
+
+      - text: "What types of data does the application process?"
+        weight: High
+        choices:
+          - text: "Non-sensitive operational data only"
+            risk: L
+          - text: "PII — employee or internal user data"
+            risk: G
+          - text: "PII — student education records or financial data"
+            risk: M
+          - text: "Not assessed or unknown"
+            risk: H
+
+      - text: "Are file transfer mechanisms secured with appropriate controls?"
+        weight: High
+        guidance: "Evaluate SFTP/SCP, AWS Transfer Family, or equivalent. Assess encryption, key management, and access controls."
+        choices:
+          - text: "Yes — encrypted transfer with managed keys and access controls"
+            risk: L
+          - text: "Yes — encrypted transfer with manual key management"
+            risk: G
+          - text: "Partial — some transfers unencrypted or uncontrolled"
+            risk: M
+          - text: "No secure file transfer controls"
+            risk: H
 
       - text: "Are data retention and disposal procedures implemented?"
         weight: Medium
@@ -383,6 +521,54 @@ domains:
           - text: "Yes — manual records"
             risk: M
           - text: "No — not implemented"
+            risk: H
+
+      - text: "Does the application support notification of student/parent rights as required by FERPA §99.7?"
+        weight: High
+        choices:
+          - text: "Yes — integrated annual notice mechanism"
+            risk: L
+          - text: "Yes — manual process"
+            risk: G
+          - text: "Not applicable"
+            risk: M
+          - text: "Not implemented"
+            risk: H
+
+      - text: "Are re-disclosure restrictions enforced when sharing data from this application with third parties (FERPA §99.33)?"
+        weight: High
+        choices:
+          - text: "Yes — technical controls preventing unauthorized re-disclosure"
+            risk: L
+          - text: "Yes — contractual controls only"
+            risk: G
+          - text: "No controls"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Does the application support directory information opt-out procedures (FERPA §99.37)?"
+        weight: Medium
+        choices:
+          - text: "Yes — automated opt-out with data suppression"
+            risk: L
+          - text: "Yes — manual opt-out process"
+            risk: G
+          - text: "Not applicable"
+            risk: M
+          - text: "Not implemented"
+            risk: H
+
+      - text: "Are limitations on re-disclosure to third parties technically enforced (FERPA §99.12)?"
+        weight: Medium
+        choices:
+          - text: "Yes — DLP or access controls restricting re-disclosure"
+            risk: L
+          - text: "Yes — policy-based only"
+            risk: G
+          - text: "No technical enforcement"
+            risk: M
+          - text: "Not applicable"
             risk: H
 
   # ─────────────────────────────────────────────────────────────────
@@ -408,9 +594,8 @@ domains:
 
       - text: "Are SAST and/or SCA scans integrated into the CI/CD pipeline?"
         weight: Critical
-        ## *** Block critical AND HIGH findings - sonarqube/tenable
         choices:
-          - text: "Yes — blocking on critical findings"
+          - text: "Yes — blocking on critical and high findings"
             risk: L
           - text: "Yes — advisory only"
             risk: G
@@ -471,6 +656,42 @@ domains:
           - text: "No — outputs used directly without review"
             risk: H
 
+      - text: "Is there a documented change management policy covering all stages of the change lifecycle (SOX CM-1)?"
+        weight: High
+        choices:
+          - text: "Yes — formalized policy with version control and regular review"
+            risk: L
+          - text: "Yes — documented but not regularly reviewed"
+            risk: G
+          - text: "Informal or undocumented"
+            risk: M
+          - text: "No change management policy"
+            risk: H
+
+      - text: "Is security sign-off required before promoting changes to production (SOX PD-3)?"
+        weight: High
+        choices:
+          - text: "Yes — formal security review and sign-off"
+            risk: L
+          - text: "Yes — security review but no formal sign-off"
+            risk: G
+          - text: "No security review before production promotion"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Is conversion/migration testing performed and documented before data migrations or major upgrades (SOX PD-4)?"
+        weight: Medium
+        choices:
+          - text: "Yes — formal conversion testing with reconciliation"
+            risk: L
+          - text: "Yes — testing performed but not formally documented"
+            risk: G
+          - text: "Ad-hoc or no conversion testing"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
   # ─────────────────────────────────────────────────────────────────
   # Domain 5: Vulnerability and Threat Management
   # ─────────────────────────────────────────────────────────────────
@@ -483,10 +704,6 @@ domains:
       - ID.RA
       - DE.CM
     questions:
-    # ** More detail for Vuln Mgmt
-    # ** Two versions: internal, SaaS
-    # ** There is a vendor risk assessment - TPRM (third party risk assessment) - if below a certain contract
-    # **  value will throw into Risk Recon
       - text: "Is the application included in vulnerability scanning scope?"
         weight: Critical
         choices:
@@ -523,8 +740,21 @@ domains:
           - text: "No security monitoring"
             risk: H
 
-      ## ** Ask about bastion protection - use bastion hosts for access to critical systems, 
-      ## ** especially those with RDP/SSH access - and how these are monitored and secured
+      - text: "Are bastion hosts or jump servers used for administrative access to critical systems?"
+        weight: High
+        guidance: "Evaluate bastion host controls for RDP/SSH access. Assess session recording, MFA enforcement, and access logging."
+        applicability:
+          - ON_PREM_INTERNAL
+          - ON_PREM_VENDOR
+        choices:
+          - text: "Yes — bastion hosts with session recording and MFA"
+            risk: L
+          - text: "Yes — bastion hosts without session recording"
+            risk: G
+          - text: "Direct administrative access with logging"
+            risk: M
+          - text: "Direct administrative access without controls"
+            risk: H
 
       - text: "Does the application have a web application firewall (WAF)?"
         weight: Medium
@@ -572,6 +802,22 @@ domains:
           - text: "Partial — ad-hoc reporting"
             risk: M
           - text: "No usage monitoring"
+            risk: H
+
+      - text: "Is vendor risk scoring or continuous monitoring used for third-party application risk assessment?"
+        weight: Medium
+        guidance: "Evaluate TPRM program integration — contract-threshold-based assessment (e.g., Risk Recon / SecurityScorecard for vendors below assessment threshold)."
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
+        choices:
+          - text: "Yes — continuous vendor risk scoring integrated into risk program"
+            risk: L
+          - text: "Yes — periodic vendor risk assessment"
+            risk: G
+          - text: "Ad-hoc vendor risk review only"
+            risk: M
+          - text: "No vendor risk assessment"
             risk: H
 
   # ─────────────────────────────────────────────────────────────────
@@ -646,6 +892,30 @@ domains:
           - text: "No forensic readiness"
             risk: H
 
+      - text: "Is job scheduling for this application managed through a centralized enterprise scheduler with audit controls (SOX CO-1)?"
+        weight: Medium
+        choices:
+          - text: "Yes — enterprise job scheduler with logging and alerting"
+            risk: L
+          - text: "Yes — application-level scheduling with logs"
+            risk: G
+          - text: "Manual or ad-hoc scheduling"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Are batch processing integrity controls implemented to detect and prevent data corruption (SOX CO-4)?"
+        weight: Medium
+        choices:
+          - text: "Yes — automated reconciliation with hash verification"
+            risk: L
+          - text: "Yes — manual reconciliation procedures"
+            risk: G
+          - text: "No batch integrity controls"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
   # ─────────────────────────────────────────────────────────────────
   # Domain 7: Third-Party and Supply Chain Risk
   # ─────────────────────────────────────────────────────────────────
@@ -655,22 +925,25 @@ domains:
     csf_refs:
       - GV.SC
     questions:
-      - text: "Is the application a third-party or SaaS product?"
-        weight: Info
+      - text: "What is the network segmentation and accessibility posture for this application?"
+        weight: High
         choices:
-          - text: "No — internally developed"
+          - text: "Internal network only — behind VPN with segmentation"
             risk: L
-          - text: "Yes — on-premises third-party"
+          - text: "Internal network — accessible without segmentation"
             risk: G
-          - text: "Yes — SaaS / cloud-hosted"
+          - text: "Internet-facing with WAF and network controls"
             risk: M
-          - text: "Hybrid"
+          - text: "Internet-facing with minimal controls"
+            risk: E
+          - text: "External SaaS — no network control"
             risk: H
-
-      # ** Network location - segment, accessibility - built internally, behind VPN, public, external Saa
 
       - text: "Has a vendor security assessment been completed?"
         weight: High
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
         choices:
           - text: "Yes — within 12 months"
             risk: L
@@ -681,6 +954,9 @@ domains:
 
       - text: "Does the vendor contract include security requirements?"
         weight: High
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
         choices:
           - text: "Yes — comprehensive security addendum"
             risk: L
@@ -691,6 +967,9 @@ domains:
 
       - text: "Is there a defined exit strategy for vendor transition?"
         weight: Medium
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
         choices:
           - text: "Yes — documented with data portability plan"
             risk: L
@@ -717,4 +996,218 @@ domains:
           - text: "Yes — partial assessment of key risks"
             risk: M
           - text: "No — AI risks not assessed"
+            risk: H
+
+      - text: "Has a formal supply chain risk management assessment been performed for this application (GV.SC)?"
+        weight: High
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
+        choices:
+          - text: "Yes — comprehensive SCRM assessment with documented findings"
+            risk: L
+          - text: "Yes — limited scope assessment"
+            risk: G
+          - text: "No formal SCRM assessment"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Do vendor contracts include audit rights and security assessment clauses?"
+        weight: High
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
+        choices:
+          - text: "Yes — comprehensive audit rights with exercised assessments"
+            risk: L
+          - text: "Yes — contractual audit rights not yet exercised"
+            risk: G
+          - text: "No audit rights in contracts"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Is software bill of materials (SBOM) or software provenance information available for this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — SBOM with automated vulnerability tracking"
+            risk: L
+          - text: "Yes — SBOM available but not actively monitored"
+            risk: G
+          - text: "No SBOM or provenance documentation"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+      - text: "Is continuous monitoring of the vendor or supply chain implemented for this application?"
+        weight: Medium
+        applicability:
+          - ON_PREM_VENDOR
+          - CLOUD_SAAS
+        choices:
+          - text: "Yes — automated continuous monitoring with alerts"
+            risk: L
+          - text: "Yes — periodic review (quarterly or more frequent)"
+            risk: G
+          - text: "Annual review only"
+            risk: M
+          - text: "No ongoing monitoring"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 8: Risk Management Governance
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Risk Management Governance"
+    policy_refs:
+      - ISP 2.2
+    csf_refs:
+      - GV.RM
+    questions:
+      - text: "Has a formal risk appetite statement been established that covers this application?"
+        weight: High
+        choices:
+          - text: "Yes — documented risk appetite with quantitative thresholds"
+            risk: L
+          - text: "Yes — qualitative risk appetite statement"
+            risk: G
+          - text: "Informal risk tolerance understanding only"
+            risk: M
+          - text: "No risk appetite defined"
+            risk: H
+
+      - text: "Is this application tracked in an enterprise risk register?"
+        weight: High
+        choices:
+          - text: "Yes — with risk owners, treatment plans, and regular review"
+            risk: L
+          - text: "Yes — registered but not actively managed"
+            risk: G
+          - text: "Tracked informally"
+            risk: M
+          - text: "Not tracked"
+            risk: H
+
+      - text: "Has a formal risk assessment been performed for this application?"
+        weight: Critical
+        choices:
+          - text: "Yes — within 12 months using a defined methodology"
+            risk: L
+          - text: "Yes — older than 12 months"
+            risk: G
+          - text: "Informal assessment only"
+            risk: M
+          - text: "No risk assessment performed"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 9: Awareness and Training
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Awareness and Training"
+    policy_refs:
+      - ISP 4.2
+    csf_refs:
+      - PR.AT
+    questions:
+      - text: "Is role-based security training provided to users of this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — role-specific training with completion tracking"
+            risk: L
+          - text: "Yes — general security awareness training only"
+            risk: G
+          - text: "Training available but not mandatory"
+            risk: M
+          - text: "No training provided"
+            risk: H
+
+      - text: "Do privileged users of this application receive additional security training?"
+        weight: High
+        choices:
+          - text: "Yes — specialized privileged user training with assessment"
+            risk: L
+          - text: "Yes — same training as general users"
+            risk: G
+          - text: "No additional training for privileged users"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 10: Adverse Event Analysis
+  # ─────────────────────────────────────────────────────────────────
+  - name: "Adverse Event Analysis"
+    policy_refs:
+      - ISP 5.1
+    csf_refs:
+      - DE.AE
+    questions:
+      - text: "Is security event correlation implemented for this application?"
+        weight: High
+        choices:
+          - text: "Yes — automated correlation with SIEM and alerting"
+            risk: L
+          - text: "Yes — manual correlation with log review"
+            risk: G
+          - text: "Partial — some log sources correlated"
+            risk: M
+          - text: "No event correlation"
+            risk: H
+
+      - text: "Are operational baselines and anomaly detection thresholds defined for this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — baselines with automated anomaly detection"
+            risk: L
+          - text: "Yes — baselines defined but manual monitoring"
+            risk: G
+          - text: "Informal baselines only"
+            risk: M
+          - text: "No baselines defined"
+            risk: H
+
+      - text: "Is threat intelligence enrichment applied to security events from this application?"
+        weight: Medium
+        choices:
+          - text: "Yes — automated TI enrichment integrated into SIEM"
+            risk: L
+          - text: "Yes — manual TI lookup for escalated events"
+            risk: G
+          - text: "No threat intelligence integration"
+            risk: M
+          - text: "Not applicable"
+            risk: H
+
+  # ─────────────────────────────────────────────────────────────────
+  # Domain 11: AI Governance
+  # ─────────────────────────────────────────────────────────────────
+  - name: "AI Governance"
+    policy_refs:
+      - IISP 5.0
+    csf_refs:
+      - GV.OC
+      - ID.AM
+    questions:
+      - text: "Is an AI model inventory maintained that includes lifecycle management for models used by or within this application?"
+        weight: High
+        choices:
+          - text: "Yes — comprehensive inventory with versioning, ownership, and retirement procedures"
+            risk: L
+          - text: "Yes — inventory exists but incomplete lifecycle tracking"
+            risk: G
+          - text: "Informal tracking only"
+            risk: M
+          - text: "No AI model inventory"
+            risk: H
+
+      - text: "Are AI training data governance and bias controls implemented for this application?"
+        weight: High
+        choices:
+          - text: "Yes — documented data governance with bias testing and mitigation"
+            risk: L
+          - text: "Yes — data governance without formal bias controls"
+            risk: G
+          - text: "No formal AI data governance"
+            risk: M
+          - text: "Not applicable"
             risk: H
