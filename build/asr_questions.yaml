@@ -19,6 +19,9 @@
 # Classification factor (transcendental question — multiplier for all):
 #   Yes-Low = 40   Yes-Medium = 60   Yes-High = 80
 #   Yes-Critical = 100   None assigned = 100
+# ** ADD AI GOVERNANCE SECTION **
+# ** Any thid party RA? ** <== GOVERNANCE (TPRM)
+# ** PRIVILEGED ACCESS - IAM 
 
 weight_tiers:
   Critical: 100
@@ -208,6 +211,11 @@ domains:
   # ─────────────────────────────────────────────────────────────────
   # Domain 2: Identity and Access Management
   # ─────────────────────────────────────────────────────────────────
+  ## ** Session management - add questions
+  ## ** Session timeout - how long before session expires - add question
+  ## ** Privileged access - how is this managed, monitored, and reviewed? <--
+  ## ** Monitoring privileged access - are there alerts for anomalous privileged activity? <--
+  ## ** Impersonation is possible, how traced, etc.? - validation and verification - who did what and when
   - name: "Identity and Access Management"
     policy_refs:
       - ISP 4.1
@@ -217,6 +225,8 @@ domains:
       - PR.AA
     questions:
       - text: "What authentication mechanism does the application use?"
+      ## ** Add choice passwordless - key, client certifcate, passkey
+      ## ** get lower score for passkey authentication
         weight: Critical
         choices:
           - text: "SSO with MFA (Entra ID)"
@@ -231,8 +241,10 @@ domains:
       - text: "What authentication method do APIs exposed or consumed by this application use?"
         weight: Critical
         choices:
+        ## ** Remove OAuth 2.0
           - text: "OAuth 2.0 / OIDC with scoped tokens"
             risk: L
+        ## ** Bare token answer
           - text: "API key with IP allowlisting and rate limiting"
             risk: G
           - text: "API key without restrictions"
@@ -310,6 +322,8 @@ domains:
           - text: "Unknown / Not assessed"
             risk: H
 
+     ## ** SFTP/SCP - AWS transfer family - for file transfers - is this used for data in transit or at rest? 
+     ## ** - if so, what controls are in place (encryption, key management, access controls)
       - text: "Is data encrypted at rest?"
         weight: High
         choices:
@@ -325,7 +339,9 @@ domains:
       - text: "Is data encrypted in transit?"
         weight: Critical
         choices:
-          - text: "Yes — TLS 1.2+ enforced"
+          - text: "Yes — TLS 1.2+ enforced" ## ** standard is TLS 1.2, anything below is fail
+                                            ## ** policy on CloudFront - see what connections are coming (CDN) >1.2
+                                            ## ** AWS Config rules
             risk: L
           - text: "Yes — TLS with older versions allowed"
             risk: G
@@ -345,6 +361,7 @@ domains:
             risk: M
           - text: "Not classified"
             risk: H
+      ## ** What kind of data in addition to classification - is this processing PII/student info
 
       - text: "Are data retention and disposal procedures implemented?"
         weight: Medium
@@ -391,6 +408,7 @@ domains:
 
       - text: "Are SAST and/or SCA scans integrated into the CI/CD pipeline?"
         weight: Critical
+        ## *** Block critical AND HIGH findings - sonarqube/tenable
         choices:
           - text: "Yes — blocking on critical findings"
             risk: L
@@ -465,6 +483,10 @@ domains:
       - ID.RA
       - DE.CM
     questions:
+    # ** More detail for Vuln Mgmt
+    # ** Two versions: internal, SaaS
+    # ** There is a vendor risk assessment - TPRM (third party risk assessment) - if below a certain contract
+    # **  value will throw into Risk Recon
       - text: "Is the application included in vulnerability scanning scope?"
         weight: Critical
         choices:
@@ -500,6 +522,9 @@ domains:
             risk: M
           - text: "No security monitoring"
             risk: H
+
+      ## ** Ask about bastion protection - use bastion hosts for access to critical systems, 
+      ## ** especially those with RDP/SSH access - and how these are monitored and secured
 
       - text: "Does the application have a web application firewall (WAF)?"
         weight: Medium
@@ -641,6 +666,8 @@ domains:
             risk: M
           - text: "Hybrid"
             risk: H
+
+      # ** Network location - segment, accessibility - built internally, behind VPN, public, external Saa
 
       - text: "Has a vendor security assessment been completed?"
         weight: High
