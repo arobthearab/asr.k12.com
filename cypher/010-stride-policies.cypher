@@ -10,29 +10,29 @@
 
 // ─── ISP Policy Nodes ────────────────────────────────────────────
 
-MERGE (p:Policy {reference: 'ISP 1.0'})  SET p.title = 'Information Security Program', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 2.1'})  SET p.title = 'Risk Assessment', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 2.3'})  SET p.title = 'Access Management Policy', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 2.4'})  SET p.title = 'Security Awareness', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 2.5'})  SET p.title = 'Security Documentation', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 2.6'})  SET p.title = 'Third-Party Risk Management', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 3.2'})  SET p.title = 'Vulnerability Management', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 4.1'})  SET p.title = 'Identity and Access Management', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 4.3'})  SET p.title = 'Data Protection', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 4.4'})  SET p.title = 'Secure Development', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 5.1'})  SET p.title = 'Threat Detection', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 6.1'})  SET p.title = 'Incident Response', p.updated = datetime();
-MERGE (p:Policy {reference: 'ISP 6.2'})  SET p.title = 'Business Continuity', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 1.0'})  SET p.title = 'Information Security Program', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 2.1'})  SET p.title = 'Risk Assessment', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 2.3'})  SET p.title = 'Access Management Policy', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 2.4'})  SET p.title = 'Security Awareness', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 2.5'})  SET p.title = 'Security Documentation', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 2.6'})  SET p.title = 'Third-Party Risk Management', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 3.2'})  SET p.title = 'Vulnerability Management', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 4.1'})  SET p.title = 'Identity and Access Management', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 4.3'})  SET p.title = 'Data Protection', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 4.4'})  SET p.title = 'Secure Development', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 5.1'})  SET p.title = 'Threat Detection', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 6.1'})  SET p.title = 'Incident Response', p.tag = 'ISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'ISP 6.2'})  SET p.title = 'Business Continuity', p.tag = 'ISP', p.updated = datetime();
 
 // ─── IISP Policy Nodes ──────────────────────────────────────────
 
-MERGE (p:Policy {reference: 'IISP 1.0'}) SET p.title = 'Information Security Implementation Standard', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 2.0'}) SET p.title = 'Data Classification Implementation', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 3.0'}) SET p.title = 'Data Handling Implementation', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 7.0'}) SET p.title = 'Vulnerability Scanning Implementation', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 8.0'}) SET p.title = 'Access Control Implementation', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 9.0'}) SET p.title = 'Secure Development Implementation', p.updated = datetime();
-MERGE (p:Policy {reference: 'IISP 10.0'}) SET p.title = 'Business Continuity Implementation', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 1.0'}) SET p.title = 'Information Security Implementation Standard', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 2.0'}) SET p.title = 'Data Classification Implementation', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 3.0'}) SET p.title = 'Data Handling Implementation', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 7.0'}) SET p.title = 'Vulnerability Scanning Implementation', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 8.0'}) SET p.title = 'Access Control Implementation', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 9.0'}) SET p.title = 'Secure Development Implementation', p.tag = 'IISP', p.updated = datetime();
+MERGE (p:Policy {reference: 'IISP 10.0'}) SET p.title = 'Business Continuity Implementation', p.tag = 'IISP', p.updated = datetime();
 
 // ─── Domain policyRefs and Compliance Notes ─────────────────────
 
