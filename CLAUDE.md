@@ -52,4 +52,14 @@ python3 build/extract_all.py
 | `build/` | Build scripts, YAML config, templates |
 | `build/output/` | Generated output (gitignored) |
 | `build/extracted/` | Extracted text JSON (gitignored) |
+| `cypher/` | Stride-specific Neo4j overlay scripts for asr.rescor.net |
 | `docs/` | Project documentation |
+
+## ASR Web Application Overlay
+
+Stride-specific Neo4j seed data lives in `cypher/`.
+To apply it when setting up the asr.rescor.net web application:
+
+```bash
+ASR_OVERLAY_CYPHER_DIR=../asr.k12.com/cypher npm run cypher:setup -w api
+```
