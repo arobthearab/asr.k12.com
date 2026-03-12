@@ -61,5 +61,5 @@ Stride-specific Neo4j seed data lives in `cypher/`.
 To apply it when setting up the asr.rescor.net web application:
 
 ```bash
-ASR_OVERLAY_CYPHER_DIR=../asr.k12.com/cypher npm run cypher:setup -w api
+npm run cypher:setup -w api -- --overlay /Volumes/Overflow/Repositories/asr.k12.com/cypher
 ```
