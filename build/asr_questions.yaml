@@ -21,11 +21,11 @@
 #   Yes-Low = 40   Yes-Medium = 60   Yes-High = 80
 #   Yes-Critical = 100   None assigned = 100
 #
-# Deployment archetypes (routing question — controls question visibility):
-#   ON_PREM_INTERNAL = On-premises, internally developed
-#   ON_PREM_VENDOR   = On-premises, third-party / canned software
-#   CLOUD_SAAS       = Cloud / SaaS
-#   HYBRID           = Mixed deployment (all questions visible)
+# Deployment taxonomy — Source × Environment:
+#   Source:      INTERNAL / EXTERNAL / OTS
+#   Environment: CLOUD / ONPREMISE / HYBRID
+#   9 compound archetypes (e.g. INTERNAL_CLOUD, EXTERNAL_ONPREMISE)
+#   control per-question visibility via the applicability list.
 
 weight_tiers:
   Critical: 100
@@ -69,37 +69,85 @@ score_scales:
 
 na_score: 1
 
-# ── Deployment archetypes (routing question) ───────────────────────
-# Controls which questions are visible.  If a question has no
-# applicability list, it is shown for all archetypes.
-deployment_archetypes:
-  ON_PREM_INTERNAL:
-    label: "On-Premises — Internally Developed"
-    description: "Application developed and hosted internally"
-  ON_PREM_VENDOR:
-    label: "On-Premises — Third-Party / Canned"
-    description: "Vendor software deployed on organization infrastructure"
-  CLOUD_SAAS:
-    label: "Cloud / SaaS"
-    description: "Cloud-hosted or SaaS application"
-  HYBRID:
-    label: "Hybrid"
-    description: "Mixed deployment model — all questions visible"
+# ── Source × Environment deployment taxonomy ──────────────────────
+# Two transcendental questions (source + environment) together
+# derive one of 9 compound archetypes that control question visibility.
+# If a question has no applicability list, it is shown for all archetypes.
+# Customers can extend by adding entries to source_question / environment_question;
+# the pipeline auto-generates the cross-product archetypes.
 
-# ── Deployment routing question (transcendental) ──────────────────
-# Asked once alongside classification; determines which domain
-# questions are visible.  N/A is NOT available.
-deployment_question:
-  text: "What is the application's deployment model?"
+deployment_archetypes:
+  INTERNAL_CLOUD:
+    source: INTERNAL
+    environment: CLOUD
+    label: "Internal — Cloud"
+    description: "Internally developed, cloud-hosted"
+  INTERNAL_ONPREMISE:
+    source: INTERNAL
+    environment: ONPREMISE
+    label: "Internal — On-Premise"
+    description: "Internally developed and hosted on-premises"
+  INTERNAL_HYBRID:
+    source: INTERNAL
+    environment: HYBRID
+    label: "Internal — Hybrid"
+    description: "Internally developed, mixed deployment"
+  EXTERNAL_CLOUD:
+    source: EXTERNAL
+    environment: CLOUD
+    label: "External — Cloud"
+    description: "Third-party software, cloud-hosted"
+  EXTERNAL_ONPREMISE:
+    source: EXTERNAL
+    environment: ONPREMISE
+    label: "External — On-Premise"
+    description: "Third-party software deployed on-premises"
+  EXTERNAL_HYBRID:
+    source: EXTERNAL
+    environment: HYBRID
+    label: "External — Hybrid"
+    description: "Third-party software, mixed deployment"
+  OTS_CLOUD:
+    source: OTS
+    environment: CLOUD
+    label: "OTS — Cloud"
+    description: "Off-the-shelf software, cloud-hosted"
+  OTS_ONPREMISE:
+    source: OTS
+    environment: ONPREMISE
+    label: "OTS — On-Premise"
+    description: "Off-the-shelf software deployed on-premises"
+  OTS_HYBRID:
+    source: OTS
+    environment: HYBRID
+    label: "OTS — Hybrid"
+    description: "Off-the-shelf software, mixed deployment"
+
+# ── Source question (transcendental) ──────────────────────────────
+# Asked once alongside classification; determines the "source" axis.
+# N/A is NOT available.
+source_question:
+  text: "What is the application's source?"
   choices:
-    - text: "On-premises — internally developed"
-      archetype: ON_PREM_INTERNAL
-    - text: "On-premises — third-party / canned software"
-      archetype: ON_PREM_VENDOR
+    - text: "Internally developed"
+      source: INTERNAL
+    - text: "Externally developed (third-party / vendor)"
+      source: EXTERNAL
+    - text: "Off-the-shelf (OTS / COTS)"
+      source: OTS
+
+# ── Environment question (transcendental) ─────────────────────────
+# Asked once alongside classification; determines the "environment" axis.
+# N/A is NOT available.
+environment_question:
+  text: "What is the application's hosting environment?"
+  choices:
     - text: "Cloud / SaaS"
-      archetype: CLOUD_SAAS
-    - text: "Hybrid"
-      archetype: HYBRID
+      environment: CLOUD
+    - text: "On-premise"
+      environment: ONPREMISE
+    - text: "Hybrid (mixed deployment)"
+      environment: HYBRID
 
 domains:
   # ─────────────────────────────────────────────────────────────────
@@ -355,7 +403,7 @@ domains:
 
       - text: "How is privileged access managed, monitored, and reviewed?"
         weight: Critical
-        applicability: [ON_PREM_INTERNAL, ON_PREM_VENDOR]
+        applicability: [INTERNAL_ONPREMISE, EXTERNAL_ONPREMISE, OTS_ONPREMISE]
         choices:
           - text: "PAM solution with session recording and approval workflows"
             risk: L
@@ -368,7 +416,7 @@ domains:
 
       - text: "Are there alerts for anomalous privileged activity?"
         weight: High
-        applicability: [ON_PREM_INTERNAL, ON_PREM_VENDOR]
+        applicability: [INTERNAL_ONPREMISE, EXTERNAL_ONPREMISE, OTS_ONPREMISE]
         choices:
           - text: "Yes — real-time alerting with automated response"
             risk: L
@@ -744,8 +792,9 @@ domains:
         weight: High
         guidance: "Evaluate bastion host controls for RDP/SSH access. Assess session recording, MFA enforcement, and access logging."
         applicability:
-          - ON_PREM_INTERNAL
-          - ON_PREM_VENDOR
+          - INTERNAL_ONPREMISE
+          - EXTERNAL_ONPREMISE
+          - OTS_ONPREMISE
         choices:
           - text: "Yes — bastion hosts with session recording and MFA"
             risk: L
@@ -808,8 +857,12 @@ domains:
         weight: Medium
         guidance: "Evaluate TPRM program integration — contract-threshold-based assessment (e.g., Risk Recon / SecurityScorecard for vendors below assessment threshold)."
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — continuous vendor risk scoring integrated into risk program"
             risk: L
@@ -942,8 +995,12 @@ domains:
       - text: "Has a vendor security assessment been completed?"
         weight: High
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — within 12 months"
             risk: L
@@ -955,8 +1012,12 @@ domains:
       - text: "Does the vendor contract include security requirements?"
         weight: High
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — comprehensive security addendum"
             risk: L
@@ -968,8 +1029,12 @@ domains:
       - text: "Is there a defined exit strategy for vendor transition?"
         weight: Medium
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — documented with data portability plan"
             risk: L
@@ -1001,8 +1066,12 @@ domains:
       - text: "Has a formal supply chain risk management assessment been performed for this application (GV.SC)?"
         weight: High
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — comprehensive SCRM assessment with documented findings"
             risk: L
@@ -1016,8 +1085,12 @@ domains:
       - text: "Do vendor contracts include audit rights and security assessment clauses?"
         weight: High
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — comprehensive audit rights with exercised assessments"
             risk: L
@@ -1043,8 +1116,12 @@ domains:
       - text: "Is continuous monitoring of the vendor or supply chain implemented for this application?"
         weight: Medium
         applicability:
-          - ON_PREM_VENDOR
-          - CLOUD_SAAS
+          - EXTERNAL_CLOUD
+          - EXTERNAL_ONPREMISE
+          - EXTERNAL_HYBRID
+          - OTS_CLOUD
+          - OTS_ONPREMISE
+          - OTS_HYBRID
         choices:
           - text: "Yes — automated continuous monitoring with alerts"
             risk: L
