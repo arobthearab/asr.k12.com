@@ -27,6 +27,8 @@
 #   9 compound archetypes (e.g. INTERNAL_CLOUD, EXTERNAL_ONPREMISE)
 #   control per-question visibility via the applicability list.
 
+questionnaire_label: "v2.0 — Source/Environment Taxonomy"
+
 weight_tiers:
   Critical: 100
   High: 67
