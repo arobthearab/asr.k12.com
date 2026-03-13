@@ -71,6 +71,26 @@ score_scales:
 
 na_score: 1
 
+# ── Compliance sources — per-tag chip behavior ────────────────────
+# Defines what happens when a user clicks a compliance chip in the UI.
+#   action: link   → opens a URL (explicit per-policy or derived from base_url)
+#   action: dialog → shows description text in a modal
+# Tags not listed here default to tooltip-only (no click action).
+
+compliance_sources:
+  ISP:
+    action: link
+    base_url: "https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library"
+  IISP:
+    action: link
+    base_url: "https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library"
+  NIST:
+    action: dialog
+  FERPA:
+    action: dialog
+  SOX:
+    action: dialog
+
 # ── Source × Environment deployment taxonomy ──────────────────────
 # Two transcendental questions (source + environment) together
 # derive one of 9 compound archetypes that control question visibility.

@@ -35,16 +35,6 @@ MERGE (p:Policy {reference: 'IISP 8.0'}) SET p.title = 'Access Control Implement
 MERGE (p:Policy {reference: 'IISP 9.0'}) SET p.title = 'Secure Development Implementation', p.tag = 'IISP', p.url = 'https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library%2FIISP%209.0%20-%20Secure%20Development%20Implementation.pdf', p.updated = datetime();
 MERGE (p:Policy {reference: 'IISP 10.0'}) SET p.title = 'Business Continuity Implementation', p.tag = 'IISP', p.url = 'https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library%2FIISP%2010.0%20-%20Business%20Continuity%20Implementation.pdf', p.updated = datetime();
 
-// ─── Compliance Tag Configuration ────────────────────────────────
-// Defines per-tag click behavior for compliance chips in the UI.
-// action = 'link' opens a URL; action = 'dialog' shows description text.
-
-MERGE (t:ComplianceTagConfig {tag: 'ISP'})   SET t.action = 'link',   t.baseUrl = 'https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library', t.updated = datetime();
-MERGE (t:ComplianceTagConfig {tag: 'IISP'})  SET t.action = 'link',   t.baseUrl = 'https://k12inc.sharepoint.com/sites/SCS/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000ABC909F9BC8499498C741B0E0784D6B4&id=%2Fsites%2FSCS%2FShared%20Documents%2FStride%20Information%20Security%20Policy%20Library', t.updated = datetime();
-MERGE (t:ComplianceTagConfig {tag: 'NIST'})  SET t.action = 'dialog', t.updated = datetime();
-MERGE (t:ComplianceTagConfig {tag: 'FERPA'}) SET t.action = 'dialog', t.updated = datetime();
-MERGE (t:ComplianceTagConfig {tag: 'SOX'})   SET t.action = 'dialog', t.updated = datetime();
-
 // ─── Domain policyRefs and Compliance Notes ─────────────────────
 
 MATCH (d0:Domain {domainIndex: 0})
