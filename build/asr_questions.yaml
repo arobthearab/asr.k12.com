@@ -188,6 +188,7 @@ domains:
     questions:
       - text: "Does the application have a designated security owner or steward?"
         weight: High
+        responsible_function: GENERAL
         choices:
           - text: "Yes — named owner in CMDB"
             risk: L
@@ -198,6 +199,7 @@ domains:
 
       - text: "Is the application included in the organization's security policy scope?"
         weight: Medium
+        responsible_function: GENERAL
         choices:
           - text: "Yes — explicitly referenced"
             risk: L
@@ -210,6 +212,7 @@ domains:
 
       - text: "When was the last security review or assessment performed?"
         weight: High
+        responsible_function: GENERAL
         choices:
           - text: "Within 6 months"
             risk: L
@@ -222,6 +225,7 @@ domains:
 
       - text: "Does the application have documented data flow diagrams?"
         weight: Medium
+        responsible_function: EA
         choices:
           - text: "Yes — current and reviewed"
             risk: L
@@ -232,6 +236,7 @@ domains:
 
       - text: "Has a RACI matrix been established for this application's security controls?"
         weight: High
+        responsible_function: EA
         choices:
           - text: "Yes — documented and current"
             risk: L
@@ -244,6 +249,7 @@ domains:
 
       - text: "Are escalation paths and notification responsibilities documented for security incidents involving this application?"
         weight: High
+        responsible_function: GENERAL
         choices:
           - text: "Yes — RACI-aligned runbook with named contacts"
             risk: L
@@ -256,6 +262,7 @@ domains:
 
       - text: "What is the business necessity classification for this application?"
         weight: Medium
+        responsible_function: GENERAL
         choices:
           - text: "Nice to have — productivity enhancement (MAY)"
             risk: L
@@ -268,6 +275,7 @@ domains:
 
       - text: "Which teams and departments are authorized to use this application?"
         weight: Medium
+        responsible_function: GENERAL
         choices:
           - text: "Single team or department"
             risk: L
@@ -280,6 +288,7 @@ domains:
 
       - text: "Are productivity improvement estimates or benchmarks documented for this application?"
         weight: Medium
+        responsible_function: GENERAL
         choices:
           - text: "Yes — quantified with baseline metrics and KPIs"
             risk: L
@@ -292,6 +301,7 @@ domains:
 
       - text: "Has legal counsel reviewed this application's terms of service, data handling, and intellectual property implications?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — reviewed and approved"
             risk: L
@@ -304,6 +314,7 @@ domains:
 
       - text: "Has the application been reviewed and approved through the enterprise architecture governance process?"
         weight: High
+        responsible_function: EA
         choices:
           - text: "Yes — approved with defined boundaries and controls"
             risk: L
@@ -327,6 +338,7 @@ domains:
     questions:
       - text: "What authentication mechanism does the application use?"
         weight: Critical
+        responsible_function: SAE
         choices:
           - text: "Passwordless (FIDO2 / passkey / client certificate)"
             risk: L
@@ -341,6 +353,7 @@ domains:
 
       - text: "What authentication method do APIs exposed or consumed by this application use?"
         weight: Critical
+        responsible_function: SAE
         choices:
           - text: "mTLS with certificate pinning"
             risk: L
@@ -355,6 +368,7 @@ domains:
 
       - text: "Are user roles and permissions based on the principle of least privilege?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — RBAC/ABAC enforced"
             risk: L
@@ -367,6 +381,7 @@ domains:
 
       - text: "How are service accounts and API keys managed?"
         weight: Critical
+        responsible_function: SAE
         choices:
           - text: "Vault/managed identities with rotation"
             risk: L
@@ -377,6 +392,7 @@ domains:
 
       - text: "Is there automated provisioning/deprovisioning tied to HR events?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — fully automated via SCIM/JIT"
             risk: L
@@ -389,6 +405,7 @@ domains:
 
       - text: "Are access reviews performed periodically?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Quarterly or more frequently"
             risk: L
@@ -401,6 +418,7 @@ domains:
 
       - text: "What session management controls does the application implement?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Enforced idle and absolute timeouts with secure token handling"
             risk: L
@@ -413,6 +431,7 @@ domains:
 
       - text: "What is the session timeout duration for the application?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "15 minutes or less"
             risk: L
@@ -425,6 +444,7 @@ domains:
 
       - text: "How is privileged access managed, monitored, and reviewed?"
         weight: Critical
+        responsible_function: SAE
         applicability: [INTERNAL_ONPREMISE, EXTERNAL_ONPREMISE, OTS_ONPREMISE]
         choices:
           - text: "PAM solution with session recording and approval workflows"
@@ -438,6 +458,7 @@ domains:
 
       - text: "Are there alerts for anomalous privileged activity?"
         weight: High
+        responsible_function: SAE
         applicability: [INTERNAL_ONPREMISE, EXTERNAL_ONPREMISE, OTS_ONPREMISE]
         choices:
           - text: "Yes — real-time alerting with automated response"
@@ -451,6 +472,7 @@ domains:
 
       - text: "If impersonation or delegation is supported, is it traceable and auditable?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — full audit trail with distinct identity attribution"
             risk: L
@@ -461,6 +483,7 @@ domains:
 
       - text: "Are identity assertions (e.g., SAML claims, OIDC tokens) validated and managed per a documented standard?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — assertion validation with claim mapping"
             risk: L
@@ -473,6 +496,7 @@ domains:
 
       - text: "Is there a formal process for managing and certifying access rights granted to this application?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — automated access certification (e.g., SailPoint)"
             risk: L
@@ -497,6 +521,7 @@ domains:
     questions:
       - text: "Does the application process, store, or transmit student education records (FERPA-protected data)?"
         weight: Critical
+        responsible_function: LEGAL
         choices:
           - text: "No — no education records"
             risk: L
@@ -509,6 +534,7 @@ domains:
 
       - text: "Is data encrypted at rest?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — AES-256 or equivalent"
             risk: L
@@ -521,6 +547,7 @@ domains:
 
       - text: "Is data encrypted in transit?"
         weight: Critical
+        responsible_function: SAE
         guidance: "Validate via CloudFront TLS policy and AWS Config rules (e.g., cloudfront-viewer-policy-https). TLS < 1.2 is a failure condition."
         choices:
           - text: "Yes — TLS 1.3 enforced"
@@ -536,6 +563,7 @@ domains:
 
       - text: "What is the data classification level of information processed?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Public"
             risk: L
@@ -548,6 +576,7 @@ domains:
 
       - text: "What types of data does the application process?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Non-sensitive operational data only"
             risk: L
@@ -560,6 +589,7 @@ domains:
 
       - text: "Are file transfer mechanisms secured with appropriate controls?"
         weight: High
+        responsible_function: SAE
         guidance: "Evaluate SFTP/SCP, AWS Transfer Family, or equivalent. Assess encryption, key management, and access controls."
         choices:
           - text: "Yes — encrypted transfer with managed keys and access controls"
@@ -573,6 +603,7 @@ domains:
 
       - text: "Are data retention and disposal procedures implemented?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — automated lifecycle management"
             risk: L
@@ -585,6 +616,7 @@ domains:
 
       - text: "Does the application maintain disclosure records as required by FERPA §99.32?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — automated logging"
             risk: L
@@ -595,6 +627,7 @@ domains:
 
       - text: "Does the application support notification of student/parent rights as required by FERPA §99.7?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — integrated annual notice mechanism"
             risk: L
@@ -607,6 +640,7 @@ domains:
 
       - text: "Are re-disclosure restrictions enforced when sharing data from this application with third parties (FERPA §99.33)?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — technical controls preventing unauthorized re-disclosure"
             risk: L
@@ -619,6 +653,7 @@ domains:
 
       - text: "Does the application support directory information opt-out procedures (FERPA §99.37)?"
         weight: Medium
+        responsible_function: LEGAL
         choices:
           - text: "Yes — automated opt-out with data suppression"
             risk: L
@@ -631,6 +666,7 @@ domains:
 
       - text: "Are limitations on re-disclosure to third parties technically enforced (FERPA §99.12)?"
         weight: Medium
+        responsible_function: LEGAL
         choices:
           - text: "Yes — DLP or access controls restricting re-disclosure"
             risk: L
@@ -654,6 +690,7 @@ domains:
     questions:
       - text: "Is the application developed using a documented SDLC methodology?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — with security gates"
             risk: L
@@ -664,6 +701,7 @@ domains:
 
       - text: "Are SAST and/or SCA scans integrated into the CI/CD pipeline?"
         weight: Critical
+        responsible_function: SEPG
         choices:
           - text: "Yes — blocking on critical and high findings"
             risk: L
@@ -676,6 +714,7 @@ domains:
 
       - text: "Is DAST or penetration testing performed?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — automated DAST in CI/CD + annual pentest"
             risk: L
@@ -688,6 +727,7 @@ domains:
 
       - text: "Are development, test, and production environments segregated?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — fully segregated with access controls"
             risk: L
@@ -698,6 +738,7 @@ domains:
 
       - text: "Is there a formal change approval process for production deployments?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — CAB/change authority approval required"
             risk: L
@@ -708,6 +749,7 @@ domains:
 
       - text: "Is the application managed through the enterprise endpoint or patch management system, or does it require an out-of-band update mechanism?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Fully managed via enterprise MDM/SCCM"
             risk: L
@@ -718,6 +760,7 @@ domains:
 
       - text: "Are human review and approval required before application outputs are used in production or decision-making?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — mandatory human review with sign-off"
             risk: L
@@ -728,6 +771,7 @@ domains:
 
       - text: "Is there a documented change management policy covering all stages of the change lifecycle (SOX CM-1)?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — formalized policy with version control and regular review"
             risk: L
@@ -740,6 +784,7 @@ domains:
 
       - text: "Is security sign-off required before promoting changes to production (SOX PD-3)?"
         weight: High
+        responsible_function: LEGAL
         choices:
           - text: "Yes — formal security review and sign-off"
             risk: L
@@ -752,6 +797,7 @@ domains:
 
       - text: "Is conversion/migration testing performed and documented before data migrations or major upgrades (SOX PD-4)?"
         weight: Medium
+        responsible_function: LEGAL
         choices:
           - text: "Yes — formal conversion testing with reconciliation"
             risk: L
@@ -776,6 +822,7 @@ domains:
     questions:
       - text: "Is the application included in vulnerability scanning scope?"
         weight: Critical
+        responsible_function: SEPG
         choices:
           - text: "Yes — authenticated scans weekly+"
             risk: L
@@ -788,6 +835,7 @@ domains:
 
       - text: "What is the SLA for remediating critical vulnerabilities?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "7 days or fewer"
             risk: L
@@ -800,6 +848,7 @@ domains:
 
       - text: "Is the application monitored for security events?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — SIEM integration with alerting"
             risk: L
@@ -812,6 +861,7 @@ domains:
 
       - text: "Are bastion hosts or jump servers used for administrative access to critical systems?"
         weight: High
+        responsible_function: SAE
         guidance: "Evaluate bastion host controls for RDP/SSH access. Assess session recording, MFA enforcement, and access logging."
         applicability:
           - INTERNAL_ONPREMISE
@@ -829,6 +879,7 @@ domains:
 
       - text: "Does the application have a web application firewall (WAF)?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — managed WAF with tuned rules"
             risk: L
@@ -841,6 +892,7 @@ domains:
 
       - text: "Are detective controls implemented to identify unauthorized or anomalous use of this application?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — automated detection with real-time alerting"
             risk: L
@@ -853,6 +905,7 @@ domains:
 
       - text: "Are corrective controls defined to remediate or contain issues detected during application use?"
         weight: High
+        responsible_function: SEPG
         choices:
           - text: "Yes — automated remediation and rollback capabilities"
             risk: L
@@ -865,6 +918,7 @@ domains:
 
       - text: "Is application usage monitored with defined KPIs escalated to both team-level and enterprise-level analysis?"
         weight: Medium
+        responsible_function: SEPG
         choices:
           - text: "Yes — dashboards with KPIs at both levels"
             risk: L
@@ -877,6 +931,7 @@ domains:
 
       - text: "Is vendor risk scoring or continuous monitoring used for third-party application risk assessment?"
         weight: Medium
+        responsible_function: SAE
         guidance: "Evaluate TPRM program integration — contract-threshold-based assessment (e.g., Risk Recon / SecurityScorecard for vendors below assessment threshold)."
         applicability:
           - EXTERNAL_CLOUD
@@ -911,6 +966,7 @@ domains:
     questions:
       - text: "Is the application covered by the incident response plan?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — application-specific runbook"
             risk: L
@@ -923,6 +979,7 @@ domains:
 
       - text: "What is the Recovery Time Objective (RTO)?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "1 hour or less"
             risk: L
@@ -935,6 +992,7 @@ domains:
 
       - text: "What is the Recovery Point Objective (RPO)?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "1 hour or less"
             risk: L
@@ -947,6 +1005,7 @@ domains:
 
       - text: "When was the last backup restoration test performed?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Within 6 months"
             risk: L
@@ -959,6 +1018,7 @@ domains:
 
       - text: "Is forensic evidence preservation addressed for this application?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — log retention and chain of custody documented"
             risk: L
@@ -969,6 +1029,7 @@ domains:
 
       - text: "Is job scheduling for this application managed through a centralized enterprise scheduler with audit controls (SOX CO-1)?"
         weight: Medium
+        responsible_function: LEGAL
         choices:
           - text: "Yes — enterprise job scheduler with logging and alerting"
             risk: L
@@ -981,6 +1042,7 @@ domains:
 
       - text: "Are batch processing integrity controls implemented to detect and prevent data corruption (SOX CO-4)?"
         weight: Medium
+        responsible_function: LEGAL
         choices:
           - text: "Yes — automated reconciliation with hash verification"
             risk: L
@@ -1002,6 +1064,7 @@ domains:
     questions:
       - text: "What is the network segmentation and accessibility posture for this application?"
         weight: High
+        responsible_function: EA
         choices:
           - text: "Internal network only — behind VPN with segmentation"
             risk: L
@@ -1016,6 +1079,7 @@ domains:
 
       - text: "Has a vendor security assessment been completed?"
         weight: High
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1033,6 +1097,7 @@ domains:
 
       - text: "Does the vendor contract include security requirements?"
         weight: High
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1050,6 +1115,7 @@ domains:
 
       - text: "Is there a defined exit strategy for vendor transition?"
         weight: Medium
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1067,6 +1133,7 @@ domains:
 
       - text: "Is there a phased deployment plan with maturity-gated control enhancements (e.g., crawl/walk/run)?"
         weight: High
+        responsible_function: EA
         choices:
           - text: "Yes — defined phases with control gates at each stage"
             risk: L
@@ -1077,6 +1144,7 @@ domains:
 
       - text: "Have AI-specific risks been formally assessed for this application (e.g., overreliance, output accuracy, prompt consistency, IP leakage)?"
         weight: High
+        responsible_function: ERM
         choices:
           - text: "Yes — formal AI risk assessment completed"
             risk: L
@@ -1087,6 +1155,7 @@ domains:
 
       - text: "Has a formal supply chain risk management assessment been performed for this application (GV.SC)?"
         weight: High
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1106,6 +1175,7 @@ domains:
 
       - text: "Do vendor contracts include audit rights and security assessment clauses?"
         weight: High
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1125,6 +1195,7 @@ domains:
 
       - text: "Is software bill of materials (SBOM) or software provenance information available for this application?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — SBOM with automated vulnerability tracking"
             risk: L
@@ -1137,6 +1208,7 @@ domains:
 
       - text: "Is continuous monitoring of the vendor or supply chain implemented for this application?"
         weight: Medium
+        responsible_function: SAE
         applicability:
           - EXTERNAL_CLOUD
           - EXTERNAL_ONPREMISE
@@ -1165,6 +1237,7 @@ domains:
     questions:
       - text: "Has a formal risk appetite statement been established that covers this application?"
         weight: High
+        responsible_function: ERM
         choices:
           - text: "Yes — documented risk appetite with quantitative thresholds"
             risk: L
@@ -1177,6 +1250,7 @@ domains:
 
       - text: "Is this application tracked in an enterprise risk register?"
         weight: High
+        responsible_function: ERM
         choices:
           - text: "Yes — with risk owners, treatment plans, and regular review"
             risk: L
@@ -1189,6 +1263,7 @@ domains:
 
       - text: "Has a formal risk assessment been performed for this application?"
         weight: Critical
+        responsible_function: ERM
         choices:
           - text: "Yes — within 12 months using a defined methodology"
             risk: L
@@ -1210,6 +1285,7 @@ domains:
     questions:
       - text: "Is role-based security training provided to users of this application?"
         weight: Medium
+        responsible_function: GENERAL
         choices:
           - text: "Yes — role-specific training with completion tracking"
             risk: L
@@ -1222,6 +1298,7 @@ domains:
 
       - text: "Do privileged users of this application receive additional security training?"
         weight: High
+        responsible_function: GENERAL
         choices:
           - text: "Yes — specialized privileged user training with assessment"
             risk: L
@@ -1243,6 +1320,7 @@ domains:
     questions:
       - text: "Is security event correlation implemented for this application?"
         weight: High
+        responsible_function: SAE
         choices:
           - text: "Yes — automated correlation with SIEM and alerting"
             risk: L
@@ -1255,6 +1333,7 @@ domains:
 
       - text: "Are operational baselines and anomaly detection thresholds defined for this application?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — baselines with automated anomaly detection"
             risk: L
@@ -1267,6 +1346,7 @@ domains:
 
       - text: "Is threat intelligence enrichment applied to security events from this application?"
         weight: Medium
+        responsible_function: SAE
         choices:
           - text: "Yes — automated TI enrichment integrated into SIEM"
             risk: L
@@ -1289,6 +1369,7 @@ domains:
     questions:
       - text: "Is an AI model inventory maintained that includes lifecycle management for models used by or within this application?"
         weight: High
+        responsible_function: ERM
         choices:
           - text: "Yes — comprehensive inventory with versioning, ownership, and retirement procedures"
             risk: L
@@ -1301,6 +1382,7 @@ domains:
 
       - text: "Are AI training data governance and bias controls implemented for this application?"
         weight: High
+        responsible_function: ERM
         choices:
           - text: "Yes — documented data governance with bias testing and mitigation"
             risk: L
